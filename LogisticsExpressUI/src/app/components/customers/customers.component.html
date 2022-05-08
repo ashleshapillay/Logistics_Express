@@ -1,0 +1,176 @@
+<div class="Background">
+
+  <!-- Navigation Bar  -->
+  <app-navigation-bar></app-navigation-bar>
+
+  <div *ngIf="!ViewContact" class="container">
+    <div class="row">
+      <div class="col-6">
+        <!-- List of Customer   -->
+        <div class="CustomerList">
+          <mat-card class="CustomerHeader">
+            <mat-card-header>Customer</mat-card-header>
+          </mat-card>
+          <br>
+          <div class="example-container">
+            <mat-card>
+
+              <mat-table [dataSource]="customers" matSort>
+
+                <ng-container matColumnDef="businessName">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Business Name </mat-header-cell>
+                  <mat-cell *matCellDef="let customer" (click)="populateForm(customer)"> {{customer.businessName}}
+                  </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let customer; columns: displayedColumns;">
+                </mat-row>
+              </mat-table>
+              <br>
+              <button mat-flat-button color="accent" (click)="AddPage()">Add Customer</button>
+            </mat-card>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="col-6">
+
+        <mat-card class="NavButtonHeader">
+          <button mat-button class="NavButton">Customer Details</button>
+          <button mat-button class="NavButton" [disabled]="isDisabled" (click)="getCustomerContacts(customer.customerId)">Customer Contacts</button>
+        </mat-card>
+        <!-- <button mat-button class="NavButton" (click)="getCustomerContacts(customer.customerId)">Customer Contacts</button> -->
+        <br>
+
+        <div class="CustomerDetails">       
+          <!-- Update Customer Details  -->
+          <div *ngIf="EditView">
+            <mat-card class="header">
+              <mat-card-header>Customer Details</mat-card-header>
+            </mat-card>
+            <br>
+            <mat-card class="example-container">
+              <form #form="ngForm">
+                <mat-form-field>
+                  <mat-label for="">Businsess Name</mat-label><br>
+                  <input matInput id="businessName" type="text" name="businessName" required [(ngModel)]="customer.businessName">
+                </mat-form-field>
+  
+                <br>
+  
+                <mat-form-field>
+                  <mat-label>Business Phone Number</mat-label><br>
+                  <div *ngIf="customer.phoneNumber.length != 10">
+                    <mat-error>Invalid Phone Number</mat-error>
+                  </div>
+                  <input matInput type="text" name="phoneNumber"  required  [(ngModel)]="customer.phoneNumber">
+                </mat-form-field>
+  
+                <br>
+  
+                <mat-form-field>
+                  <mat-label>Business Email Address</mat-label><br>
+                  <input matInput type="email" name="emailAddress"  required email="true" [(ngModel)]="customer.emailAddress">
+                </mat-form-field>
+  
+                <br>
+  
+                <div>
+                  <!-- <button mat-flat-button color="accent" (click)="addCustomer()" >Add Customer</button>
+              <br>
+              <br> -->
+                  <button mat-flat-button color="accent" [disabled]="isDisabled" (click)="updateCustomer(customer)">Save
+                    Changes</button>
+                </div>
+              </form>
+            </mat-card>
+          </div>
+          <!-- View Customer Details -->
+          <div *ngIf="!EditView">
+            <div *ngIf="!AddView">
+              <mat-card class="header">
+                <mat-card-header>Customer Details</mat-card-header>
+              </mat-card>
+              <br>
+              <mat-card class="example-container">
+  
+                <div>
+                  <mat-list>
+                    <mat-list-item>Businsess Name: {{customer.businessName}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>Phone Number: {{customer.phoneNumber}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>Email Address: {{customer.emailAddress}}</mat-list-item>
+                  </mat-list>
+                </div>
+                <br>
+                <div>
+                  <button mat-flat-button color="accent" [disabled]="isDisabled" (click)="UpdatePage()">Update
+                    Customer</button>
+                  <br>
+                  <br>
+                  <button mat-flat-button color="accent" [disabled]="isDisabled"
+                    (click)="deleteCustomer(customer.customerId)">Delete Customer</button>
+                </div>
+  
+              </mat-card>
+            </div>
+          </div>
+          <!-- Add Customer  -->
+          <div  *ngIf="AddView">
+            <br>
+            <mat-card class="header">
+              <mat-card-header>Customer Details</mat-card-header>
+            </mat-card>
+            <br>
+            <mat-card class="example-container">
+              <form #form="ngForm">
+                <mat-form-field>
+                  <mat-label for="">Businsess Name</mat-label><br>
+                  <input matInput type="text" name="businessName"  required [(ngModel)]="customer.businessName">
+                </mat-form-field>
+  
+                <br>
+  
+                <mat-form-field>
+                  <mat-label>Business Phone Number</mat-label><br>
+                  <div *ngIf="customer.phoneNumber.length != 10">
+                    <mat-error>Invalid Phone Number</mat-error>
+                  </div>
+                  <input matInput type="text" name="phoneNumber" required [(ngModel)]="customer.phoneNumber">
+                </mat-form-field>
+  
+                <br>
+  
+                <mat-form-field>
+                  <mat-label>Business Email Address</mat-label><br>
+                  <input matInput type="email" name="emailAddress" required email="true" [(ngModel)]="customer.emailAddress">
+                </mat-form-field>
+  
+                <br>
+  
+                <div>
+                  <!-- <button mat-flat-button color="accent" (click)="addCustomer()" >Add Customer</button>
+                <br>
+                <br> -->
+                  <button mat-flat-button color="accent" (click)="addCustomer()">Add Customer</button>
+                </div>
+              </form>
+            </mat-card>
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Viewing Customer Contact  -->
+  <div *ngIf="ViewContact">
+    <app-customercontacts [customercontacts]="customercontacts"></app-customercontacts>
+  </div>
+
+</div>

@@ -1,0 +1,59 @@
+
+.CustomerDetails{
+   width: max-content;
+   margin-right: 50px;
+   margin-left: 200px;
+   margin-bottom: 50px;
+}
+
+.CustomerList{
+   margin-right: 45px;
+   margin-left: 45px;
+   width: 750px;
+}
+
+.mat-card-header{
+   color: #990000;
+   font-family: 'Poppins';
+   font-size: large;
+   font-weight: bolder;
+}
+
+.container{
+   margin: 0;
+}
+
+.header{
+  background-color: #f0f0f0;
+  width: 640px;
+} 
+
+.CustomerHeader{
+   background-color: #f0f0f0;
+   width:750px;
+}
+
+
+.Background{
+   background-color: #d4d4d4;
+   margin: 0;
+}
+
+.NavButton:active{
+   background-color: #990000;
+   color: white;
+
+}
+
+.NavButtonHeader{
+   background-color: #f0f0f0;;
+   color: black;
+   width: 640px;
+   margin-left: 200px;
+}
+
+.NavButton{
+   font-family: 'Poppins';
+   font-size: medium;
+   font-weight: normal;
+}

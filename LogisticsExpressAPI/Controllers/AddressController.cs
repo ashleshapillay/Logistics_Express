@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using LocationAPI.Data;
+using LogisticsExpressAPI.Data;
 using Microsoft.EntityFrameworkCore;
-using LocationAPI.Models;
+using LogisticsExpressAPI.Models; 
 
 namespace LocationAPI.Controllers
 {

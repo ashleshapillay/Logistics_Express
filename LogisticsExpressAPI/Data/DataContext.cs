@@ -18,5 +18,9 @@ namespace LogisticsExpressAPI.Data
         public DbSet<Suburb> Suburbs { get; set; }
         public DbSet<Address> Addresses { get; set; }
 
+        public DbSet<Subcontractor> Subcontractor {get;set;}
+        public DbSet<SubcontractorContacts> SubcontractorContacts {get;set;}
+
+
     }
 }

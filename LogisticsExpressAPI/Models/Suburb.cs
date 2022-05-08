@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace LocationAPI.Models
+namespace LogisticsExpressAPI.Models
 {
     public class Suburb
     {

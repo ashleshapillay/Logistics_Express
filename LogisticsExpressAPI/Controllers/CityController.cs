@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using LocationAPI.Data;
+using LogisticsExpressAPI.Data;
 using Microsoft.EntityFrameworkCore;
-using LocationAPI.Models;
-namespace LocationAPI.Controllers
+using LogisticsExpressAPI.Models;
+namespace LogisticsExpressAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

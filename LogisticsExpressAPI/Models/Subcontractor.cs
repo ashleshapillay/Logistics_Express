@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SubcontractorAPI.Models
+namespace LogisticsExpressAPI.Models
 {
     public class Subcontractor
     {

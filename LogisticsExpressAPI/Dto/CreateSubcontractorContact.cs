@@ -1,4 +1,4 @@
-﻿namespace SubcontractorAPI.Dto
+﻿namespace LogisticsExpressAPI.Dto
 {
     public class CreateSubcontractorContact
     {

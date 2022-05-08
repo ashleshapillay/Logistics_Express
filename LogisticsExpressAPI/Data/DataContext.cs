@@ -17,5 +17,6 @@ namespace LogisticsExpressAPI.Data
         public DbSet<City> Cities { get; set; }
         public DbSet<Suburb> Suburbs { get; set; }
         public DbSet<Address> Addresses { get; set; }
+
     }
 }

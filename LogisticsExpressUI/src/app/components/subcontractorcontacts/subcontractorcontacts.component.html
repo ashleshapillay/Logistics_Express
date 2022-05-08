@@ -15,7 +15,7 @@
   
                   <ng-container matColumnDef="contactName">
                     <mat-header-cell *matHeaderCellDef mat-sort-header> Contact Name </mat-header-cell>
-                    <mat-cell *matCellDef="let contact" (click)="populateForm(contact)"> {{contact.SubcontractorName}}
+                    <mat-cell *matCellDef="let contact" (click)="populateForm(contact)"> {{contact.subcontractorName}}
                     </mat-cell>
                   </ng-container>
   
@@ -53,7 +53,7 @@
                 <form #form="ngForm" (ngSubmit)="addContact()">
                   <mat-form-field>
                     <mat-label for="">Name</mat-label><br>
-                    <input matInput type="text" name="contactName"  required [(ngModel)]="subcontractorcontact.phoneNumber">
+                    <input matInput type="text" name="contactName"  required [(ngModel)]="subcontractorcontact.SubcontractorName">
                   </mat-form-field>
   
                   <br>

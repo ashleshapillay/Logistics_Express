@@ -25,6 +25,7 @@ import { AddressesComponent } from './components/addresses/addresses.component';
 import { SubcontractorComponent } from './components/subcontractor/subcontractor.component';
 import { SubcontractorcontactsComponent } from './components/subcontractorcontacts/subcontractorcontacts.component';
 import { EmployeeComponent } from './components/employee/employee.component';
+import { EmployeeRoleComponent } from './components/employee-role/employee-role.component';
 
 
 
@@ -42,7 +43,8 @@ import { EmployeeComponent } from './components/employee/employee.component';
     AddressesComponent,
     SubcontractorComponent,
     SubcontractorcontactsComponent,
-    EmployeeComponent
+    EmployeeComponent,
+    EmployeeRoleComponent
    ],
   imports: [
     BrowserModule,

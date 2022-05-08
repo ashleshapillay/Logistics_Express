@@ -29,4 +29,8 @@ export class NavigationBarComponent implements OnInit {
   SubcontractorClick(){
     this.router.navigate(["subcontractor"]);
   }
+
+  Employee(){
+    this.router.navigate(["employeerole"]);
+  }
 }

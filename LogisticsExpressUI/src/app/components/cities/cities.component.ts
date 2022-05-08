@@ -10,14 +10,14 @@ import { LocationserviceService } from 'src/app/services/locations/locationservi
 @Component({
   selector: 'app-cities',
   templateUrl: './cities.component.html',
-  styleUrls: ['./cities.component.scss']
+  styleUrls: ['./cities.component.css']
 })
 export class CitiesComponent implements OnInit {
   displayedColumns = ['name'];
   EditView = false; 
   displayMessage = ''; 
   isDisabled = true; 
-  
+  AddDisabled = false; 
   provinces: Province[] = [];
 
   cities: City[] = [];
@@ -90,6 +90,8 @@ export class CitiesComponent implements OnInit {
         };
     //add city
     addCity() {
+      this.AddView = true;
+
       if (this.city.name == ""|| this.city.provinceId==0){
         this.displayMessage = "Attempt to add city was unsuccessful.";
         this.openSnackBar();
@@ -144,6 +146,7 @@ export class CitiesComponent implements OnInit {
                 this.getAllCities();
                 this.displayMessage = "City successfully removed.";
                 this.openSnackBar();
+                window.location.reload();
               }
             )
         };
@@ -153,6 +156,8 @@ export class CitiesComponent implements OnInit {
 populateForm(city: City){
   this.city = city; 
   this.isDisabled = false; 
+  this.AddDisabled = true; 
+
 }
 
 //PAGE

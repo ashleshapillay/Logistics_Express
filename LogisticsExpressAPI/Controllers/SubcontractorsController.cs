@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using LogisticsExpressAPI.Data;
 using LogisticsExpressAPI.Models;
 
-namespace SubcontractorAPI.Controllers
+namespace LogisticsExpressAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

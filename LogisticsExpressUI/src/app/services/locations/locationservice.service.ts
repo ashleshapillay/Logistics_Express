@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Country } from '../modules/locationmodules/country.module';
-import { Province } from '../modules/locationmodules/province.module';
-import { City } from '../modules/locationmodules/city.module';
-import { Suburb } from '../modules/locationmodules/suburb.module';
-import { Address } from '../modules/locationmodules/address.module';
+import { Address} from 'src/app/modules/locationmodules/address.module';
+import { City } from 'src/app/modules/locationmodules/city.module';
+import { Country } from 'src/app/modules/locationmodules/country.module';
+import { Province } from 'src/app/modules/locationmodules/province.module';
+import { Suburb } from 'src/app/modules/locationmodules/suburb.module';
+
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +14,11 @@ import { Address } from '../modules/locationmodules/address.module';
 export class LocationserviceService {
 
 //base URL's
-  countryUrl = 'https://localhost:7056/api/Country';
-  provinceUrl = 'https://localhost:7056/api/Province';
-  cityUrl = 'https://localhost:7056/api/City';
-  suburbUrl = 'https://localhost:7056/api/Suburb';
-  addressUrl = 'https://localhost:7056/api/Address';
+  countryUrl = 'https://localhost:7013/api/Country';
+  provinceUrl = 'https://localhost:7013/api/Province';
+  cityUrl = 'https://localhost:7013/api/City';
+  suburbUrl = 'https://localhost:7013/api/Suburb';
+  addressUrl = 'https://localhost:7013/api/Address';
 
   constructor(private http: HttpClient) { }
 

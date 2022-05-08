@@ -4,7 +4,7 @@ using LogisticsExpressAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using LogisticsExpressAPI.Models; 
 
-namespace LocationAPI.Controllers
+namespace LogisticsExpressAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

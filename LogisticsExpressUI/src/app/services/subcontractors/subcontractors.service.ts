@@ -9,7 +9,7 @@ import { Subcontractor } from 'src/app/modules/subcontractors/subcontractors.mod
 })
 export class SubcontractorsService {
 
-  baseUrl ='https://localhost:44347/api/Subcontractors'
+  baseUrl ='https://localhost:7013/api/Subcontractors'
   
   constructor(private http: HttpClient) { }
 

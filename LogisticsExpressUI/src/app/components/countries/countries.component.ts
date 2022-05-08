@@ -8,7 +8,7 @@ import { LocationserviceService } from 'src/app/services/locations/locationservi
 @Component({
   selector: 'app-countries',
   templateUrl: './countries.component.html',
-  styleUrls: ['./countries.component.scss']
+  styleUrls: ['./countries.component.css']
 })
 export class CountriesComponent implements OnInit {
 
@@ -16,6 +16,8 @@ export class CountriesComponent implements OnInit {
   EditView = false; 
   displayMessage = ''; 
   isDisabled = true; 
+  AddDisabled = false; 
+
   
   countries: Country[] = [];
   country: Country = {
@@ -60,6 +62,7 @@ export class CountriesComponent implements OnInit {
     }
 //add country
   addCountry() {
+    this.AddView = true;
     if (this.country.name == ""){
         this.displayMessage = "Attempt to add country was unsuccessful.";
         this.openSnackBar();
@@ -112,6 +115,7 @@ export class CountriesComponent implements OnInit {
             this.getAllCountries();
             this.displayMessage = "Country successfully removed.";
             this.openSnackBar();
+            window.location.reload();
           }
         )
     };
@@ -132,6 +136,7 @@ export class CountriesComponent implements OnInit {
     populateForm(country: Country){
       this.country = country; 
       this.isDisabled = false; 
+      this.AddDisabled = true; 
    }
 
    //PAGE

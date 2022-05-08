@@ -10,14 +10,15 @@ import { LocationserviceService } from 'src/app/services/locations/locationservi
 @Component({
   selector: 'app-suburbs',
   templateUrl: './suburbs.component.html',
-  styleUrls: ['./suburbs.component.scss']
+  styleUrls: ['./suburbs.component.css']
 })
 export class SuburbsComponent implements OnInit {
   displayedColumns = ['name'];
   EditView = false; 
   displayMessage = ''; 
   isDisabled = true; 
-  
+  AddDisabled = false; 
+
   cities: City[] = [];
 
   suburbs: Suburb[] = [];
@@ -91,6 +92,8 @@ export class SuburbsComponent implements OnInit {
         };
     //add suburb
     addSuburb() {
+      this.AddView = true;
+
       if (this.suburb.name == ""|| this.suburb.cityId==0){
         this.displayMessage = "Attempt to add suburb was unsuccessful.";
         this.openSnackBar();
@@ -145,6 +148,8 @@ export class SuburbsComponent implements OnInit {
                 this.getAllSuburbs();
                 this.displayMessage = "Suburb successfully removed.";
                 this.openSnackBar();
+                window.location.reload();
+
               }
             )
         };
@@ -153,6 +158,8 @@ export class SuburbsComponent implements OnInit {
 populateForm(suburb: Suburb){
   this.suburb = suburb; 
   this.isDisabled = false; 
+  this.AddDisabled = true; 
+
 }
 
 //PAGE

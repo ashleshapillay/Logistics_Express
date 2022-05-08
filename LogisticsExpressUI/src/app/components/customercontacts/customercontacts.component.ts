@@ -139,17 +139,9 @@ if (this.customercontact.contactName == "" || this.customercontact.emailAddress 
     this.contactService.updateCustomerContact(customercontact)
       .subscribe(
         response => {           
-          this.customercontact = 
-          {
-             contactName: '',
-             customerContactId: 0,
-             customerId: 0, 
-             emailAddress: '',
-             phoneNumber: ''
-          }
-          this.EditView = true;
           this.displayMessage = "Customer Was Updated Successfully";
           this.openSnackBar();
+          this.EditView = true;
           window.location.reload();
         }
       )

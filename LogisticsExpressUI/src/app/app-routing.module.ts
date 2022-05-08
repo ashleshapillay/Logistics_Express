@@ -9,7 +9,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProvincesComponent } from './components/provinces/provinces.component';
 import { SuburbsComponent } from './components/suburbs/suburbs.component';
 
-
+import { SubcontractorComponent } from './components/subcontractor/subcontractor.component';
+import { SubcontractorcontactsComponent } from './components/subcontractorcontacts/subcontractorcontacts.component';
 
 const routes: Routes = [
     { path: '', component: DashboardComponent },
@@ -19,7 +20,9 @@ const routes: Routes = [
     {path: 'provinces', component: ProvincesComponent},
     {path: 'cities', component: CitiesComponent},
     {path: 'suburbs', component: SuburbsComponent},
-    {path: 'addresses', component: AddressesComponent}
+    {path: 'addresses', component: AddressesComponent},
+    { path: 'subcontractor', component: SubcontractorComponent},
+    { path: 'subcontractocontacts', component: SubcontractorcontactsComponent},
 ];
 
 @NgModule({

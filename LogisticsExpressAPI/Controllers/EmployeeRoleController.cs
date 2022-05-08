@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using EmployeeAPI.Data;
+using LogisticsExpressAPI.Data;
 using Microsoft.EntityFrameworkCore;
-using EmployeeAPI.Models;
+using LogisticsExpressAPI.Models;
 
 namespace EmployeeAPI.Controllers
 {

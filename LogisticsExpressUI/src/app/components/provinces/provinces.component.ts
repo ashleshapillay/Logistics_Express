@@ -10,7 +10,7 @@ import { LocationserviceService } from 'src/app/services/locations/locationservi
 @Component({
   selector: 'app-provinces',
   templateUrl: './provinces.component.html',
-  styleUrls: ['./provinces.component.scss']
+  styleUrls: ['./provinces.component.css']
 })
 export class ProvincesComponent implements OnInit {
 
@@ -18,7 +18,8 @@ export class ProvincesComponent implements OnInit {
   EditView = false; 
   displayMessage = ''; 
   isDisabled = true; 
-  
+  AddDisabled = false; 
+
   countries: Country[] = [];
 
   provinces: Province[] = [];
@@ -93,6 +94,7 @@ export class ProvincesComponent implements OnInit {
         };
     //add province
   addProvince() {
+    this.AddView = true;
     if (this.province.name == ""|| this.province.countryId==0){
         this.displayMessage = "Attempt to add province was unsuccessful.";
         this.openSnackBar();
@@ -147,6 +149,7 @@ export class ProvincesComponent implements OnInit {
                 this.getAllProvinces();
                 this.displayMessage = "Province successfully removed.";
                 this.openSnackBar();
+                window.location.reload();
               }
             )
         };
@@ -155,6 +158,7 @@ export class ProvincesComponent implements OnInit {
    populateForm(province: Province){
     this.province = province; 
     this.isDisabled = false; 
+    this.AddDisabled = true; 
  }
 
  //PAGE

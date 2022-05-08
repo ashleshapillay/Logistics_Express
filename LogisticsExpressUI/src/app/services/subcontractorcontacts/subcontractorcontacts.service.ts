@@ -9,7 +9,7 @@ import { SubcontractorContact } from 'src/app/modules/subcontractorcontacts/subc
 })
 export class SubcontractorcontactsService {
  
-  baseUrl ='https://localhost:44347/api/SubcontractorContacts'
+  baseUrl ='https://localhost:7013/api/SubcontractorContacts'
  
   constructor(private http: HttpClient) { }
 

@@ -1,22 +1,22 @@
 import { Component, OnInit, Output, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import { Address } from 'src/app/modules/locationmodules/address.module';
 import { Suburb } from 'src/app/modules/locationmodules/suburb.module';
 import { LocationserviceService } from 'src/app/services/locations/locationservice.service';
-
+import { Address } from 'src/app/modules/locationmodules/address.module';
 
 @Component({
   selector: 'app-addresses',
   templateUrl: './addresses.component.html',
-  styleUrls: ['./addresses.component.scss']
+  styleUrls: ['./addresses.component.css']
 })
 export class AddressesComponent implements OnInit {
   displayedColumns = ['streetNumber', 'streetName'];
   EditView = false; 
   displayMessage = ''; 
   isDisabled = true; 
-  
+  AddDisabled = false; 
+
   suburbs: Suburb[] = [];
 
   addresses: Address[] = [];
@@ -82,6 +82,7 @@ export class AddressesComponent implements OnInit {
         };
     //add address
     addAddress() {
+      this.AddView = true;
       if (this.address.streetNumber == 0 || this.address.streetName == ""|| this.address.suburbId == 0){
         this.displayMessage = "Attempt to add address was unsuccessful.";
         this.openSnackBar();
@@ -138,6 +139,8 @@ export class AddressesComponent implements OnInit {
                 this.getAllSuburbs();
                 this.displayMessage = "Address successfully removed.";
                 this.openSnackBar();
+                window.location.reload();
+
               }
             )
         };
@@ -146,6 +149,8 @@ export class AddressesComponent implements OnInit {
 populateForm(address: Address){
   this.address = address; 
   this.isDisabled = false; 
+  this.AddDisabled = true; 
+
 }
 
 //PAGE

@@ -10,7 +10,7 @@ using LogisticsExpressAPI.Data;
 using LogisticsExpressAPI.Dto;
 using LogisticsExpressAPI.Models;
 
-namespace SubcontractorAPI.Controllers
+namespace LogisticsExpressAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

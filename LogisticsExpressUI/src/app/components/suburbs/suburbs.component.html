@@ -1,9 +1,14 @@
-<div class="background">
+<div class="Background">
     <!-- Navigation Bar  -->
     <app-navigation-bar></app-navigation-bar>
     
     <div *ngIf="!ViewCountry || !ViewProvince || !ViewCity|| !ViewAddress" class="container">
-    <div class="row"  style="float: right;"  >
+      <div class="row">
+        <div class="col-6">
+            <!-- add map  -->
+        </div>
+        <div class="col-6">
+
         <mat-card class="NavButtonHeader">
                 <a><button mat-button class="NavButton" (click)="CountryClick()">Countries</button></a>
                 <a><button mat-button class="NavButton" (click)="ProvinceClick()">Provinces</button></a>
@@ -11,14 +16,18 @@
                 <button mat-button class="NavButton" (click)="SuburbClick()" disabled="true">Suburbs</button>
                 <a><button mat-button class="NavButton" (click)="AddressClick()">Addresses</button></a>
         </mat-card>
-    </div>
-    <br><br><br><br>
+        <br>
+        <mat-card class="NavButtonHeader">
+            <button mat-button class="NavButton" (click)="AddPage()"  [disabled]="AddDisabled">Add Suburbs</button>
+            <a><button mat-button class="NavButton" (click)="deleteSuburb(suburb.suburbId)" [disabled]="isDisabled">Delete Suburbs</button></a>
+            <a><button mat-button class="NavButton" (click)="UpdatePage()" [disabled]="isDisabled">Update Suburbs</button></a>
+        </mat-card>
     
-    
-    <div class="row">
     <!--Table-->
-      <div class="example-container" style="position: relative" class="col" >
-        <mat-card class="example-container" style="width: 500px;">
+    <div *ngIf="!EditView">
+      <div style="position: relative;" class="col-6" *ngIf="!AddView">
+          <div class="example-container" matSort>
+        <mat-card style="width: 640px;">
             <mat-table #table [dataSource]="suburbs">
                   <ng-container matColumnDef="name">
                            <mat-header-cell *matHeaderCellDef><b>Suburb Name</b></mat-header-cell>
@@ -27,23 +36,17 @@
                           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                           <mat-row *matRowDef="let suburb; columns: displayedColumns;"></mat-row>
                  </mat-table>
-                 <br>
-    
-                <button mat-flat-button color="accent" (click)="AddPage()">Add Suburb</button>
-                <p> </p>
-                <button mat-flat-button color="accent" (click)="UpdatePage()">Maintain Suburb</button>
            </mat-card>
            </div>
     
     <!--Forms-->
-    <div style="position: relative; size: 50%;">
+    <div style="position: relative;">
           <!-- Add Suburb  -->
-          <div class="CustomerDetails" *ngIf="AddView" >
+          <div  *ngIf="AddView" >
              <form  #form="ngForm">
-              <mat-card class="example-container" style="width: 500px;">
+              <mat-card class="example-container" style="width: 640px;">
                   <mat-form-field appearance="fill">
                         <input matInput type="text" name="name"  [(ngModel)]="suburb.name" placeholder="Suburb Name">
-                            <hr>
                       </mat-form-field>
           <br>
                       <mat-form-field appearance="fill">
@@ -61,13 +64,11 @@
     
       <div style="position: relative; size: 50%;">
       <!-- Edit City  -->
-      <div class="CustomerDetails" *ngIf="EditView" >
+      <div  *ngIf="EditView" >
           <form  #form="ngForm">
-            <mat-card class="example-container" style="width: 500px;">
-          <label style="font-size: 80%">Select a suburb from the table</label><br>
+            <mat-card class="example-container" style="width: 640px;">
               <mat-form-field appearance="fill">
                 <input matInput type="text" name="name"  [(ngModel)]="suburb.name" placeholder="Suburb Name">
-                <hr>
               </mat-form-field>
             <br>
               <mat-form-field appearance="fill">
@@ -79,8 +80,6 @@
                </mat-form-field><br>
                <br><br>
                  <button mat-flat-button color="accent"  (click)="updateSuburb(suburb)">Update City</button>
-                 <p> </p>
-                 <button mat-flat-button color="accent"  (click)="deleteSuburb(suburb.suburbId)">Delete City</button>
                  </mat-card>
                  </form>
       </div>

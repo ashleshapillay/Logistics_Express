@@ -25,4 +25,8 @@ export class NavigationBarComponent implements OnInit {
   dashboardClick(){
     this.router.navigate([""]);
   }
+
+  SubcontractorClick(){
+    this.router.navigate(["subcontractor"]);
+  }
 }

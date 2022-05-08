@@ -9727,11 +9727,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ashle\\Documents\\2022\\INF 370\\Final Logistics Express\\LogisticsExpressAPI\\LogisticsExpressAPI.csproj",
+      "projectUniqueName": "C:\\Users\\ashle\\Documents\\TUKS\\2021\\LE\\Logistics_Express\\LogisticsExpressAPI\\LogisticsExpressAPI.csproj",
       "projectName": "LogisticsExpressAPI",
-      "projectPath": "C:\\Users\\ashle\\Documents\\2022\\INF 370\\Final Logistics Express\\LogisticsExpressAPI\\LogisticsExpressAPI.csproj",
+      "projectPath": "C:\\Users\\ashle\\Documents\\TUKS\\2021\\LE\\Logistics_Express\\LogisticsExpressAPI\\LogisticsExpressAPI.csproj",
       "packagesPath": "C:\\Users\\ashle\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ashle\\Documents\\2022\\INF 370\\Final Logistics Express\\LogisticsExpressAPI\\obj\\",
+      "outputPath": "C:\\Users\\ashle\\Documents\\TUKS\\2021\\LE\\Logistics_Express\\LogisticsExpressAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

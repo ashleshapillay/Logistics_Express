@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using LogisticsExpressAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using LogisticsExpressAPI.Models;
+
 namespace LogisticsExpressAPI.Controllers
 {
     [Route("api/[controller]")]

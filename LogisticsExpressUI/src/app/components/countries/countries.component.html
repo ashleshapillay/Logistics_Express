@@ -1,0 +1,87 @@
+<div class="Background">
+    <!-- Navigation Bar  -->
+    <app-navigation-bar></app-navigation-bar>
+
+    <div *ngIf="!ViewProvince || !ViewCity || !ViewSuburb || !ViewAddress" class="container">
+        <div class="row">
+            <div class="col-6">
+                
+                <!-- add map  -->
+            </div>
+            <div class="col-6">
+
+                <mat-card class="NavButtonHeader">
+                    <button mat-button class="NavButton" (click)="CountryClick()" disabled="true">Countries</button>
+                    <a><button mat-button class="NavButton" (click)="ProvinceClick()">Provinces</button></a>
+                    <a><button mat-button class="NavButton" (click)="CityClick()">Cities</button></a>
+                    <a><button mat-button class="NavButton" (click)="SuburbClick()">Suburbs</button></a>
+                    <a><button mat-button class="NavButton" (click)="AddressClick()">Addresses</button></a>
+                </mat-card>
+                <br>
+                <mat-card class="NavButtonHeader">
+                    <button mat-button class="NavButton" (click)="AddPage()"  [disabled]="AddDisabled">Add Country</button>
+                    <a><button mat-button class="NavButton" (click)="deleteCountry(country.countryId)" [disabled]="isDisabled">Delete Country</button></a>
+                    <a><button mat-button class="NavButton" (click)="UpdatePage()" [disabled]="isDisabled">Update Country</button></a>
+                </mat-card>
+
+
+
+                <!--Table-->
+                <div *ngIf="!EditView">
+                    <div style="position: relative;" class="col-6" *ngIf="!AddView">
+                        <div class="example-container" matSort>
+                            <mat-card style="width: 640px;">
+                                <mat-table #table [dataSource]="countries">
+                                    <ng-container matColumnDef="name">
+                                        <mat-header-cell *matHeaderCellDef><b>Country Name</b></mat-header-cell>
+                                        <mat-cell *matCellDef="let country" (click)="populateForm(country)">{{country.name}}
+                                        </mat-cell>
+                                    </ng-container>
+                                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                    <mat-row *matRowDef="let country; columns: displayedColumns;"></mat-row>
+                                </mat-table>
+                            </mat-card>
+                        </div>
+                    </div>
+                </div>
+                    
+
+                <!--Form-->
+                <div style="position: relative;" >
+                    <!-- Add Country  -->
+                    <div *ngIf="AddView">
+                        <form #form="ngForm">
+                            <mat-card class="example-container" style="width: 640px;">
+                                <mat-form-field appearance="fill">
+                                    <input matInput type="text" name="name" [(ngModel)]="country.name"
+                                        placeholder="Country Name" required>
+                                </mat-form-field>
+                                <br><br>
+                                <button mat-flat-button color="accent" (click)="addCountry()">Add Country</button>
+                            </mat-card>
+                        </form>
+                    </div>
+                </div>
+
+                <div style="position: relative; size: 50%;">
+                    <!-- Edit Country  -->
+                    <div *ngIf="EditView">
+                        <form #form="ngForm">
+                            <mat-card class="example-container" style="width: 640px;">
+                                <mat-form-field appearance="fill">
+                                    <input matInput type="text" name="name" [(ngModel)]="country.name"
+                                        placeholder="Country Name">
+                                </mat-form-field>
+                                <br>
+                                <button mat-flat-button color="accent" (click)="updateCountry(country)">Save Changes</button>
+                            </mat-card>
+                        </form>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>

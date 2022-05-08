@@ -1,0 +1,130 @@
+<div class="Background">
+
+    <!-- Navigation Bar  -->
+    <app-navigation-bar></app-navigation-bar>
+  
+    <div *ngIf="!ViewContact" class="container">
+      <div class="row">
+        <div class="col-6">
+          <!-- List of Customer   -->
+          <div class="CustomerList">
+            <mat-card class="CustomerHeader">
+              <mat-card-header>Employee Roles</mat-card-header>
+            </mat-card>
+            <br>
+            <div class="example-container">
+              <mat-card>
+  
+                <mat-table [dataSource]="employeeRoles" matSort>
+  
+                  <ng-container matColumnDef="EmployeeDescription">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Employee Description </mat-header-cell>
+                    <mat-cell *matCellDef="let role" (click)="populateForm(role)"> {{role.employeeDescription}}
+                    </mat-cell>
+                  </ng-container>
+  
+                  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                  <mat-row *matRowDef="let role; columns: displayedColumns;">
+                  </mat-row>
+                </mat-table>
+                <br>
+                <button mat-flat-button color="accent" (click)="AddPage()">Add Role</button>
+              </mat-card>
+  
+            </div>
+  
+          </div>
+  
+        </div>
+  
+        <div class="col-6">
+
+            <mat-card class="NavButtonHeader">
+              <button mat-button class="NavButton">Employee Role Details</button>
+              <button mat-button class="NavButton" [disabled]="isDisabled" >Employees</button>
+            </mat-card>  
+            <!-- (click)="getCustomerContacts(customer.customerId)" -->
+            <!-- <button mat-button class="NavButton" (click)="getCustomerContacts(customer.customerId)">Customer Contacts</button> -->
+            <br>
+    
+            <div class="CustomerDetails">       
+              <!-- Update Customer Details  -->
+              <div *ngIf="EditView">
+                <mat-card class="header">
+                  <mat-card-header>Employee Role Details</mat-card-header>
+                </mat-card>
+                <br>
+                <mat-card class="example-container">
+                  <form #form="ngForm">
+                    <mat-form-field>
+                      <mat-label for="">Role Details</mat-label><br>
+                      <input matInput id="businessName" type="text" name="businessName" required [(ngModel)]="employeeRole.EmployeeDescription">
+                    </mat-form-field>
+      
+                    
+                    <div>
+                      <button mat-flat-button color="accent" [disabled]="isDisabled" >Save 
+                          <!-- (click)="updateCustomer(customer)" -->
+                        Changes</button>
+                    </div>
+                  </form>
+                </mat-card>
+              </div>
+              <!-- View Customer Details -->
+              <div *ngIf="!EditView">
+                <div *ngIf="!AddView">
+                  <mat-card class="header">
+                    <mat-card-header>Employee Role Details</mat-card-header>
+                  </mat-card>
+                  <br>
+                  <mat-card class="example-container">
+      
+                    <div>
+                      <mat-list>
+                        <mat-list-item>Role Description: {{employeeRole.EmployeeDescription}}</mat-list-item>
+                      </mat-list>
+                    </div>
+                    <br>
+                    <div>
+                      <button mat-flat-button color="accent" [disabled]="isDisabled" (click)="UpdatePage()">Update
+                        Customer</button>
+                      <br>
+                      <br>
+                      <button mat-flat-button color="accent" [disabled]="isDisabled"
+                       >Delete Customer</button>
+                       <!-- (click)="deleteCustomer(customer.customerId)" -->
+                    </div>
+      
+                  </mat-card>
+                </div>
+              </div>
+              <!-- Add Customer  -->
+              <div  *ngIf="AddView">
+                <br>
+                <mat-card class="header">
+                  <mat-card-header>Employee Role Details</mat-card-header>
+                </mat-card>
+                <br>
+                <mat-card class="example-container">
+                  <form #form="ngForm">
+                    <mat-form-field>
+                      <mat-label for="">Role Description</mat-label><br>
+                      <input matInput type="text" name="businessName"  required [(ngModel)]="employeeRole.EmployeeDescription">
+                    </mat-form-field>
+    
+      
+                    <div>
+                      <!-- <button mat-flat-button color="accent" (click)="addCustomer()" >Add Customer</button>
+                    <br>
+                    <br> -->
+                      <button mat-flat-button color="accent" >Add Customer</button>
+                    </div>
+                  </form>
+                </mat-card>
+      
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>

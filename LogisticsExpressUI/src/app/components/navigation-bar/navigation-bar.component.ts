@@ -18,7 +18,19 @@ export class NavigationBarComponent implements OnInit {
     this.router.navigate(["customers"]);
   }
 
+  LocationClick(){
+    this.router.navigate(["countries"]);
+  }
+
   dashboardClick(){
     this.router.navigate([""]);
+  }
+
+  SubcontractorClick(){
+    this.router.navigate(["subcontractor"]);
+  }
+
+  Employee(){
+    this.router.navigate(["employeerole"]);
   }
 }

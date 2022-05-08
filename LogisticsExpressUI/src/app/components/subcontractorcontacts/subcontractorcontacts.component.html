@@ -1,0 +1,159 @@
+<div class="Background">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-6">
+          <!-- List of Customer Contacts  -->
+          <div class="CustomerList">
+            <mat-card class="CustomerHeader">
+              <mat-card-header>Contacts</mat-card-header>
+            </mat-card>
+            <br>
+            <div class="example-container">
+              <mat-card>
+                <mat-table [dataSource]="subcontractorcontacts" matSort>
+  
+                  <ng-container matColumnDef="contactName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Contact Name </mat-header-cell>
+                    <mat-cell *matCellDef="let contact" (click)="populateForm(contact)"> {{contact.subcontractorName}}
+                    </mat-cell>
+                  </ng-container>
+  
+                  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                  <mat-row *matRowDef="let contact; columns: displayedColumns;">
+                  </mat-row>
+                </mat-table>
+                <br>
+                <button mat-flat-button color="accent" (click)="AddPage()">Add Contact</button>
+              </mat-card>
+  
+            </div>
+  
+          </div>
+  
+        </div>
+  
+        <div class="col-6">
+  
+          <mat-card class="NavButtonHeader">
+            <button mat-button class="NavButton" (click)="NavigateBack()">Subcontractor Details</button>
+            <button mat-button class="NavButton" (click)="getCustomerContacts(subcontractorId)">Subcontractor Contacts</button>
+          </mat-card>
+            
+          <br>
+  
+          <div class="CustomerDetails">
+            <!-- Update Contact Details  -->
+            <div *ngIf="EditView">
+              <mat-card class="header">
+                <mat-card-header>Contact Person Details</mat-card-header>
+              </mat-card>
+              <br>
+              <mat-card class="example-container">
+                <form #form="ngForm" (ngSubmit)="addContact()">
+                  <mat-form-field>
+                    <mat-label for="">Name</mat-label><br>
+                    <input matInput type="text" name="contactName"  required [(ngModel)]="subcontractorcontact.SubcontractorName">
+                  </mat-form-field>
+  
+                  <br>
+  
+                  <mat-form-field>
+                    <mat-label>Phone Number</mat-label><br>
+                    <div *ngIf="subcontractorcontact.phoneNumber.length != 10">
+                      <mat-error>Invalid Phone Number</mat-error>
+                    </div>
+                    <input matInput type="text" name="phoneNumber" required [(ngModel)]="subcontractorcontact.phoneNumber">
+                  </mat-form-field>
+  
+                  <br>
+  
+                  <mat-form-field>
+                    <mat-label>Email Address</mat-label><br>
+                    <input matInput type="email" name="emailAddress" required email="true"  [(ngModel)]="subcontractorcontact.emailAddress">
+                  </mat-form-field>
+  
+                  <br>
+                </form>
+                <button mat-flat-button color="accent" (click)="updateContact(subcontractorcontact)">Update Contact
+                  Person</button>
+              </mat-card>
+            </div>
+            <!-- View Customer Details -->
+            <div *ngIf="!EditView">
+              <div *ngIf="!AddView">
+                <mat-card class="header">
+                  <mat-card-header>Subcontractor Details</mat-card-header>
+                </mat-card>
+                <br>
+                <mat-card class="example-container">
+  
+                  <div>
+                    <mat-list>
+                      <mat-list-item>Full Name: {{subcontractorcontact.SubcontractorName}}</mat-list-item>
+                      <mat-divider></mat-divider>
+                      <mat-list-item>Phone Number: {{subcontractorcontact.phoneNumber}}</mat-list-item>
+                      <mat-divider></mat-divider>
+                      <mat-list-item>Email Address: {{subcontractorcontact.emailAddress}}</mat-list-item>
+                    </mat-list>
+                  </div>
+                  <br>
+                  <div>
+                    <button mat-flat-button color="accent"[disabled]="isDisabled" (click)="UpdatePage()">Update
+                      Subcontractor</button>
+                    <br>
+                    <br>
+                    <button mat-flat-button color="accent" [disabled]="isDisabled"
+                      (click)="deleteContact(subcontractorcontact.subcontractorContactId)">Delete Customer</button>
+                  </div>
+  
+                </mat-card>
+              </div>
+            </div>
+            <!-- Add Customer  -->
+            <div *ngIf="AddView">
+  
+              <mat-card class="header">
+                <mat-card-header>Customer Details</mat-card-header>
+              </mat-card>
+              <br>
+              <mat-card class="example-container">
+                <form #form="ngForm">
+                  <mat-form-field>
+                    <mat-label for="">Contact Name</mat-label><br>
+                    <input matInput type="text" name="businessName"  [(ngModel)]="subcontractorcontact.SubcontractorName">
+                  </mat-form-field>
+  
+                  <br>
+  
+                  <mat-form-field>
+                    <mat-label>Phone Number</mat-label><br>
+                    <div *ngIf="subcontractorcontact.phoneNumber.length != 10">
+                      <mat-error>Invalid Phone Number</mat-error>
+                    </div>
+                    <input matInput type="text" name="phoneNumber" [(ngModel)]="subcontractorcontact.phoneNumber">
+                  </mat-form-field>
+  
+                  <br>
+  
+                  <mat-form-field>
+                    <mat-label>Email Address</mat-label><br>
+                    <input matInput type="email" name="emailAddress" [(ngModel)]="subcontractorcontact.emailAddress">
+                  </mat-form-field>
+  
+                  <br>
+                  <div>
+                    <button mat-flat-button color="accent"  (click)="addContact()">Add Contact</button>
+                  </div>
+                </form>
+              </mat-card>
+  
+            </div>
+  
+  
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </div>

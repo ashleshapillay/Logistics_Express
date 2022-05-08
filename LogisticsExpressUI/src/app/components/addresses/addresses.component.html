@@ -1,0 +1,115 @@
+<div class="Background">
+  <!-- Navigation Bar  -->
+  <app-navigation-bar></app-navigation-bar>
+  <div *ngIf="!ViewProvince || !ViewCity || !ViewSuburb" class="container">
+    <div class="row">
+      <div class="col-6">
+
+        <!-- add map  -->
+      </div>
+      <div class="col-6">
+        <mat-card class="NavButtonHeader">
+          <a><button mat-button class="NavButton" (click)="CountryClick()">Countries</button></a>
+          <a><button mat-button class="NavButton" (click)="ProvinceClick()">Provinces</button></a>
+          <a><button mat-button class="NavButton" (click)="CityClick()">Cities</button></a>
+          <a><button mat-button class="NavButton" (click)="SuburbClick()">Suburbs</button></a>
+          <button mat-button class="NavButton" (click)="AddressClick()" disabled="true">Addresses</button>
+        </mat-card>
+        <br>
+        <mat-card class="NavButtonHeader">
+          <button mat-button class="NavButton" (click)="AddPage()" [disabled]="AddDisabled">Add Address</button>
+          <a><button mat-button class="NavButton" (click)="deleteAddress(address.addressId)"
+              [disabled]="isDisabled">Delete Address</button></a>
+          <a><button mat-button class="NavButton" (click)="UpdatePage()" [disabled]="isDisabled">Update
+              Address</button></a>
+        </mat-card>
+
+        <!--Table-->
+        <div *ngIf="!EditView">
+          <div style="position: relative;" class="col-6" *ngIf="!AddView">
+            <div class="example-container" matSort>
+              <mat-card  style="width: 640px;">
+                <mat-table #table [dataSource]="addresses">
+                  <ng-container matColumnDef="streetNumber">
+                    <mat-header-cell *matHeaderCellDef><b>Street Number</b></mat-header-cell>
+                    <mat-cell *matCellDef="let address" (click)="populateForm(address)">{{address.streetNumber}}
+                    </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="streetName">
+                    <mat-header-cell *matHeaderCellDef><b>Street Name</b></mat-header-cell>
+                    <mat-cell *matCellDef="let address" (click)="populateForm(address)">{{address.streetName}}
+                    </mat-cell>
+                  </ng-container>
+                  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                  <mat-row *matRowDef="let address; columns: displayedColumns;"></mat-row>
+                </mat-table>
+              </mat-card>
+            </div>
+          </div>
+        </div>
+
+            <!--Forms-->
+            <div style="position: relative;">
+              <!-- Add Address  -->
+              <div *ngIf="AddView">
+                <form #form="ngForm">
+                  <mat-card class="example-container" style="width: 640px;">
+                    <mat-form-field appearance="fill">
+                      <input matInput type="number" name="streetNumber" [(ngModel)]="address.streetNumber"
+                        placeholder="Street Number">
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field appearance="fill">
+                      <input matInput type="text" name="streetName" [(ngModel)]="address.streetName"
+                        placeholder="Street Name">
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field appearance="fill">
+                      <mat-select [(value)]="address.suburbId" placeholder="Suburb Name"
+                        style="color: rgb(192, 192, 192);">
+                        <div style="width: 250px;">
+                          <mat-option name="suburbId" *ngFor="let suburb of suburbs" [value]="suburb.suburbId">
+                            {{suburb.name}}</mat-option>
+                        </div>
+                      </mat-select>
+                    </mat-form-field><br>
+                    <br><br>
+                    <button mat-flat-button color="accent" (click)="addAddress()">Add Address</button>
+                  </mat-card>
+                </form>
+              </div>
+            </div>
+
+            <div style="position: relative; size: 50%;">
+              <!-- Edit City  -->
+              <div  *ngIf="EditView">
+                <form #form="ngForm">
+                  <mat-card class="example-container" style="width: 640px;">
+                    <mat-form-field appearance="fill">
+                      <input matInput type="number" name="streetNumber" [(ngModel)]="address.streetNumber"
+                        placeholder="Street Number">
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field appearance="fill">
+                      <input matInput type="text" name="streetName" [(ngModel)]="address.streetName"
+                        placeholder="Street Name">
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field appearance="fill">
+                      <mat-select [(value)]="address.suburbId" placeholder="Suburb Name"
+                        style="color: rgb(192, 192, 192);">
+                        <div style="width: 250px;">
+                          <mat-option name="suburbId" *ngFor="let suburb of suburbs" [value]="suburb.suburbId"
+                            style="right: inherit;">{{suburb.name}}</mat-option>
+                        </div>
+                      </mat-select>
+                    </mat-form-field><br>
+                  </mat-card>
+                </form>
+              </div>
+            </div>
+
+          </div>
+        </div>
+  </div>
+</div>

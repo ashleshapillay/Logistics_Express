@@ -1,0 +1,104 @@
+<div class="background">
+    <!-- Navigation Bar  -->
+    <app-navigation-bar></app-navigation-bar>
+    
+    <div *ngIf="!ViewCountry || !ViewProvince || !ViewCity|| !ViewSuburb" class="container">
+    <div class="row"  style="float: right;"  >
+        <mat-card class="NavButtonHeader">
+                <a><button mat-button class="NavButton" (click)="CountryClick()">Countries</button></a>
+                <a><button mat-button class="NavButton" (click)="ProvinceClick()">Provinces</button></a>
+                <a><button mat-button class="NavButton" (click)="CityClick()">Cities</button></a>
+                <a><button mat-button class="NavButton" (click)="SuburbClick()">Suburbs</button></a>
+                <button mat-button class="NavButton" (click)="AddressClick()" disabled="true">Addresses</button>
+        </mat-card>
+    </div>
+    <br><br><br><br>
+    
+    
+    <div class="row">
+    <!--Table-->
+      <div class="example-container" style="position: relative" class="col" >
+        <mat-card class="example-container" style="width: 500px;">
+            <mat-table #table [dataSource]="addresses">
+                  <ng-container matColumnDef="streetNumber">
+                           <mat-header-cell *matHeaderCellDef><b>Street Number</b></mat-header-cell>
+                           <mat-cell *matCellDef="let address" (click)="populateForm(address)">{{address.streetNumber}}</mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="streetName">
+                        <mat-header-cell *matHeaderCellDef><b>Street Name</b></mat-header-cell>
+                        <mat-cell *matCellDef="let address" (click)="populateForm(address)">{{address.streetName}}</mat-cell>
+                   </ng-container>
+                          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                          <mat-row *matRowDef="let address; columns: displayedColumns;"></mat-row>
+                 </mat-table>
+                 <br>
+    
+                <button mat-flat-button color="accent" (click)="AddPage()">Add Address</button>
+                <p> </p>
+                <button mat-flat-button color="accent" (click)="UpdatePage()">Maintain Address</button>
+           </mat-card>
+           </div>
+    
+    <!--Forms-->
+    <div style="position: relative; size: 50%;">
+          <!-- Add Address  -->
+          <div class="CustomerDetails" *ngIf="AddView" >
+             <form  #form="ngForm">
+              <mat-card class="example-container" style="width: 500px;">
+                  <mat-form-field appearance="fill">
+                        <input matInput type="number" name="streetNumber"  [(ngModel)]="address.streetNumber" placeholder="Street Number">
+                            <hr>
+                      </mat-form-field>
+          <br>
+            <mat-form-field appearance="fill">
+                        <input matInput type="text" name="streetName"  [(ngModel)]="address.streetName" placeholder="Street Name">
+                            <hr>
+            </mat-form-field>
+        <br>
+                      <mat-form-field appearance="fill">
+                        <mat-select [(value)]="address.suburbId" placeholder="Suburb Name" style="color: rgb(192, 192, 192);">
+                            <div style="width: 250px;">
+                              <mat-option name="suburbId" *ngFor="let suburb of suburbs" [value]="suburb.suburbId">{{suburb.name}}</mat-option></div>
+                            </mat-select>
+                      </mat-form-field><br>
+                      <br><br>
+        <button mat-flat-button color="accent"  (click)="addAddress()">Add Address</button>
+        </mat-card>
+        </form>
+      </div>
+          </div>
+    
+      <div style="position: relative; size: 50%;">
+      <!-- Edit City  -->
+      <div class="CustomerDetails" *ngIf="EditView" >
+          <form  #form="ngForm">
+            <mat-card class="example-container" style="width: 500px;">
+          <label style="font-size: 80%">Select a address from the table</label><br>
+              <mat-form-field appearance="fill">
+                <input matInput type="number" name="streetNumber" [(ngModel)]="address.streetNumber" placeholder="Street Number">
+                <hr>
+              </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill">
+                <input matInput type="text" name="streetName" [(ngModel)]="address.streetName" placeholder="Street Name">
+                <hr>
+              </mat-form-field>
+            <br>
+              <mat-form-field appearance="fill">
+                  <mat-select [(value)]="address.suburbId" placeholder="Suburb Name" style="color: rgb(192, 192, 192);">
+                    <div style="width: 250px;">
+                      <mat-option name="suburbId" *ngFor="let suburb of suburbs" [value]="suburb.suburbId" style="right: inherit;">{{suburb.name}}</mat-option>
+                    </div>
+                  </mat-select>
+               </mat-form-field><br>
+               <br><br>
+                 <button mat-flat-button color="accent"  (click)="updateAddress(address)">Update Address</button>
+                 <p> </p>
+                 <button mat-flat-button color="accent"  (click)="deleteAddress(address.addressId)">Delete Address</button>
+                 </mat-card>
+                 </form>
+      </div>
+      </div>
+    
+      </div>
+        </div>

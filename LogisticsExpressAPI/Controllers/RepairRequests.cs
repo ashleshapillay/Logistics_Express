@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RequestAndFuelAPI.Data;
 using Microsoft.EntityFrameworkCore;
-using RequestAndFuelAPI.Models;
+using LogisticsExpressAPI.Models;
 
 namespace LogisticsExpressAPI.Controllers
 {

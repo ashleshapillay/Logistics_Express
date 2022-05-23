@@ -49,7 +49,7 @@ namespace LogisticsExpressAPI.Controllers
             fuelLog.Litres = litres;
             fuelLog.Price_Per_Litre = priceLitre;
             fuelLog.Total_Spent = totalSpent;
-            fuelLog.Receipt_Image = file.FileName.ToString();
+            fuelLog.Receipt_Image = file.FileName;
             fuelLog.VehicleId = vehicleId;
 
             dataContext.FuelLogs.Add(fuelLog);
@@ -71,7 +71,7 @@ namespace LogisticsExpressAPI.Controllers
                 existingFuelEntry.Litres = litres;
                 existingFuelEntry.Price_Per_Litre = priceLitre;
                 existingFuelEntry.Total_Spent = totalSpent;
-                existingFuelEntry.Receipt_Image = file.FileName.ToString();
+                existingFuelEntry.Receipt_Image = file.FileName;
                 existingFuelEntry.VehicleId = vehicleId;
                 await dataContext.SaveChangesAsync();
                 return Ok(existingFuelEntry);

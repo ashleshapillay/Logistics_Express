@@ -15,6 +15,8 @@ import { SubcontractorcontactsComponent } from './components/subcontractorcontac
 import { EmployeeComponent } from './components/employee/employee.component';
 import { EmployeeRoleComponent} from './components/employee-role/employee-role.component';
 
+import { RepairRequestsComponent } from './components/repairrequest/repair-requests.component';
+
 const routes: Routes = [
     { path: '', component: DashboardComponent },
     { path: 'customers', component: CustomersComponent},
@@ -28,6 +30,7 @@ const routes: Routes = [
     { path: 'subcontractocontacts', component: SubcontractorcontactsComponent},
     { path: 'employee', component: EmployeeComponent},
     { path: 'employeerole', component: EmployeeRoleComponent},
+    { path: 'repair-requests', component: RepairRequestsComponent},
 ];
 
 @NgModule({

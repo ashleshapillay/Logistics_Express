@@ -23,7 +23,7 @@ export class NavigationBarComponent implements OnInit {
   }
 
   dashboardClick(){
-    this.router.navigate([""]);
+    this.router.navigate(["repair-requests"]);
   }
 
   SubcontractorClick(){

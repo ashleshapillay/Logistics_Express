@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Fuel</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+<p>fuel works!</p>
+
+<!--Test form-->
+<form #form="ngForm">
+  <ion-label for="">Litres</ion-label>
+  <ion-input  type="number" name="Litres"  required [(ngModel)]="fuelEntry.Litres"></ion-input><br>
+  <ion-label for="">Price per Litre</ion-label>
+  <ion-input  type="number" name="Price per Litre"  required [(ngModel)]="fuelEntry.Price_Per_Litre"></ion-input><br>
+  <ion-label for="">Total Spent</ion-label>
+  <ion-input  type="number" name="Total Spent"  required [(ngModel)]="fuelEntry.Total_Spent"></ion-input><br>
+  <ion-label for="">Vehicle</ion-label>
+  <ion-input  type="number" name="Total Spent"  required [(ngModel)]="fuelEntry.VehicleId"></ion-input><br>
+  <ion-label for="">Receipt</ion-label>
+  <ion-input  type="file" name="Litres"  required [(ngModel)]="fuelEntry.ReceiptImage"></ion-input>
+  <ion-button (click)="addFuelEntry()">Add Fuel Entry</ion-button>
+</form>
+
+{{fuelEntries|json}}
+<ion-button  routerLink="/home" >Back</ion-button>
+</ion-content>

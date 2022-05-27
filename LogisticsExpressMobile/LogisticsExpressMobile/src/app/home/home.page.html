@@ -1,0 +1,57 @@
+
+<div class="Background"> 
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-title>
+        <img src="assets/image/Logistics Express Logo.png" width="250px">
+      </ion-title>
+
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content [fullscreen]="true">
+  
+    <ion-grid>
+  
+      <ion-row>
+  
+        <ion-col size="6">
+          <ion-card routerLink="/repair-request">
+            <ion-card-header>
+              <ion-card-title  class="RouteLabel" routerLink="/repair-request" >Repair Request</ion-card-title>
+            </ion-card-header>
+           
+            <ion-card-content>
+              <img src="assets/image/Repair.png" width="120px">
+             
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+  
+        <ion-col size="6">
+          <ion-card routerLink="/fuel-list">
+            <ion-card-header>
+              <ion-card-title class="RouteLabel"  routerLink="/fuel-list">Fuel Log</ion-card-title>
+            </ion-card-header>
+      
+            <ion-card-content>
+              <img src="assets/image/Fuel.png" width="250px" height="140px">
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+  
+  
+      </ion-row>
+
+      <!-- LogoutButton -->
+      <!-- <ion-row>
+         <ion-card  class="Logout">
+             <ion-card-header>
+              <ion-card-title class="RouteLabel" >Logout</ion-card-title>
+             </ion-card-header>
+         </ion-card>
+      </ion-row> -->
+  
+    </ion-grid>
+  </ion-content>
+  </div>

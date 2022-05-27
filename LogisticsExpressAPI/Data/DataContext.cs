@@ -21,5 +21,11 @@ namespace LogisticsExpressAPI.Data
         public DbSet<Employee> Employees { get; set; }
         public DbSet<EmployeeRole> EmployeeRoles { get; set; }
 
+        public DbSet<VehicleType> VehicleTypes { get; set; }
+        public DbSet<VehicleMake> VehicleMakes { get; set; }
+        public DbSet<VehicleModel> VehicleModels { get; set; }
+        public DbSet<Vehicle> Vehicles { get; set; }
+        public DbSet<VehicleDriver> VehicleDrivers { get; set; }
+
     }
 }

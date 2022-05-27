@@ -1,1 +1,26 @@
-<router-outlet></router-outlet>
+<div class="BackGround">
+    <div *ngIf="!isUserLoggedIn" class="mat-elevation-z2" class="body">
+        <div class="body">
+
+            <body >
+                <div
+                    style="align-items: center; display: flex; flex-direction: column; background-color: rgb(230, 230, 230);">
+                    <br>
+                    <img src="assets/image/DEL0.png" width="150px"><br>
+                    <img src="assets/image/LE_name.png" width="400px"><br>
+                    <br>
+                    <br>
+                    <button class="buttonColour" mat-raised-button *ngIf="!isUserLoggedIn"
+                        (click)="login()">Login</button>
+                    <br>
+                    <br>
+                </div>
+            </body>
+        </div>
+
+    </div>
+</div>
+
+<div *ngIf="isUserLoggedIn">
+    <router-outlet></router-outlet>
+</div>

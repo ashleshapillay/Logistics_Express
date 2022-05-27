@@ -1,0 +1,22 @@
+ion-icon{
+    width: 40px; 
+    height: 50px;
+    color: black;
+}
+
+.maintain{
+    margin-left: 270px; 
+}
+
+.Background{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+ion-card-title {
+    color: black;
+}
+
+ion-card-subtitle {
+    color: black;
+}

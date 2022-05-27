@@ -30,6 +30,8 @@ import { MsalModule, MsalInterceptor, MsalGuard, MsalRedirectComponent } from '@
 import { PublicClientApplication, InteractionType } from '@azure/msal-browser';
 import { AuthenicationService } from './services/authenication/authenication.service';
 
+import { RepairRequestsComponent } from './components/repairrequest/repair-requests.component';
+
 
 
 @NgModule({
@@ -48,6 +50,8 @@ import { AuthenicationService } from './services/authenication/authenication.ser
     SubcontractorcontactsComponent,
     EmployeeComponent,
     EmployeeRoleComponent,
+    RepairRequestsComponent
+
    ],
   imports: [
     BrowserModule,

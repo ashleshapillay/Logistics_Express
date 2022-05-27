@@ -18,7 +18,7 @@
               <mat-table [dataSource]="customers" matSort>
 
                 <ng-container matColumnDef="businessName">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header> Business Name </mat-header-cell>
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Customer Name </mat-header-cell>
                   <mat-cell *matCellDef="let customer" (click)="populateForm(customer)"> {{customer.businessName}}
                   </mat-cell>
                 </ng-container>

@@ -27,6 +27,8 @@ import { SubcontractorcontactsComponent } from './components/subcontractorcontac
 import { EmployeeComponent } from './components/employee/employee.component';
 import { EmployeeRoleComponent } from './components/employee-role/employee-role.component';
 
+import { RepairRequestsComponent } from './components/repairrequest/repair-requests.component';
+
 
 
 @NgModule({
@@ -44,7 +46,8 @@ import { EmployeeRoleComponent } from './components/employee-role/employee-role.
     SubcontractorComponent,
     SubcontractorcontactsComponent,
     EmployeeComponent,
-    EmployeeRoleComponent
+    EmployeeRoleComponent,
+    RepairRequestsComponent
    ],
   imports: [
     BrowserModule,

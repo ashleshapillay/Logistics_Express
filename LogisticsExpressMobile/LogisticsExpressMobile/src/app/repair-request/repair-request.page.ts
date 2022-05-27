@@ -6,7 +6,7 @@ import { RepairRequest } from '../interfaces/repair-request';
 @Component({
   selector: 'app-repair-request',
   templateUrl: './repair-request.page.html',
-  styleUrls: ['./repair-request.page.scss'],
+  styleUrls: ['./repair-request.page.css'],
 })
 export class RepairRequestPage implements OnInit {
 

@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { NavController, NavParams } from '@ionic/angular';
+import { Fuel } from '../interfaces/fuel';
 import { MobileServicesService } from '../services/mobile-services.service';
-import { Fuel } from 'src/app/interfaces/fuel';
 
 @Component({
-  selector: 'app-fuel',
-  templateUrl: './fuel.page.html',
-  styleUrls: ['./fuel.page.css'],
+  selector: 'app-fuel-list',
+  templateUrl: './fuel-list.page.html',
+  styleUrls: ['./fuel-list.page.css'],
 })
-export class FuelPage implements OnInit {
-  
+export class FuelListPage implements OnInit {
+
   fuelEntries: Fuel[] = [];
   fuelEntry: Fuel = {
     FuelEntryId : 0,
@@ -20,6 +21,8 @@ export class FuelPage implements OnInit {
     ReceiptImage :'',
     VehicleId : 0
   }
+
+  EditView = false; 
 
 constructor(private route: ActivatedRoute, private fuelEntryService: MobileServicesService) { }
 
@@ -86,6 +89,15 @@ constructor(private route: ActivatedRoute, private fuelEntryService: MobileServi
 
   ngOnInit() {
     this.getAllFuelEntries();
+  }
+
+  update()
+  {
+
+  }
+
+  delete(){
+   
   }
 
 }

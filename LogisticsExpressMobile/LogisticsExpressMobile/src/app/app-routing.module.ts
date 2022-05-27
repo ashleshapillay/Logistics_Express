@@ -18,7 +18,11 @@ const routes: Routes = [
   {
     path: 'fuel',
     loadChildren: () => import('./fuel/fuel.module').then( m => m.FuelPageModule)
+  },  {
+    path: 'fuel-list',
+    loadChildren: () => import('./fuel-list/fuel-list.module').then( m => m.FuelListPageModule)
   },
+
 ];
 
 @NgModule({

@@ -20,6 +20,10 @@ namespace LogisticsExpressAPI.Data
         public DbSet<Suburb> Suburbs { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<EmployeeRole> EmployeeRoles { get; set; }
+        public DbSet<InsurancePlan> InsurancePlans { get; set; }
+        public DbSet<Repair> Repairs{ get; set; }
+        public DbSet<ServicePlan> ServicePlans { get; set; }
+        public DbSet<VehicleLicense> VehicleLicenses { get; set; }
 
     }
 }

@@ -25,9 +25,14 @@ import { SubcontractorComponent } from './components/subcontractor/subcontractor
 import { SubcontractorcontactsComponent } from './components/subcontractorcontacts/subcontractorcontacts.component';
 import { EmployeeComponent } from './components/employee/employee.component';
 import { EmployeeRoleComponent } from './components/employee-role/employee-role.component';
+
+import { VehicleComponent } from './components/vehicle/vehicle.component';
+import { VehicleDriverComponent } from './components/vehicle-driver/vehicle-driver.component';
+import { VehicleSpecsComponent } from './components/vehicle-specs/vehicle-specs.component';
 import { MsalModule, MsalInterceptor, MsalGuard, MsalRedirectComponent } from '@azure/msal-angular';
 import { PublicClientApplication, InteractionType } from '@azure/msal-browser';
 import { AuthenicationService } from './services/authenication/authenication.service';
+
 
 import { RepairRequestsComponent } from './components/repairrequest/repair-requests.component';
 
@@ -49,7 +54,13 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     SubcontractorcontactsComponent,
     EmployeeComponent,
     EmployeeRoleComponent,
+
+    VehicleComponent,
+    VehicleDriverComponent,
+    VehicleSpecsComponent
+
     RepairRequestsComponent
+
    ],
   imports: [
     BrowserModule,

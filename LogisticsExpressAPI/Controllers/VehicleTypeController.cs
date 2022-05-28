@@ -51,7 +51,20 @@ namespace LogisticsExpressAPI.Controllers
             return await GetVehicleType(newType.VehicleTypeID);
         }
 
-
+        //Delete a Vehicle Type
+        [HttpDelete]
+        [Route("{id:int}")]
+        public async Task<IActionResult> DeleteVehicleType([FromRoute] int id)
+        {
+            var existingType = await dataContext.VehicleTypes.FirstOrDefaultAsync(x => x.VehicleTypeID == id);
+            if (existingType != null)
+            {
+                dataContext.Remove(existingType);
+                await dataContext.SaveChangesAsync();
+                return Ok(existingType);
+            }
+            return NotFound("Vehicle Type not found");
+        }
         //[HttpPut("{id}")]
         //public async Task<IActionResult> PutVehicleType(int id, VehicleType types)
         //{

@@ -63,7 +63,20 @@ namespace LogisticsExpressAPI.Controllers
             return await GetVehicleMake(newMake.VehicleMakeID);
         }
 
-
+        //Delete a Vehicle Make
+        [HttpDelete]
+        [Route("{id:int}")]
+        public async Task<IActionResult> DeleteVehicleMake([FromRoute] int id)
+        {
+            var existingModel = await dataContext.VehicleMakes.FirstOrDefaultAsync(x => x.VehicleMakeID == id);
+            if (existingModel != null)
+            {
+                dataContext.Remove(existingModel);
+                await dataContext.SaveChangesAsync();
+                return Ok(existingModel);
+            }
+            return NotFound("Vehicle Make not found");
+        }
 
 
         //private readonly DataContext datacontext;

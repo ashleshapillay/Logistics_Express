@@ -52,8 +52,21 @@ namespace LogisticsExpressAPI.Controllers
 
             return await GetVehicleModels(newModel.VehicleModelID);
         }
-
         
+        //Delete a Vehicle Model
+        [HttpDelete]
+        [Route("{id:int}")]
+        public async Task<IActionResult> DeleteVehicleModel([FromRoute] int id)
+        {
+            var existingMake = await dataContext.VehicleModels.FirstOrDefaultAsync(x => x.VehicleModelID == id);
+            if (existingMake != null)
+            {
+                dataContext.Remove(existingMake);
+                await dataContext.SaveChangesAsync();
+                return Ok(existingMake);
+            }
+            return NotFound("Vehicle Model not found");
+        }
 
 
     }

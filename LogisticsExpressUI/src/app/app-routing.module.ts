@@ -18,6 +18,7 @@ import { MsalGuard } from '@azure/msal-angular';
 
 import { RepairRequestsComponent } from './components/repairrequest/repair-requests.component';
 
+
 const routes: Routes = [
     { path: 'customers', component: CustomersComponent},
     { path: 'customercontacts', component: CustomercontactsComponent},
@@ -32,7 +33,7 @@ const routes: Routes = [
     { path: 'employeerole', component: EmployeeRoleComponent},
     { path: '', component: DashboardComponent},
     { path: 'dashboard', component: DashboardComponent, canActivate:[MsalGuard]},
-    { path: 'repair-requests', component: RepairRequestsComponent},
+    { path: 'repair-requests', component: RepairRequestsComponent}
 
 ];
 

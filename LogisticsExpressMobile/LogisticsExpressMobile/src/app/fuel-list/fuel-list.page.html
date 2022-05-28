@@ -9,16 +9,16 @@
 
 <ion-content [fullscreen]="true" class="Background">
 
-   <ion-card *ngFor="let fuelEntry of fuelEntries ">
+   <ion-card *ngFor="let fuel of fuelEntries ">
     <ion-card-header>
-      <ion-card-title  class="RouteLabel" >Total Spent: {{fuelEntry.Total_Spent}} </ion-card-title>
-      <ion-card-title  class="RouteLabel" >Date: {{fuelEntry.Log_Date}} </ion-card-title> 
+      <ion-card-title  class="RouteLabel" >Total Spent: {{fuel.total_Spent}} </ion-card-title>
+      <ion-card-title  class="RouteLabel" >Date: {{fuel.log_Date}} </ion-card-title> 
     </ion-card-header>
    
    <ion-card-content>
-      <ion-card-subtitle>Price per Litre:{{fuelEntry.Price_Per_Litre}} </ion-card-subtitle>
-      <ion-card-subtitle>Litres:  {{fuelEntry.Litres}} </ion-card-subtitle>
-      <ion-icon name="trash-outline" class="maintain"  (click)="deleteFuelEntry(fuelEntry.FuelEntryId)" ></ion-icon>  
+      <ion-card-subtitle>Price per Litre:{{fuel.price_Per_Litre}} </ion-card-subtitle>
+      <ion-card-subtitle>Litres:  {{fuel.litres}} </ion-card-subtitle>
+      <ion-icon name="trash-outline" class="maintain"  (click)="delete(fuel.fuelEntryId)" ></ion-icon>  
    </ion-card-content>
 
      

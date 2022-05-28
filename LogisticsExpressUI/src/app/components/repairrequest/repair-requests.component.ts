@@ -1,9 +1,12 @@
 import { DatePipe } from '@angular/common';
 import { NodeWithI18n } from '@angular/compiler';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { RepairRequest } from 'src/app/modules/repairrequest/repairrequest.module';
 import { RepairrequestserviceService } from 'src/app/services/repairrequest/repairrequestservice.service';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-repair-requests',
@@ -11,6 +14,7 @@ import { RepairrequestserviceService } from 'src/app/services/repairrequest/repa
   styleUrls: ['./repair-requests.component.css']
 })
 export class RepairRequestsComponent implements OnInit {
+  displayedColumns = ['Date','Description','VehicleId'];
 
   repairRequests: RepairRequest[] = [];
   repairRequest: RepairRequest = {
@@ -20,7 +24,14 @@ export class RepairRequestsComponent implements OnInit {
     VehicleId : 0
   }
 
-  constructor(private route: ActivatedRoute, private repairRequestService: RepairrequestserviceService) { }
+  title = 'appBootstrap';
+  
+  closeResult: string = '';
+
+  deleteId: Number = 0; 
+
+
+  constructor(private route: ActivatedRoute, private repairRequestService: RepairrequestserviceService, private modalService: NgbModal) { }
 
   //COMPONENTS TO ACCESS BACKEND
    //get all requests
@@ -35,8 +46,9 @@ export class RepairRequestsComponent implements OnInit {
     };
 
   //delete request - FULFILLED 
-      deleteRepairRequest(id: Number) {
-        this.repairRequestService.deleteRepairRequest(id)
+      deleteRepairRequest() {
+        console.log(this.deleteId)
+        this.repairRequestService.deleteRepairRequest(this.deleteId)
           .subscribe(
             response => {
              this.repairRequest = {
@@ -48,7 +60,6 @@ export class RepairRequestsComponent implements OnInit {
               this.getAllRepairRequests();
               //TO DO: Redirect to Add Repair Details
               //TO DO: Validation
-              console.log("Province successfully removed.");
               window.location.reload();
             }
           )
@@ -57,5 +68,26 @@ export class RepairRequestsComponent implements OnInit {
   ngOnInit(): void {
     this.getAllRepairRequests();
   }
+
+  open(content:any, id:Number) {
+    this.deleteId = id; 
+    console.log(this.deleteId)
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+  
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
+  }
+
 
 }

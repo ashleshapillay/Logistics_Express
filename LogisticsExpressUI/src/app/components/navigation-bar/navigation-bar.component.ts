@@ -34,7 +34,7 @@ export class NavigationBarComponent implements OnDestroy{
   }
 
   dashboardClick(){
-    this.router.navigate(["repair-requests"]);
+    this.router.navigate(["dashboard"]);
   }
 
   SubcontractorClick(){
@@ -53,4 +53,6 @@ export class NavigationBarComponent implements OnDestroy{
     this._destroy.next(undefined);
     this._destroy.complete(); 
   }
+
+  
 }

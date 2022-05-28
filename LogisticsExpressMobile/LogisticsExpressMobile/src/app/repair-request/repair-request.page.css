@@ -14,3 +14,7 @@ ion-input{
     border-width: thin;
     width: auto;
 }
+
+input{
+    background-color: white;
+}

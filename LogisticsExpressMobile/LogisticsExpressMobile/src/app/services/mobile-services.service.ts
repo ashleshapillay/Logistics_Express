@@ -10,8 +10,8 @@ import { RepairRequest } from '../interfaces/repair-request';
 export class MobileServicesService {
 
 //base URL's
-fuelUrl = 'https://localhost:7009/api/Fuel';
-requestUrl = 'https://localhost:7009/api/RepairRequest';
+fuelUrl = 'https://localhost:7013/api/Fuel';
+requestUrl = 'https://localhost:7013/api/RepairRequest';
 
   constructor(private http: HttpClient) { }
 
@@ -30,7 +30,7 @@ requestUrl = 'https://localhost:7009/api/RepairRequest';
     }
     //update a fuel entry
     updateFuelEntry(entry:Fuel): Observable<Fuel>{
-      return  this.http.put<Fuel>(this.fuelUrl + '/'+ entry.FuelEntryId, entry);
+      return  this.http.put<Fuel>(this.fuelUrl + '/'+ entry.fuelEntryId, entry);
     }
     //delete a fuel entry
     deleteFuelEntry(id: Number): Observable<Fuel>{

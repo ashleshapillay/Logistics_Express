@@ -1,9 +1,9 @@
 export interface Fuel {
-    FuelEntryId : number;
-    Log_Date : Date;
-    Litres : number;
-    Price_Per_Litre : number;
-    Total_Spent : number;
-    ReceiptImage : string;
-    VehicleId : number;
+    fuelEntryId : number;
+    log_Date : Date;
+    litres : number;
+    price_Per_Litre : number;
+    total_Spent : number;
+    receiptImage : string;
+    vehicleId : number;
 }

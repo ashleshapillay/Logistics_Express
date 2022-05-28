@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MobileServicesService } from '../services/mobile-services.service';
 import { Fuel } from 'src/app/interfaces/fuel';
+import { ToastController } from '@ionic/angular';
+
+
 
 @Component({
   selector: 'app-fuel',
@@ -12,16 +15,18 @@ export class FuelPage implements OnInit {
   
   fuelEntries: Fuel[] = [];
   fuelEntry: Fuel = {
-    FuelEntryId : 0,
-    Log_Date : new Date(),
-    Litres : 0,
-    Price_Per_Litre : 0,
-    Total_Spent : 0,
-    ReceiptImage :'',
-    VehicleId : 0
+    fuelEntryId : 0,
+    log_Date : new Date(),
+    litres : 0,
+    price_Per_Litre : 0,
+    total_Spent : 0,
+    receiptImage :'',
+    vehicleId : 0
   }
 
-constructor(private route: ActivatedRoute, private fuelEntryService: MobileServicesService) { }
+ 
+
+constructor(private route: ActivatedRoute, private fuelEntryService: MobileServicesService,private toastCtrl: ToastController ) { }
 
 //FUEL ENTRIES - ACCESS BACKEND
 //TO DO: Validation and Html
@@ -36,24 +41,61 @@ constructor(private route: ActivatedRoute, private fuelEntryService: MobileServi
           }
         )
     };
+
+
+
   //add fuel entry
-    addFuelEntry() {
-      this.fuelEntryService.addFuelEntry(this.fuelEntry)
-        .subscribe(
-          response => {
-            this.fuelEntry = {
-              FuelEntryId : 0,
-              Log_Date : new Date(),
-              Litres : 0,
-              Price_Per_Litre : 0,
-              Total_Spent : 0,
-              ReceiptImage :'',
-              VehicleId : 0
-            }
-          console.log(response);
-          window.location.reload()
+    async addFuelEntry() {
+        if (this.fuelEntry.litres < 5 || this.fuelEntry.price_Per_Litre < 10|| this.fuelEntry.total_Spent != (this.fuelEntry.litres * this.fuelEntry.price_Per_Litre) ){
+          //toast alert
+          let toast = await this.toastCtrl.create({
+            message: 'The attempt to add a new fuel entry was unsuccessful',
+            duration: 3000,
+            position: 'top',
+          });
+          //display alert
+          toast.present();
+          this.fuelEntry = {
+            fuelEntryId : 0,
+            log_Date : new Date(),
+            litres : 0,
+            price_Per_Litre : 0,
+            total_Spent : 0,
+            receiptImage :'',
+            vehicleId : 0
           }
-        )
+        }
+        else{
+          
+                this.fuelEntryService.addFuelEntry(this.fuelEntry)
+                  .subscribe(
+                    async response => {
+                      this.fuelEntry = {
+                        fuelEntryId : 0,
+                        log_Date : new Date(),
+                        litres : 0,
+                        price_Per_Litre : 0,
+                        total_Spent : 0,
+                        receiptImage :'',
+                        vehicleId : 0
+                      }
+                    //toast alert
+              let toast = await this.toastCtrl.create({
+                message: 'The fuel entry has successfully been added',
+                duration: 3000,
+                position: 'top',
+              });
+              //display alert
+              toast.present();
+              
+              setTimeout(function(){
+                window.location.reload();
+              }, 1000);
+                    }
+                  
+                  )
+
+        }
     };
 
   //update fuel entry
@@ -69,17 +111,24 @@ constructor(private route: ActivatedRoute, private fuelEntryService: MobileServi
     deleteFuelEntry(id: Number) {
       this.fuelEntryService.deleteFuelEntry(id)
         .subscribe(
-          response => {
+          async response => {
            this.fuelEntry = {
-            FuelEntryId : 0,
-            Log_Date : new Date(),
-            Litres : 0,
-            Price_Per_Litre : 0,
-            Total_Spent : 0,
-            ReceiptImage :'',
-            VehicleId : 0
+            fuelEntryId : 0,
+            log_Date : new Date(),
+            litres : 0,
+            price_Per_Litre : 0,
+            total_Spent : 0,
+            receiptImage :'',
+            vehicleId : 0
             }
-            window.location.reload();
+          //toast alert
+          let toast = await this.toastCtrl.create({
+            message: 'The fuel entry has successfully been deleted.”',
+            duration: 3000,
+            position: 'top',
+          });
+          //display alert
+          toast.present();
           }
         )
     };
@@ -87,5 +136,7 @@ constructor(private route: ActivatedRoute, private fuelEntryService: MobileServi
   ngOnInit() {
     this.getAllFuelEntries();
   }
+
+
 
 }

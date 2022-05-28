@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { NavController, NavParams } from '@ionic/angular';
 import { Fuel } from '../interfaces/fuel';
 import { MobileServicesService } from '../services/mobile-services.service';
+import { ToastController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-fuel-list',
@@ -13,18 +15,19 @@ export class FuelListPage implements OnInit {
 
   fuelEntries: Fuel[] = [];
   fuelEntry: Fuel = {
-    FuelEntryId : 0,
-    Log_Date : new Date(),
-    Litres : 0,
-    Price_Per_Litre : 0,
-    Total_Spent : 0,
-    ReceiptImage :'',
-    VehicleId : 0
+    fuelEntryId : 0,
+    log_Date : new Date(),
+    litres : 0,
+    price_Per_Litre : 0,
+    total_Spent : 0,
+    receiptImage :'',
+    vehicleId : 0
   }
 
-  EditView = false; 
 
-constructor(private route: ActivatedRoute, private fuelEntryService: MobileServicesService) { }
+  confirmDelete: Boolean; 
+
+constructor(private route: ActivatedRoute, private fuelEntryService: MobileServicesService, private toastCtrl: ToastController, public alertController: AlertController ) { }
 
 //FUEL ENTRIES - ACCESS BACKEND
 //TO DO: Validation and Html
@@ -45,13 +48,13 @@ constructor(private route: ActivatedRoute, private fuelEntryService: MobileServi
         .subscribe(
           response => {
             this.fuelEntry = {
-              FuelEntryId : 0,
-              Log_Date : new Date(),
-              Litres : 0,
-              Price_Per_Litre : 0,
-              Total_Spent : 0,
-              ReceiptImage :'',
-              VehicleId : 0
+              fuelEntryId : 0,
+              log_Date : new Date(),
+              litres : 0,
+              price_Per_Litre : 0,
+              total_Spent : 0,
+              receiptImage :'',
+              vehicleId : 0
             }
           console.log(response);
           window.location.reload()
@@ -72,17 +75,29 @@ constructor(private route: ActivatedRoute, private fuelEntryService: MobileServi
     deleteFuelEntry(id: Number) {
       this.fuelEntryService.deleteFuelEntry(id)
         .subscribe(
-          response => {
+          async response => {
            this.fuelEntry = {
-            FuelEntryId : 0,
-            Log_Date : new Date(),
-            Litres : 0,
-            Price_Per_Litre : 0,
-            Total_Spent : 0,
-            ReceiptImage :'',
-            VehicleId : 0
+            fuelEntryId : 0,
+            log_Date : new Date(),
+            litres : 0,
+            price_Per_Litre : 0,
+            total_Spent : 0,
+            receiptImage :'',
+            vehicleId : 0
             }
+          //toast alert
+          let toast = await this.toastCtrl.create({
+            message: 'The fuel entry has successfully been deleted.”',
+            duration: 3000,
+            position: 'top',
+          });
+          //display alert
+          toast.present();
+          
+          setTimeout(function(){
             window.location.reload();
+          }, 1000);
+
           }
         )
     };
@@ -91,13 +106,38 @@ constructor(private route: ActivatedRoute, private fuelEntryService: MobileServi
     this.getAllFuelEntries();
   }
 
-  update()
-  {
-
+  delete(id:Number){
+    this.presentAlertConfirm(id);
   }
 
-  delete(){
-   
-  }
+  async presentAlertConfirm(id: Number) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Delete Fuel Entry',
+      message: 'Are you sure you want to delete this entry?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          id: 'cancel-button',
+          handler: (blah) => {
+            this.confirmDelete = false; 
+            console.log( this.confirmDelete);
+          }
+        }, {
+          text: 'Okay',
+          id: 'confirm-button',
+          handler: () => {
+            this.confirmDelete = true; 
+            console.log( this.confirmDelete);
+            this.deleteFuelEntry(id)
+          }
+        }
+      ]
+    });
 
+    await alert.present();
+
+}
 }

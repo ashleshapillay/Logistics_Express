@@ -11,7 +11,6 @@ import { CustomercontactsComponent } from './components/customercontacts/custome
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { NgbModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -32,7 +31,7 @@ import { AuthenicationService } from './services/authenication/authenication.ser
 
 import { RepairRequestsComponent } from './components/repairrequest/repair-requests.component';
 
-
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -51,7 +50,6 @@ import { RepairRequestsComponent } from './components/repairrequest/repair-reque
     EmployeeComponent,
     EmployeeRoleComponent,
     RepairRequestsComponent
-
    ],
   imports: [
     BrowserModule,
@@ -60,9 +58,8 @@ import { RepairRequestsComponent } from './components/repairrequest/repair-reque
     MaterialModule,
     HttpClientModule,
     FormsModule,
-    NgbModule,
-    NgbPaginationModule,
     ReactiveFormsModule,
+    NgbModule,
     MsalModule.forRoot(new PublicClientApplication
       (
         {

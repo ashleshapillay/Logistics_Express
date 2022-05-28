@@ -26,6 +26,7 @@ import { SubcontractorComponent } from './components/subcontractor/subcontractor
 import { SubcontractorcontactsComponent } from './components/subcontractorcontacts/subcontractorcontacts.component';
 import { EmployeeComponent } from './components/employee/employee.component';
 import { EmployeeRoleComponent } from './components/employee-role/employee-role.component';
+import { DriverdetailsComponent } from './components/driverdetails/driverdetails.component';
 
 
 
@@ -44,7 +45,8 @@ import { EmployeeRoleComponent } from './components/employee-role/employee-role.
     SubcontractorComponent,
     SubcontractorcontactsComponent,
     EmployeeComponent,
-    EmployeeRoleComponent
+    EmployeeRoleComponent,
+    DriverdetailsComponent
    ],
   imports: [
     BrowserModule,

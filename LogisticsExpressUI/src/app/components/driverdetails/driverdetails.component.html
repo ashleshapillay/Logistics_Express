@@ -1,0 +1,180 @@
+<div class="Background">
+
+  <div class="container">
+    <div class="row">
+      <div class="col-6">
+        <!-- List of Customer Contacts  -->
+        <div class="EmployeeList">
+          <mat-card class="EmployeeHeader">
+            <mat-card-header>Driver Details</mat-card-header>
+          </mat-card>
+          <br>
+          <div class="example-container">
+            <mat-card>
+              <mat-table [dataSource]="driverdetails"atSort>
+
+                <ng-container matColumnDef="driverdetails">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Driver Details </mat-header-cell>
+                  <mat-cell *matCellDef="let driverdetails" (click)="populateForm(driverdetails)"> {{driverdetails.licenseNumber}}
+                  </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let driverdetails; columns: displayedColumns;">
+                </mat-row>
+              </mat-table>
+              <br>
+              <button mat-flat-button color="accent" (click)="AddPage()">Add Driver Details</button>
+            </mat-card>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="col-6">
+
+        <mat-card class="NavButtonHeader">
+          <a><button mat-button class="NavButton" (click)="EmployeeClick()" >Employee</button> </a>
+        
+          <a><button mat-button class="NavButton" (click)="EmployeeRoleClick()">Employee Roles</button> </a>
+        
+          <button mat-button class="NavButton" (click)="DriverDetailsClick()" disabled="true">Driver Details</button>
+        </mat-card>
+          
+        <br>
+
+        <div class="CustomerDetails">
+          <!-- Update Contact Details  -->
+          <div *ngIf="EditView">
+            <mat-card class="header">
+              <mat-card-header>Driver Details</mat-card-header>
+            </mat-card>
+            <br>
+            <mat-card class="example-container">
+              <form #form="ngForm" (ngSubmit)="addDriverDetails()">
+                <mat-form-field>
+                  <mat-label for="">License Number</mat-label><br>
+                  <input matInput type="text" name="licenseNumber"  required [(ngModel)]="driverdetail.licenseNumber">
+                </mat-form-field>
+
+                <br>
+
+                <mat-form-field>
+                  <mat-label>License Code </mat-label><br>
+                  <input matInput type="text" name="licenseCode" required [(ngModel)]="driverdetail.licenseCode">
+                </mat-form-field>
+
+                <br>
+
+                <mat-form-field>
+                  <mat-label>License Expiry Date </mat-label><br>
+                  <input matInput type="text" name="licenseExpirydate" required [(ngModel)]="driverdetail.licenseExpirydate">
+                </mat-form-field>
+
+                <br>
+
+                <mat-form-field>
+                  <mat-label>License Code Description</mat-label><br>
+                  <input matInput type="text" name="licenseCodeDescription" required [(ngModel)]="driverdetail.licenseCodeDescription">
+                </mat-form-field>
+
+                <br>
+                <mat-label>License Image</mat-label><br>
+                  <input type="file" name="licenseCopy" required [(ngModel)]="driverdetail.licenseCopy">
+                <br>
+              </form>
+              <button mat-flat-button color="accent" (click)="updateDriverDetails(driverdetail)">Update Driver Details</button>
+            </mat-card>
+          </div>
+          <!-- View Customer Details -->
+          <div *ngIf="!EditView">
+            <div *ngIf="!AddView">
+              <mat-card class="header">
+                <mat-card-header>Driver Details</mat-card-header>
+              </mat-card>
+              <br>
+              <mat-card class="example-container">
+
+                <div>
+                  <mat-list>
+                    <mat-list-item>License Number: {{driverdetail.licenseNumber}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>License Expiry date: {{driverdetail.licenseExpirydate}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>License Code{{driverdetail.licenseCode}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>License Code Description {{driverdetail.licenseCodeDescription}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>License Image{{driverdetail.licenseCopy}}</mat-list-item>
+                  </mat-list>
+                </div>
+                <br>
+                <div>
+                  <button mat-flat-button color="accent"[disabled]="isDisabled" (click)="UpdatePage()">Update
+                    Driver Details </button>
+                  <br>
+                  <br>
+                  <button mat-flat-button color="accent" [disabled]="isDisabled"
+                    (click)="deleteDriverDetails(driverdetail.driverDetailsID)">Delete Driver Details</button>
+                </div>
+
+              </mat-card>
+            </div>
+          </div>
+          <!-- Add Customer  -->
+          <div *ngIf="AddView">
+
+            <mat-card class="header">
+              <mat-card-header>Customer Details</mat-card-header>
+            </mat-card>
+            <br>
+            <mat-card class="example-container">
+              <form #form="ngForm">
+                <mat-form-field>
+                  <mat-label for="">License Number</mat-label><br>
+                  <input matInput type="text" name="licenseNumber"  [(ngModel)]="driverdetail.licenseNumber">
+                </mat-form-field>
+
+                <br>
+
+                <mat-form-field>
+                  <mat-label>License Expiry date</mat-label><br>
+                  <input matInput type="text" name="licenseExpirydate" [(ngModel)]="driverdetail.licenseExpirydate">
+                </mat-form-field>
+
+                <br>
+
+                <mat-form-field>
+                  <mat-label>License Code</mat-label><br>
+                  <input matInput type="text" name="licenseCode"[(ngModel)]="driverdetail.licenseCode">
+                </mat-form-field>
+
+                <br>
+                <mat-form-field>
+                  <mat-label>License Code Description</mat-label><br>
+                  <input matInput type="text" name="licenseCodeDescription"(ngModel)]="driverdetail.licenseCodeDescription">
+                </mat-form-field>
+
+                <br>
+                <mat-label>License Image</mat-label><br>
+                  <input type="file" name="licenseCopy" required [(ngModel)]="driverdetail.licenseCopy">
+                <br>
+                <div>
+
+
+                  <button mat-flat-button color="accent"  (click)="addDriverDetails()">Add Driver Details</button>
+                </div>
+              </form>
+            </mat-card>
+
+          </div>
+
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

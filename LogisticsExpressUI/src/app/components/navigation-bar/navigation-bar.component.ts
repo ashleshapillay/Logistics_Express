@@ -31,6 +31,6 @@ export class NavigationBarComponent implements OnInit {
   }
 
   Employee(){
-    this.router.navigate(["employeerole"]);
+    this.router.navigate(["employee"]);
   }
 }

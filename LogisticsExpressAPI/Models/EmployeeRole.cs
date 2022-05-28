@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
 
 namespace LogisticsExpressAPI.Models
 {
@@ -7,6 +6,6 @@ namespace LogisticsExpressAPI.Models
     {
         [Key]
         public int EmployeeRoleId { get; set; }
-        public string EmployeeDescription { get; set; } = String.Empty;
+        public string EmployeeRoleDescription { get; set; } = String.Empty;
     }
 }

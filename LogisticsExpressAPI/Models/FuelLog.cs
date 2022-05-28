@@ -11,7 +11,7 @@ namespace LogisticsExpressAPI.Models
         public decimal Litres { get; set; }
         public decimal Price_Per_Litre { get; set; }
         public decimal Total_Spent { get; set; }
-        public string Receipt_Image { get; set; } = String.Empty;
+        public string ReceiptImage { get; set; } = String.Empty;
 
         [JsonIgnore]
         public Vehicle? Vehicle { get; set; } //Many fuel entries for 1 Vehicle

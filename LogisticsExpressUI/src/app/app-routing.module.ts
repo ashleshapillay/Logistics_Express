@@ -15,6 +15,10 @@ import { SubcontractorcontactsComponent } from './components/subcontractorcontac
 import { EmployeeComponent } from './components/employee/employee.component';
 import { EmployeeRoleComponent} from './components/employee-role/employee-role.component';
 
+import { VehicleComponent } from './components/vehicle/vehicle.component';
+import { VehicleDriverComponent } from './components/vehicle-driver/vehicle-driver.component';
+import { VehicleSpecsComponent } from './components/vehicle-specs/vehicle-specs.component';
+
 const routes: Routes = [
     { path: '', component: DashboardComponent },
     { path: 'customers', component: CustomersComponent},
@@ -28,6 +32,9 @@ const routes: Routes = [
     { path: 'subcontractocontacts', component: SubcontractorcontactsComponent},
     { path: 'employee', component: EmployeeComponent},
     { path: 'employeerole', component: EmployeeRoleComponent},
+  { path: 'vehicle', component: VehicleComponent },
+  {path:'vehicleDriver', component: VehicleDriverComponent},
+  {path: 'vehicleSpecs', component: VehicleSpecsComponent}
 ];
 
 @NgModule({

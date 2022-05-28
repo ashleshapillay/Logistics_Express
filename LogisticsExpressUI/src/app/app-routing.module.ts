@@ -14,11 +14,21 @@ import { SubcontractorcontactsComponent } from './components/subcontractorcontac
 
 import { EmployeeComponent } from './components/employee/employee.component';
 
+
 import { DriverdetailsComponent } from './components/driverdetails/driverdetails.component';
 import { EmployeeroleComponent } from './components/employeerole/employeerole.component';
 
+import { MsalGuard } from '@azure/msal-angular';
+
+import { RepairRequestsComponent } from './components/repairrequest/repair-requests.component';
+
+
+import { VehicleComponent } from './components/vehicle/vehicle.component';
+import { VehicleDriverComponent } from './components/vehicle-driver/vehicle-driver.component';
+import { VehicleSpecsComponent } from './components/vehicle-specs/vehicle-specs.component';
+
+
 const routes: Routes = [
-    { path: '', component: DashboardComponent },
     { path: 'customers', component: CustomersComponent},
     { path: 'customercontacts', component: CustomercontactsComponent},
     {path: 'countries', component: CountriesComponent},
@@ -29,12 +39,27 @@ const routes: Routes = [
     { path: 'subcontractor', component: SubcontractorComponent},
     { path: 'subcontractocontacts', component: SubcontractorcontactsComponent},
     { path: 'employee', component: EmployeeComponent},
+
     { path: 'employeerole', component: EmployeeroleComponent},
-    { path: 'driverdetails', component: DriverdetailsComponent}
+    { path: 'driverdetails', component: DriverdetailsComponent},
+
+  
+  { path: 'vehicle', component: VehicleComponent },
+  {path:'vehicleDriver', component: VehicleDriverComponent},
+  {path: 'vehicleSpecs', component: VehicleSpecsComponent},
+
+    { path: '', component: DashboardComponent},
+    { path: 'dashboard', component: DashboardComponent, canActivate:[MsalGuard]},
+    { path: 'repair-requests', component: RepairRequestsComponent}
+
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,
+    {
+      initialNavigation: 'enabled'
+    }
+    )],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

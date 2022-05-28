@@ -1,0 +1,10 @@
+.Background{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+ion-input{
+    border-style: groove;
+    border-width: thin;
+    width: auto;
+}

@@ -1,0 +1,16 @@
+
+.buttonColour{
+    background-color: #fffdfd;
+    color: #a30000;
+    width: 300px;
+ }
+
+
+
+.body{
+   width: 500px;
+   display: flex;
+   flex-direction: column;
+   margin: 100px auto;
+}
+

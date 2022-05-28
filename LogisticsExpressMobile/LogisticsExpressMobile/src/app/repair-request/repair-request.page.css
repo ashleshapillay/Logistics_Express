@@ -1,0 +1,20 @@
+.Background{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+ion-textarea{
+    border-style: groove;
+    border-width: thin;
+    width: auto;
+}
+
+ion-input{
+    border-style: groove;
+    border-width: thin;
+    width: auto;
+}
+
+input{
+    background-color: white;
+}

@@ -10,8 +10,7 @@ import { CustomersComponent } from './components/customers/customers.component';
 import { CustomercontactsComponent } from './components/customercontacts/customercontacts.component';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { HttpClientModule } from '@angular/common/http';
-import { NgbModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -26,8 +25,13 @@ import { SubcontractorComponent } from './components/subcontractor/subcontractor
 import { SubcontractorcontactsComponent } from './components/subcontractorcontacts/subcontractorcontacts.component';
 import { EmployeeComponent } from './components/employee/employee.component';
 import { EmployeeRoleComponent } from './components/employee-role/employee-role.component';
+import { MsalModule, MsalInterceptor, MsalGuard, MsalRedirectComponent } from '@azure/msal-angular';
+import { PublicClientApplication, InteractionType } from '@azure/msal-browser';
+import { AuthenicationService } from './services/authenication/authenication.service';
 
+import { RepairRequestsComponent } from './components/repairrequest/repair-requests.component';
 
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -44,7 +48,8 @@ import { EmployeeRoleComponent } from './components/employee-role/employee-role.
     SubcontractorComponent,
     SubcontractorcontactsComponent,
     EmployeeComponent,
-    EmployeeRoleComponent
+    EmployeeRoleComponent,
+    RepairRequestsComponent
    ],
   imports: [
     BrowserModule,
@@ -53,11 +58,46 @@ import { EmployeeRoleComponent } from './components/employee-role/employee-role.
     MaterialModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     NgbModule,
-    NgbPaginationModule,
-    ReactiveFormsModule
+    MsalModule.forRoot(new PublicClientApplication
+      (
+        {
+           auth: {
+               clientId: '7dff351f-fce3-470b-b470-f182fa7546ed', 
+               redirectUri: 'http://localhost:4200/dashboard', 
+                authority: 'https://login.microsoftonline.com/8812b1d1-ea33-4d29-b95f-7790c63d6572'
+           },
+          cache: 
+          {
+            cacheLocation:'localStorage',
+            storeAuthStateInCookie:false
+          }
+        }
+      ), 
+      {
+        interactionType: InteractionType.Redirect, 
+        authRequest: {
+          scopes:['user.read']
+        }
+      },
+      {
+         interactionType: InteractionType.Redirect, 
+         protectedResourceMap: new Map(
+           [
+            ['https://graph.microsoft.com/v1.0/me',['user.Read']] 
+           ]
+         )
+      }
+      )
+      
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass:MsalInterceptor,
+      multi: true
+    }, MsalGuard, AuthenicationService],
+  bootstrap: [AppComponent, MsalRedirectComponent]
 })
 export class AppModule { }

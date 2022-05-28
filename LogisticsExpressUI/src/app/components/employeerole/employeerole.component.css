@@ -1,12 +1,12 @@
 
-.EmployeeDetails{
+.EmployeeRoleDetails{
    width: max-content;
    margin-right: 50px;
    margin-left: 200px;
    margin-bottom: 50px;
 }
 
-.EmployeeList{
+.EmployeeRoleList{
    margin-right: 45px;
    margin-left: 45px;
    width: 750px;
@@ -28,7 +28,7 @@
   width: 640px;
 } 
 
-.EmployeeHeader{
+.EmployeeRoleHeader{
    background-color: #f0f0f0;
    width:750px;
 }

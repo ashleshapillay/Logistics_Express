@@ -13,7 +13,11 @@ import { SubcontractorComponent } from './components/subcontractor/subcontractor
 import { SubcontractorcontactsComponent } from './components/subcontractorcontacts/subcontractorcontacts.component';
 
 import { EmployeeComponent } from './components/employee/employee.component';
-import { EmployeeRoleComponent} from './components/employee-role/employee-role.component';
+
+
+import { DriverdetailsComponent } from './components/driverdetails/driverdetails.component';
+import { EmployeeroleComponent } from './components/employeerole/employeerole.component';
+
 import { MsalGuard } from '@azure/msal-angular';
 
 import { RepairRequestsComponent } from './components/repairrequest/repair-requests.component';
@@ -22,6 +26,7 @@ import { RepairRequestsComponent } from './components/repairrequest/repair-reque
 import { VehicleComponent } from './components/vehicle/vehicle.component';
 import { VehicleDriverComponent } from './components/vehicle-driver/vehicle-driver.component';
 import { VehicleSpecsComponent } from './components/vehicle-specs/vehicle-specs.component';
+
 
 const routes: Routes = [
     { path: 'customers', component: CustomersComponent},
@@ -34,7 +39,11 @@ const routes: Routes = [
     { path: 'subcontractor', component: SubcontractorComponent},
     { path: 'subcontractocontacts', component: SubcontractorcontactsComponent},
     { path: 'employee', component: EmployeeComponent},
-    { path: 'employeerole', component: EmployeeRoleComponent},
+
+    { path: 'employeerole', component: EmployeeroleComponent},
+    { path: 'driverdetails', component: DriverdetailsComponent},
+
+  
   { path: 'vehicle', component: VehicleComponent },
   {path:'vehicleDriver', component: VehicleDriverComponent},
   {path: 'vehicleSpecs', component: VehicleSpecsComponent},

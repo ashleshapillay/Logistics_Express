@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit, Output } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
+
+import { EmailValidator, FormControl, Validators } from '@angular/forms';
+import { DriverDetail } from 'src/app/modules/driverdetails/driverdetails';
 import { Employee } from 'src/app/modules/employee/employee.module';
-import { EmployeeService } from 'src/app/services/employee/employee.service';
+import { EmployeeRole } from 'src/app/modules/employeerole/employeerole.module';
+import { EmployeeSubService } from 'src/app/services/employee/employee-sub.service';
 
 @Component({
   selector: 'app-employee',
@@ -11,140 +15,180 @@ import { EmployeeService } from 'src/app/services/employee/employee.service';
 })
 export class EmployeeComponent implements OnInit {
 
-  displayedColumns = ['Emp_PhoneNumber','Emp_Email','Emp_Contact','Emp_FirstName','Emp_LastName'];
+  displayedColumns = ['firstName'];
   EditView = false; 
   displayMessage = ''; 
   isDisabled = true; 
-  
+  AddDisabled = false;
+
+  employeeroles: EmployeeRole[]= [];
+
   employees: Employee[] = [];
   employee: Employee = {
-    EmployeeId: 0,
-    Emp_PhoneNumber: ' ',
-    Emp_Email: ' ',
-    Emp_Contact: ' ',
-    Emp_FirstName: ' ',
-    Emp_LastName: ' ',
-    EmployeeRoleId: 0
+    employeeId: 0,
+    firstName: '',
+    surname: '',
+    email: '',
+    phoneNumber: '',
+    employeeRoleId: 0,
   }
 
-  ViewEmployeeRole= false;
-  AddView = false;
 
-  constructor(private employeeService: EmployeeService, private router: Router, private route: ActivatedRoute, private _snackBar: MatSnackBar) { }
 
-  openSnackBar() {
-    this._snackBar.open(this.displayMessage, 'Close', {
-      duration: 100000
-    });
-  }
+  @Output() driverdetails: DriverDetail[] =[
+    {
+     driverDetailsID: 0,
+     licenseNumber: '', 
+     licenseExpirydate: '',
+     licenseCode:'', 
+     licenseCodeDescription: '',
+     licenseCopy:'' ,
+     employeeId: this.employee.employeeId
+    }
+  ];
 
-////////////////////////////////////////EMPLOYEE FUNCTIONS////////////////////////////////////////
- //get all employee
- getAllEmployees() {
-  this.employeeService.getAllEmployees()
-  .subscribe(
-    response => {
-      this.employees = response;
-        console.log(response);
-        }
-      )
-  }
-//add employee
-addEmployee() {
-  if (this.employee.Emp_PhoneNumber == ""||this.employee.Emp_Email == ""||this.employee.Emp_Contact == ""||this.employee.Emp_FirstName == ""||this.employee.Emp_LastName == ""){
-      this.displayMessage = "Attempt to add employee was unsuccessful.";
-      this.openSnackBar();
-  }
-  else{
-    this.employeeService.addEmployee(this.employee)
-      .subscribe(
-        response => {
-          this.employee = {
-            EmployeeId: 0,
-            Emp_PhoneNumber: ' ',
-            Emp_Email: ' ',
-            Emp_Contact: ' ',
-            Emp_FirstName: ' ',
-            Emp_LastName: ' ',
-            EmployeeRoleId: 0
-           }
-         this.displayMessage = "Employee sucessfully added.";
-         this.openSnackBar();
-         this.getAllEmployees();
-         this.EditView = false
-         this.AddView = false
-          window.location.reload()
-        }
-      )
-  }
-  };
-  //update employee
-updateEmployee(employee: Employee){
-  if (this.employee.Emp_PhoneNumber == ""||this.employee.Emp_Email == ""||this.employee.Emp_Contact == ""||this.employee.Emp_FirstName == ""||this.employee.Emp_LastName == ""){
-      this.displayMessage = "Attempt to update employee was unsuccessful.";
-      this.openSnackBar();
-  }
-  else{
-    this.employeeService.updateEmployee(employee)
-    .subscribe(
-      response => {
-         this.EditView = true;
-         this.displayMessage = "Employee successfully updated.";
-         this.openSnackBar();
-         window.location.reload();
-      })
-  }
-  };
-  //delete employee 
-  deleteEmployee(id: Number) {
-    this.employeeService.deleteEmployee(id)
-      .subscribe(
-        response => {
-         this.employee = {
-          EmployeeId: 0,
-          Emp_PhoneNumber: ' ',
-          Emp_Email: ' ',
-          Emp_Contact: ' ',
-          Emp_FirstName: ' ',
-          Emp_LastName: ' ',
-          EmployeeRoleId: 0
-          }
-          this.getAllEmployees();
-          this.displayMessage = "Employee successfully removed.";
-          this.openSnackBar();
-        }
-      )
-  };
+ ViewEmployeeRole= false;
+ ViewDriverDetails= false;
+ AddView = false;
 
-  //FORM
-  populateForm(employee: Employee){
-    this.employee = employee; 
-    this.isDisabled = false; 
+ constructor(private employeeSubService: EmployeeSubService, private router: Router, private route: ActivatedRoute, private _snackBar: MatSnackBar) { }
+ 
+    openSnackBar() {
+      this._snackBar.open(this.displayMessage, 'Close', {
+        duration: 3000
+      });
+    }
+
+ ngOnInit(): void {
+   this.getAllEmployees();
+   this.getAllRoles();
  }
 
- //PAGE
+
+ getAllEmployees() {
+   this.employeeSubService.getAllEmployees()
+     .subscribe(
+       response => {
+         this.employees = response;
+       }
+     )
+  }
+
+ addEmployee() {
+  this.AddView=true;
+  if (this.employee.firstName == "" || this.employee.surname || this.employee.email == "" || this.employee.phoneNumber == "" || this.employee.employeeRoleId==0){
+       this.displayMessage = "Employee Details could not be added";
+        this.openSnackBar();
+  }
+  else{
+  this.employeeSubService.addEmployee(this.employee)
+     .subscribe(
+       response => {
+         this.employee = {
+           employeeId: 0,
+           firstName: '',
+           surname: '',
+           email: '',
+           phoneNumber: '',
+           employeeRoleId:0,
+          }
+        
+        this.displayMessage = "Employee Details Were Added Successfully";
+        this.openSnackBar();
+        this.getAllEmployees();
+        this.EditView = false
+        this.AddView = false
+        window.location.reload()
+       }
+     )
+  }
+
+ };
+
+ deleteEmployee(id: Number) {
+   this.employeeSubService.deleteEmployee(id)
+     .subscribe(
+       response => {
+        this.employee = {
+          employeeId: 0,
+          firstName: '',
+          surname: '',
+          email: '',
+          phoneNumber: '',
+          employeeRoleId:0,
+         }
+
+         this.getAllEmployees();
+         this.displayMessage = "Employee Details Were Removed Successfully";
+         this.openSnackBar();
+         window.location.reload();
+       }
+     )
+ };
+
+ populateForm(employee: Employee){
+   this.employee = employee; 
+   this.isDisabled = false;
+   this.AddDisabled = true; 
+}
+
+ updateEmployee(employee: Employee){
+  if (this.employee.firstName == "" || this.employee.surname || this.employee.email == "" || this.employee.phoneNumber == ""|| this.employee.employeeRoleId==0){
+    this.displayMessage = "Employee Details could not be updated";
+     this.openSnackBar();
+}
+else{
+   this.employeeSubService.updateEmployee(employee)
+   .subscribe(
+     response => {
+        this.EditView = true;
+        this.displayMessage = "Employee Details Were Updated Successfully";
+        this.openSnackBar();
+        window.location.reload();
+     })
+ }
+}
+
+getAllRoles(){
+   this.employeeSubService.getAllRoles()
+   .subscribe(
+     response => {
+         this.employeeroles = response;
+          console.log(response);
+       }
+   )
+ }
+
+ 
  UpdatePage(){
-  this.AddView = false;
-  this.EditView = true; 
+      this.AddView = false;
+      this.EditView = true; 
+ }
+
+
+
+ AddPage(){
+  this.AddView = true; 
+  this.employee = {
+    employeeId: 0,
+    firstName: '',
+    surname: '',
+    email: '',
+    phoneNumber: '',
+    employeeRoleId:0,
+   }
+   this.EditView=false;
+}
+
+  //Navigation
+  EmployeeClick(){
+    this.router.navigate(["employee"]);
   }
-
-  AddPage(){
-    this.AddView = true; 
-    this.employee = {
-      EmployeeId: 0,
-      Emp_PhoneNumber: ' ',
-      Emp_Email: ' ',
-      Emp_Contact: ' ',
-      Emp_FirstName: ' ',
-      Emp_LastName: ' ',
-      EmployeeRoleId: 0
-     }
-     this.EditView = false;
+  EmployeeRoleClick(){
+    this.router.navigate(["employeerole"]);
   }
-
-  ngOnInit(): void {
-    this.getAllEmployees();
+  DriverDetailsClick(){
+    this.router.navigate(["driverdetails"]);
   }
-
-
+  
 }

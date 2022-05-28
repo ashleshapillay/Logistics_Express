@@ -25,6 +25,7 @@ import { SubcontractorComponent } from './components/subcontractor/subcontractor
 import { SubcontractorcontactsComponent } from './components/subcontractorcontacts/subcontractorcontacts.component';
 import { EmployeeComponent } from './components/employee/employee.component';
 import { EmployeeRoleComponent } from './components/employee-role/employee-role.component';
+import { DriverdetailsComponent } from './components/driverdetails/driverdetails.component';
 
 import { VehicleComponent } from './components/vehicle/vehicle.component';
 import { VehicleDriverComponent } from './components/vehicle-driver/vehicle-driver.component';
@@ -54,6 +55,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     SubcontractorcontactsComponent,
     EmployeeComponent,
     EmployeeRoleComponent,
+    DriverdetailsComponent,
 
     VehicleComponent,
     VehicleDriverComponent,

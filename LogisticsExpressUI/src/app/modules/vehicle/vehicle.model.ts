@@ -6,4 +6,6 @@ export interface Vehicle{
     VehicleModelID: number;
     // Name: string;
     // Description: string;
+
+    //Vehicle Model contains all vehicle related tables 
 }

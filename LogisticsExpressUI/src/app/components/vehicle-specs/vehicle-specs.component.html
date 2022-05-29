@@ -204,7 +204,7 @@
                                 <mat-form-field>
                                     <mat-label for="Name">Name</mat-label><br>
                                     <input matInput type="text " name="Typename " required [(ngModel)]="type.name">
-
+                                    <mat-icon aria-hidden="false" (click)="deleteType(type.VehicleTypeID)">delete</mat-icon>
                                 </mat-form-field>
 
                                 <br>

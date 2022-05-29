@@ -19,6 +19,10 @@
                                 <ng-container matColumnDef="Name">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header>Types</mat-header-cell>
                                     <mat-cell *matCellDef="let type" (click)="loadformT(type)">{{type.name}}
+                                        <button class="buttonColour" mat-button (click)="deleteType(type.VehicleTypeID)">
+                                            <mat-icon aria-hidden="false" >delete</mat-icon>
+                                        </button>
+
                                     </mat-cell>
                                 </ng-container>
 
@@ -50,6 +54,9 @@
                                 <ng-container matColumnDef="Name">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header>Makes</mat-header-cell>
                                     <mat-cell *matCellDef="let make" (click)="loadformT(make)">{{make.name}}
+                                        <button class="buttonColour" mat-button (click)="deleteMake(make.vehicleMakeID)">
+                                            <mat-icon aria-hidden="false" >delete</mat-icon>
+                                        </button>
                                     </mat-cell>
                                 </ng-container>
 
@@ -78,6 +85,9 @@
                                 <ng-container matColumnDef="Name">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header>Models</mat-header-cell>
                                     <mat-cell *matCellDef="let model" (click)="loadformMod(model)"> {{model.name}}
+                                        <button class="buttonColour" mat-button (click)="deleteModel(model.VehicleModelID)">
+                                            <mat-icon aria-hidden="false" >delete</mat-icon>
+                                        </button>
                                     </mat-cell>
                                 </ng-container>
 
@@ -204,7 +214,7 @@
                                 <mat-form-field>
                                     <mat-label for="Name">Name</mat-label><br>
                                     <input matInput type="text " name="Typename " required [(ngModel)]="type.name">
-
+                                    <mat-icon aria-hidden="false" (click)="deleteType(type.VehicleTypeID)">delete</mat-icon>
                                 </mat-form-field>
 
                                 <br>

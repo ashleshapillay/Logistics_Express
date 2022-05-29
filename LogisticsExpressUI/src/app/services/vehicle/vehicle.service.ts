@@ -10,7 +10,7 @@ import { VehicleTypes } from 'src/app/modules/vehiclespecs/vehicletype.model';
 })
 export class VehicleService {
 
-  baseUrl!: 'https://localhost:7077/api/Vehicle';
+  baseUrl!: 'https://localhost:7013/api/Vehicle';
 
   constructor(private http: HttpClient) { }
 

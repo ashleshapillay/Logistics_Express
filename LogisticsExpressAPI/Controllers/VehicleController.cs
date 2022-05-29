@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Vehicle_Part2_API.Models;
-using Vehicle_Part2_API.Data;
+using LogisticsExpressAPI.Models;
+using LogisticsExpressAPI.Data;
 using Microsoft.EntityFrameworkCore;
-using Vehicle_Part2_API.Dto;
+using LogisticsExpressAPI.Dto;
 
-namespace Vehicle_Part2_API.Controllers
+namespace LogisticsExpressAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -29,7 +29,7 @@ namespace Vehicle_Part2_API.Controllers
         [ActionName("GetVehicle")]
         public async Task<IActionResult> GetVehicle([FromRoute] int id)
         {
-            var vehicle = await dataContext.Vehicles.FirstOrDefaultAsync(x => x.VehicleID == id);
+            var vehicle = await dataContext.Vehicles.FirstOrDefaultAsync(x => x.VehicleId == id);
 
             if (vehicle != null)
             {
@@ -54,7 +54,7 @@ namespace Vehicle_Part2_API.Controllers
         [Route("{id:int}")]
         public async Task<IActionResult> UpdateVehicle([FromRoute] int id, [FromBody] Vehicle vehicle)
         {
-            var exisitngVehicle = await dataContext.Vehicles.FirstOrDefaultAsync(x => x.VehicleID == id);
+            var exisitngVehicle = await dataContext.Vehicles.FirstOrDefaultAsync(x => x.VehicleId == id);
             if (exisitngVehicle != null)
             {
                 exisitngVehicle.TareWeight = vehicle.TareWeight;
@@ -73,7 +73,7 @@ namespace Vehicle_Part2_API.Controllers
         [Route("{id:int}")]
         public async Task<IActionResult> DeleteVehicle([FromRoute] int id)
         {
-            var exisitngVehicle = await dataContext.Vehicles.FirstOrDefaultAsync(x => x.VehicleID == id);
+            var exisitngVehicle = await dataContext.Vehicles.FirstOrDefaultAsync(x => x.VehicleId == id);
             if (exisitngVehicle != null)
             {
                 dataContext.Remove(exisitngVehicle);

@@ -11,9 +11,9 @@ import { EmployeeRole } from 'src/app/modules/employeerole/employeerole.module';
 export class EmployeeSubService {
 
   //base URL's
-  employeeUrl = 'https://localhost:7031/api/Employee';
-  employeeroleUrl = 'https://localhost:7031/api/EmployeeRole';
-  driverdetailUrl = 'https://localhost:7031/api/DriverDetails';
+  employeeUrl = 'https://localhost:7013/api/Employee';
+  employeeroleUrl = 'https://localhost:7013/api/EmployeeRole';
+  driverdetailUrl = 'https://localhost:7013/api/DriverDetails';
 
   constructor(private http: HttpClient) { }
 
@@ -79,7 +79,7 @@ export class EmployeeSubService {
     }
     //update a driverdetail
     updateDriverDetails(driverdetail: DriverDetail): Observable<DriverDetail>{
-      return  this.http.put<DriverDetail>(this.driverdetailUrl + '/'+ driverdetail.driverDetailsID, driverdetail);
+      return  this.http.put<DriverDetail>(this.driverdetailUrl + '/'+ driverdetail.DriverDetailsID, driverdetail);
     }
     //delete a driverdetail
     deleteDriverDetails(id: Number): Observable<DriverDetail>{

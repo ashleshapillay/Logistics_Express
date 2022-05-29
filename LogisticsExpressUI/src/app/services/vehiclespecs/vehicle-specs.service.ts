@@ -13,9 +13,9 @@ import { VehicleTypes } from 'src/app/modules/vehiclespecs/vehicletype.model';
 export class VehicleSpecsService {
 
   //api link
-  baseTypeUrl ='https://localhost:7077/api/VehicleType';
-  baseMakeUrl = 'https://localhost:7077/api/VehicleMake';
-  baseModelUrl = 'https://localhost:7077/api/VehicleModel';
+  baseTypeUrl ='https://localhost:7013/api/VehicleType';
+  baseMakeUrl = 'https://localhost:7013/api/VehicleMake';
+  baseModelUrl = 'https://localhost:7013/api/VehicleModel';
 
   constructor(private http:HttpClient) { }
 

@@ -12,7 +12,7 @@ import { NavigationBarComponent } from './components/navigation-bar/navigation-b
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, NgModel, ReactiveFormsModule } from '@angular/forms';
 
 import { CountriesComponent } from './components/countries/countries.component';
 import { ProvincesComponent } from './components/provinces/provinces.component';
@@ -24,10 +24,8 @@ import { AddressesComponent } from './components/addresses/addresses.component';
 import { SubcontractorComponent } from './components/subcontractor/subcontractor.component';
 import { SubcontractorcontactsComponent } from './components/subcontractorcontacts/subcontractorcontacts.component';
 import { EmployeeComponent } from './components/employee/employee.component';
-import { EmployeeRoleComponent } from './components/employee-role/employee-role.component';
 import { DriverdetailsComponent } from './components/driverdetails/driverdetails.component';
 
-import { VehicleComponent } from './components/vehicle/vehicle.component';
 import { VehicleDriverComponent } from './components/vehicle-driver/vehicle-driver.component';
 import { VehicleSpecsComponent } from './components/vehicle-specs/vehicle-specs.component';
 import { MsalModule, MsalInterceptor, MsalGuard, MsalRedirectComponent } from '@azure/msal-angular';
@@ -38,6 +36,10 @@ import { AuthenicationService } from './services/authenication/authenication.ser
 import { RepairRequestsComponent } from './components/repairrequest/repair-requests.component';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { EmployeeroleComponent } from './components/employeerole/employeerole.component';
+import { VehicleComponent } from './components/vehicle/vehicle.component';
+
+import { MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -54,14 +56,12 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     SubcontractorComponent,
     SubcontractorcontactsComponent,
     EmployeeComponent,
-    EmployeeRoleComponent,
+    EmployeeroleComponent,
     DriverdetailsComponent,
-
-    VehicleComponent,
     VehicleDriverComponent,
-    VehicleSpecsComponent
-
-    RepairRequestsComponent
+    VehicleSpecsComponent,
+    RepairRequestsComponent,
+    VehicleComponent,
 
    ],
   imports: [
@@ -73,6 +73,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
+    MatSnackBarModule,
     MsalModule.forRoot(new PublicClientApplication
       (
         {

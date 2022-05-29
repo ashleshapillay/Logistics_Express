@@ -1,88 +1,91 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using LogisticsExpressAPI.Data;
-using Microsoft.EntityFrameworkCore;
+﻿using LogisticsExpressAPI.Data;
 using LogisticsExpressAPI.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
-namespace EmployeeAPI.Controllers
+namespace LogisticsExpressAPI.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class EmployeeRoleController : ControllerBase
-    {
-        private readonly DataContext dataContext;
+   
 
-        public EmployeeRoleController(DataContext dataContext)
+        [Route("api/[controller]")]
+        [ApiController]
+        public class EmployeeRoleController : ControllerBase
         {
-            this.dataContext = dataContext;
-        }
+            private readonly DataContext dataContext;
 
-        //Get all employee roles
-        [HttpGet]
-        public async Task<IActionResult> GetAllEmployeeRoles()
-        {
-            var employeeRoles = await dataContext.EmployeeRoles.ToListAsync();
-            return Ok(employeeRoles);
-        }
-
-        //Get single employee role
-        [HttpGet]
-        [Route("{id:int}")]
-        [ActionName("GetEmployeeRole")]
-        public async Task<IActionResult> GetEmployeeRole([FromRoute] int id)
-        {
-            var employeeRole = await dataContext.EmployeeRoles.FirstOrDefaultAsync(x => x.EmployeeRoleId == id);
-            if (employeeRole != null)
+            public EmployeeRoleController(DataContext dataContext)
             {
-                return Ok(employeeRole);
+                this.dataContext = dataContext;
             }
-            return NotFound("Employee role not found");
-        }
 
-        //Add a employee role
-        [HttpPost]
-        public async Task<IActionResult> AddEmployeeRole([FromBody] EmployeeRole employeeRole)
-        {
-            var newEmployeeRole = new EmployeeRole
+            //Get all employee roles
+            [HttpGet]
+            public async Task<IActionResult> getAllRoles()
             {
-                EmployeeDescription = employeeRole.EmployeeDescription
-            };
-            dataContext.EmployeeRoles.Add(newEmployeeRole);
-            await dataContext.SaveChangesAsync();
-            return await GetEmployeeRole(newEmployeeRole.EmployeeRoleId);
-        }
+                var employeeRoles = await dataContext.EmployeeRoles.ToListAsync();
+                return Ok(employeeRoles);
+            }
 
-        //Update a employee role
-        [HttpPut]
-        [Route("{id:int}")]
-        public async Task<IActionResult> UpdateEmployeeRole([FromRoute] int id, [FromBody] EmployeeRole employeeRole)
-        {
-            var existingEmployeeRole = await dataContext.EmployeeRoles.FirstOrDefaultAsync(x => x.EmployeeRoleId == id);
-            if (existingEmployeeRole != null)
+            //Get single employee role
+            [HttpGet]
+            [Route("{id:int}")]
+            [ActionName("getRole")]
+            public async Task<IActionResult> getRole([FromRoute] int id)
             {
-                existingEmployeeRole.EmployeeDescription = employeeRole.EmployeeDescription;
+                var employeeRole = await dataContext.EmployeeRoles.FirstOrDefaultAsync(x => x.EmployeeRoleId == id);
+                if (employeeRole != null)
+                {
+                    return Ok(employeeRole);
+                }
+                return NotFound("Employee role not found");
+            }
+
+            //Add a employee role
+            [HttpPost]
+            public async Task<IActionResult> addRole([FromBody] EmployeeRole employeeRole)
+            {
+                var newEmployeeRole = new EmployeeRole
+                {
+                    EmployeeRoleDescription = employeeRole.EmployeeRoleDescription
+                };
+                dataContext.EmployeeRoles.Add(newEmployeeRole);
                 await dataContext.SaveChangesAsync();
-                return Ok(existingEmployeeRole);
+                return await getRole(newEmployeeRole.EmployeeRoleId);
             }
-            return NotFound("Employee role not found");
 
-        }
-
-        //Delete a employee role
-        [HttpDelete]
-        [Route("{id:int}")]
-        public async Task<IActionResult> DeleteEmployeeRole([FromRoute] int id)
-        {
-            var existingEmployeeRole = await dataContext.EmployeeRoles.FirstOrDefaultAsync(x => x.EmployeeRoleId == id);
-            if (existingEmployeeRole != null)
+            //Update a employee role
+            [HttpPut]
+            [Route("{id:int}")]
+            public async Task<IActionResult> updateRole([FromRoute] int id, [FromBody] EmployeeRole employeeRole)
             {
-                dataContext.Remove(existingEmployeeRole);
-                await dataContext.SaveChangesAsync();
-                return Ok(existingEmployeeRole);
+                var existingEmployeeRole = await dataContext.EmployeeRoles.FirstOrDefaultAsync(x => x.EmployeeRoleId == id);
+                if (existingEmployeeRole != null)
+                {
+                    existingEmployeeRole.EmployeeRoleDescription = employeeRole.EmployeeRoleDescription;
+                    await dataContext.SaveChangesAsync();
+                    return Ok(existingEmployeeRole);
+                }
+                return NotFound("Employee role not found");
+
             }
-            return NotFound("Employee role not found");
+
+            //Delete a employee role
+            [HttpDelete]
+            [Route("{id:int}")]
+            public async Task<IActionResult> deleteRole([FromRoute] int id)
+            {
+                var existingEmployeeRole = await dataContext.EmployeeRoles.FirstOrDefaultAsync(x => x.EmployeeRoleId == id);
+                if (existingEmployeeRole != null)
+                {
+                    dataContext.Remove(existingEmployeeRole);
+                    await dataContext.SaveChangesAsync();
+                    return Ok(existingEmployeeRole);
+                }
+                return NotFound("Employee role not found");
+            }
+
+
         }
-
-
-    }
 }
+
+

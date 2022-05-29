@@ -1,0 +1,53 @@
+<div class="col-6">
+    <!-- List of Customer   -->
+    <div class="CustomerList">
+      <mat-card class="CustomerHeader">
+        <mat-card-header>Repair Requests</mat-card-header>
+      </mat-card>
+      <br>
+      <div class="example-container">
+        <mat-card>
+          
+          <mat-table [dataSource]="repairRequests" matSort>
+            
+            <ng-container matColumnDef="Date">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Date</mat-header-cell>
+              <mat-cell *matCellDef="let request" > {{request.date}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Description">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Repair Requests</mat-header-cell>
+              <mat-cell *matCellDef="let request" > {{request.description}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="VehicleId">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+              <mat-cell *matCellDef="let request" >
+                  <button class="buttonColour" mat-button (click)="open(mymodal, request.repairRequestId)"> 
+                    <mat-icon aria-hidden="false" aria-label="Example home icon">done</mat-icon>
+                  </button>
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let customer; columns: displayedColumns;"></mat-row>
+          </mat-table>
+        
+        </mat-card>
+      </div>
+    </div>
+</div>
+
+<ng-template #mymodal let-modal>
+  <div class="modal-header">
+   <h4 class="modal-title" id="modal-basic-title">Confirm Request Fulfilment</h4>
+  </div>
+  <div class="modal-body">
+   Are you sure you want to fulfil this request?
+  </div>
+  <div class="modal-footer">
+   <button type="button" class="btn btn-outline-dark" (click)="deleteRepairRequest()">Okay</button>
+   <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
+  </div>
+  </ng-template>
+

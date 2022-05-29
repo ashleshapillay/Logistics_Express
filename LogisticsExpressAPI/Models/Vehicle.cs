@@ -1,12 +1,12 @@
-﻿using System.Text.Json.Serialization;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations;
 
-namespace Vehicle_Part2_API.Models
+namespace LogisticsExpressAPI.Models
 {
     public class Vehicle
     {
         [Key]
-        public int VehicleID { get; set; }
+        public int VehicleId { get; set; }
         public string TareWeight { get; set; }
 
         [JsonIgnore]
@@ -25,7 +25,6 @@ namespace Vehicle_Part2_API.Models
 
         //public ServicePlan? ServicePlan {get;set;}
         //public int ServicePlanID { get; set; }
-
 
     }
 }

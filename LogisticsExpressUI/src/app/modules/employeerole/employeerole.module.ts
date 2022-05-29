@@ -1,4 +1,4 @@
 export interface EmployeeRole{
-  EmployeeRoleId: number;
-  EmployeeDescription: string;
+  employeeRoleId: number;
+  employeeRoleDescription: string;
 }

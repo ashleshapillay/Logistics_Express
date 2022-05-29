@@ -1,0 +1,40 @@
+<div> 
+
+  <ion-header>
+    <ion-toolbar>
+    <ion-title>Fuel</ion-title> 
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true" class="Background">
+
+   <ion-card *ngFor="let fuel of fuelEntries ">
+    <ion-card-header>
+      <ion-card-title  class="RouteLabel" >Total Spent: {{fuel.total_Spent}} </ion-card-title>
+      <ion-card-title  class="RouteLabel" >Date: {{fuel.log_Date}} </ion-card-title> 
+    </ion-card-header>
+   
+   <ion-card-content>
+      <ion-card-subtitle>Price per Litre:{{fuel.price_Per_Litre}} </ion-card-subtitle>
+      <ion-card-subtitle>Litres:  {{fuel.litres}} </ion-card-subtitle>
+      <ion-icon name="trash-outline" class="maintain"  (click)="delete(fuel.fuelEntryId)" ></ion-icon>  
+   </ion-card-content>
+
+     
+   
+  </ion-card>
+
+   <ion-fab vertical="end" horizontal="end" >
+     <ion-fab-button>
+       <ion-icon name="add" routerLink="/fuel" ></ion-icon>
+     </ion-fab-button>
+   </ion-fab>
+   
+   <ion-button class="Background" routerLink="/home">Back</ion-button>
+
+  </ion-content>
+
+
+</div>
+

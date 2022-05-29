@@ -22,6 +22,10 @@ export class EmployeeComponent implements OnInit {
   AddDisabled = false;
 
   employeeroles: EmployeeRole[]= [];
+  employeerole: EmployeeRole = {
+    employeeRoleId: 0,
+    employeeRoleDescription: '',
+  }
 
   employees: Employee[] = [];
   employee: Employee = {
@@ -37,8 +41,8 @@ export class EmployeeComponent implements OnInit {
 
   @Output() driverdetails: DriverDetail[] =[
     {
-     driverDetailsID: 0,
-     licenseNumber: '', 
+     DriverDetailsID: 0,
+     LicenseNumber: '', 
      licenseExpirydate: '',
      licenseCode:'', 
      licenseCodeDescription: '',

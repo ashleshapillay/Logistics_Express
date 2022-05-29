@@ -5,12 +5,12 @@ import { Vehicle } from 'src/app/modules/vehicle/vehicle.model';
 //import { VehicleTypes } from 'src/app/modules/vehiclespecs/vehicletype.model';
 import { VehicleService } from 'src/app/services/vehicle/vehicle.service';
 import { VehicleSpecsService } from 'src/app/services/vehiclespecs/vehicle-specs.service';
-import { EmployeeService } from 'src/app/services/employee/employee.service';
 import { Employee } from 'src/app/modules/employee/employee.module';
 import { VehicleMakes } from 'src/app/modules/vehiclespecs/vehiclemake.model';
 import { VehicleModels } from 'src/app/modules/vehiclespecs/vehiclemodel.model';
 import { VehicleTypes } from 'src/app/modules/vehiclespecs/vehicletype.model';
 import { outputAst } from '@angular/compiler';
+import { EmployeeSubService } from 'src/app/services/employee/employee-sub.service';
 
 
 @Component({
@@ -58,20 +58,19 @@ export class VehicleComponent implements OnInit {
     // Description: ''
   }
   employee: Employee = {
-    EmployeeId: 0,
-    Emp_PhoneNumber: '',
-    Emp_Email: '',
-    Emp_Contact: '',
-    Emp_FirstName: '',
-    Emp_LastName: '',
-    EmployeeRoleId: 0
+    employeeId: 0,
+    phoneNumber: '',
+    email: '',
+    firstName: '',
+    surname: '',
+    employeeRoleId: 0
   }
 
   viewVehicles = false;
   AddView = false;
   AddViewE=false;
 
-  constructor(private router: Router, private route: ActivatedRoute,private empDriver:EmployeeService, private vehicleService: VehicleService, private snackBar: MatSnackBar, private specs: VehicleSpecsService) { }
+  constructor(private router: Router, private route: ActivatedRoute,private empDriver:EmployeeSubService, private vehicleService: VehicleService, private snackBar: MatSnackBar, private specs: VehicleSpecsService) { }
 
   // @Output() vehicletype: VehicleType[] = [
   //   {
@@ -191,13 +190,12 @@ export class VehicleComponent implements OnInit {
     this.AddView=false;
     this.EditView=false;
     this.employee ={
-      EmployeeId: 0,
-      Emp_PhoneNumber: '',
-      Emp_Email: '',
-      Emp_Contact: '',
-      Emp_FirstName: '',
-      Emp_LastName: '',
-      EmployeeRoleId: 0
+      employeeId: 0,
+      phoneNumber: '',
+      email: '',
+      firstName: '',
+      surname: '',
+      employeeRoleId: 0
     }
   }
   // getType(id: number) {

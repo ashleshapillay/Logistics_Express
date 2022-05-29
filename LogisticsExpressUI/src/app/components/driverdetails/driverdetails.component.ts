@@ -13,7 +13,7 @@ import { EmployeeSubService } from 'src/app/services/employee/employee-sub.servi
 })
 export class DriverdetailsComponent implements OnInit {
 
-  displayedColumns = ['licenseNumber'];
+  displayedColumns = ['LicenseNumber'];
   EditView = false; 
   displayMessage = ''; 
   isDisabled = true; 
@@ -21,8 +21,8 @@ export class DriverdetailsComponent implements OnInit {
 
   employees: Employee[]=[];
   driverdetail: DriverDetail = {
-    driverDetailsID: 0,
-    licenseNumber: '',
+    DriverDetailsID: 0,
+    LicenseNumber: '',
     licenseCopy : '',
     licenseExpirydate: '',
     licenseCode: '',
@@ -66,7 +66,7 @@ export class DriverdetailsComponent implements OnInit {
   
  addDriverDetails() {
    this.AddView=true;
-  if (this.driverdetail.licenseNumber == "" || this.driverdetail.licenseExpirydate || this.driverdetail.licenseCode == "" || this.driverdetail.licenseCodeDescription == ""|| this.driverdetail.licenseCopy == ""){
+  if (this.driverdetail.LicenseNumber == "" || this.driverdetail.licenseExpirydate || this.driverdetail.licenseCode == "" || this.driverdetail.licenseCodeDescription == ""|| this.driverdetail.licenseCopy == ""){
        this.displayMessage = "Driver Details were unsuccessfully created";
         this.openSnackBar();
   }
@@ -75,8 +75,8 @@ export class DriverdetailsComponent implements OnInit {
      .subscribe(
        response => {
          this.driverdetail = {
-          driverDetailsID: 0,
-          licenseNumber: '',
+          DriverDetailsID: 0,
+          LicenseNumber: '',
           licenseCopy : '',
           licenseExpirydate: '',
           licenseCode: '',
@@ -104,8 +104,8 @@ export class DriverdetailsComponent implements OnInit {
      .subscribe(
        response => {
         this.driverdetail = {
-          driverDetailsID: 0,
-          licenseNumber: '',
+          DriverDetailsID: 0,
+          LicenseNumber: '',
           licenseCopy :'',
           licenseExpirydate: '',
           licenseCode: '',
@@ -129,7 +129,7 @@ export class DriverdetailsComponent implements OnInit {
 }
 
  updateDriverDetails(driverdetail: DriverDetail){
-  if (this.driverdetail.licenseNumber == "" || this.driverdetail.licenseCopy|| this.driverdetail.licenseCode || this.driverdetail.licenseCode == "" || this.driverdetail.licenseCodeDescription == ""){
+  if (this.driverdetail.LicenseNumber == "" || this.driverdetail.licenseCopy|| this.driverdetail.licenseCode || this.driverdetail.licenseCode == "" || this.driverdetail.licenseCodeDescription == ""){
     this.displayMessage = "The Driver Details could not be updated!”";
      this.openSnackBar();
      
@@ -156,8 +156,8 @@ else{
  AddPage(){
   this.AddView = true; 
   this.driverdetail = {
-    driverDetailsID: 0,
-    licenseNumber: '',
+    DriverDetailsID: 0,
+    LicenseNumber: '',
     licenseCopy : '',
     licenseExpirydate: '',
     licenseCode: '',

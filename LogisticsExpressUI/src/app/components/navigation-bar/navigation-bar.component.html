@@ -1,3 +1,4 @@
+
 <p >
     <mat-toolbar  color="primary-light" class="navbar">
        <img src="assets/image/Logistics Express Logo.png" width="300px" (click)="dashboardClick()" >
@@ -8,6 +9,10 @@
        <button class="buttonColour" mat-button (click)="SubcontractorClick()">Sub-Contractors</button>
        <button class="buttonColour" mat-button (click)="Employee()">Employee</button>  
        <button class="buttonColour" mat-button (click)="LocationClick()">Locations</button>
+       <button class="buttonColour" mat-button (click)="Vehicle()">Vehicle</button>
+       <button class="buttonColour" mat-button *ngIf="!isUserLoggedIn" (click)="logout()">Logout</button>
+       
       </div>
       </mat-toolbar>
   </p>
+

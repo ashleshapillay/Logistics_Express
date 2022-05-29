@@ -1,0 +1,29 @@
+<div> 
+
+<ion-header >
+  <ion-toolbar>
+    <ion-title>Repair Request</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<br>
+
+<ion-content  [fullscreen]="true" >
+  
+  <form #form="ngForm" class="Background">
+
+    <ion-label for="">Request Description</ion-label>
+    <ion-textarea name="Description" required [(ngModel)]="repairRequest.Description"></ion-textarea><br>
+
+    <ion-label for="">Vehicle</ion-label>
+    <ion-input  type="number" name="Vehicle"  required [(ngModel)]="repairRequest.VehicleId"></ion-input><br>
+
+    <ion-button expand="full" (click)="addRepairRequest()">Submit</ion-button>
+
+  </form>
+ 
+  <ion-button expand="full" class="Background" routerLink="/home" >Back</ion-button>
+
+</ion-content>
+
+</div>

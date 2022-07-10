@@ -14,7 +14,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 
 @NgModule({
@@ -33,7 +36,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     NgbModule,
     NgbPaginationModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    MatNativeDateModule,
+      MatFormFieldModule,
+      MatInputModule,
+      MatDatepickerModule,
+      
   ],
   providers: [],
   bootstrap: [AppComponent]

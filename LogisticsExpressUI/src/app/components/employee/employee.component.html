@@ -1,0 +1,287 @@
+<div class="Background">
+
+  <!-- Navigation Bar  -->
+  <app-navigation-bar></app-navigation-bar>
+
+  <div *ngIf="!ViewEmployeeRole|| !ViewDriverDetails" class="container">
+    <div class="row">
+      <div class="col-6">
+        <!-- List of Customer   -->
+        <div class="EmployeeList">
+          <mat-card class="EmployeeHeader">
+            <mat-card-header>List of Employee Details</mat-card-header>
+          </mat-card>
+          <br>
+          <div class="example-container">
+            <mat-card>
+              <mat-table [dataSource]="employees" matSort>
+
+                <!--<a href= "#" class= "list-group-item" *ngFor="let employee of employees| filter:searchText"> -->
+                
+                <ng-container matColumnDef="firstName">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Employee Details</mat-header-cell>
+                  <mat-cell *matCellDef="let employee" (click)="populateForm(employee)"> {{employee.firstName}}
+                  </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let employee; columns: displayedColumns;" >
+                </mat-row>
+              
+              </mat-table>
+              <br>
+              <button mat-flat-button color="accent" (click)="AddPage()">Add Employee Details</button>
+            </mat-card>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="col-6">
+
+        <mat-card class="NavButtonHeader">
+          <button mat-button class="NavButton" (click)="EmployeeClick()"disabled="true" >Employee</button>
+        
+          <a><button mat-button class="NavButton" (click)="EmployeeRoleClick()">Employee Roles</button> </a>
+         
+        </mat-card>
+        <!-- <button mat-button class="NavButton" (click)="getCustomerContacts(customer.customerId)">Customer Contacts</button> -->
+        <br>
+
+        <div class="EmployeeDetails">       
+          <!-- Update Customer Details  -->
+          <div *ngIf="EditView">
+            <mat-card class="header">
+              <mat-card-header>Employee Details</mat-card-header>
+            </mat-card>
+            <br>
+            <mat-card class="example-container">
+              <form #form="ngForm">
+                <mat-form-field>
+                  <mat-label for="">First Name</mat-label><br>
+                  <input matInput id="firstName" type="text" name="firstName" required [(ngModel)]="employee.firstName">
+                </mat-form-field>
+  
+                <br>
+                <mat-form-field>
+                  <mat-label for="">Surname</mat-label><br>
+                  <input matInput id="surname" type="text" name="surname" required [(ngModel)]="employee.surname">
+                </mat-form-field>
+  
+                <br>
+  
+                <mat-form-field>
+                  <mat-label>Phone Number</mat-label><br>
+                  <div *ngIf="employee.phoneNumber.length != 10">
+                    <mat-error>Invalid Phone Number</mat-error>
+                  </div>
+                  <input matInput type="text" name="phoneNumber"  required  [(ngModel)]="employee.phoneNumber">
+                </mat-form-field>
+                <br>
+                <mat-form-field>
+                  <mat-label>Email Address</mat-label><br>
+                  <input matInput type="email" name="email" required [(ngModel)]="employee.email">
+                </mat-form-field>
+  
+                <br>
+                <mat-form-field>
+                  <mat-label>Employee Role</mat-label><br>
+                  <mat-select [(value)]  = "employee.employeeRoleId"
+                      stye="color:rgb(192,192,192);">
+                    <div style="width:250px;">
+                      <mat-option name="employeeRoleId" required *ngFor="let employeerole of employeeroles" [value]="employeerole.employeeRoleId">
+                        {{employeerole.employeeRoleDescription}}
+                      </mat-option>  
+                      <!--<mat-option *ngFor="let employeetype of employeetypes" [value]="employeetype.value">
+                        {{employeetype.viewValue}}
+                      </mat-option>-->
+                    </div>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-checkbox class="checkbox" (click)="toogleTag()"> Driver Details</mat-checkbox>
+                  <div *ngIf="employeeType">
+                    <mat-form-field>
+                     <mat-label for="">License Number</mat-label><br>
+                     <input matInput type="text" name="LicenseNumber" required [(ngModel)]="driverdetail.LicenseNumber">
+                   </mat-form-field>
+                   <br>
+                     <mat-form-field>
+                       <mat-label>License Expiry Date</mat-label>
+                       <input matInput [matDatepicker]="picker" disabled name="LicenseExpirydate" required [(ngModel)]="driverdetail.LicenseExpirydate">
+                       <mat-hint>MM/DD/YYYY</mat-hint>
+                       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                       <mat-datepicker #picker disabled="false"></mat-datepicker>
+                     </mat-form-field>
+   
+                     <br>
+                   <mat-form-field>
+                       <mat-label>License Code</mat-label><br>
+                       <input matInput type="text" name="LicenseCode" required [(ngModel)]="driverdetail.LicenseCode">
+                     </mat-form-field>
+                     <br>
+   
+                     <mat-form-field>
+                       <mat-label>License Code Description</mat-label><br>
+                       <input matInput type="text" name="LicenseCodeDescription" required [(ngModel)]="driverdetail.LicenseCodeDescription">
+                     </mat-form-field>
+                     <br>
+                       <mat-label>License Image</mat-label><br>
+                       <input type="file" name="LicenseCopy" required [(ngModel)]="driverdetail.LicenseCopy">
+                   <!--<div class="app-driverdetails" style="margin-right: 50px;"></div> -->
+                 </div>
+                   
+  
+                <br>
+                <div>
+                  <!-- <button mat-flat-button color="accent" (click)="addCustomer()" >Add Customer</button>
+              <br>
+              <br> -->
+                  <button mat-flat-button color="accent" [disabled]="isDisabled" (click)="updateEmployee(employee)">Save
+                    Changes</button> 
+                    <br>
+                    <br>
+                    
+                </div>
+              </form>
+            </mat-card>
+          </div>
+          <!-- View Customer Details -->
+          <div *ngIf="!EditView">
+            <div *ngIf="!AddView">
+              <mat-card class="header">
+                <mat-card-header>Employee Detailss</mat-card-header>
+              </mat-card>
+              <br>
+              <mat-card class="example-container">
+  
+                <div>
+                  <mat-list>
+                    <mat-list-item>First Name: {{employee.firstName}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>Surname:  {{employee.surname}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>Phone Number: {{employee.phoneNumber}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>Email Address: {{employee.email}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>Employee Role: {{employeerole.employeeRoleDescription}}</mat-list-item>
+                  </mat-list>
+                </div>
+                
+                <br>
+                <div>
+                  <button mat-flat-button color="accent" [disabled]="isDisabled" (click)="UpdatePage()">Update
+                    Employee Details</button>
+                  <br>
+                  <br>
+                  <button mat-flat-button color="accent" [disabled]="isDisabled"
+                    (click)="deleteEmployee(employee.employeeId)">Delete Employee Details</button>
+                </div>
+  
+              </mat-card>
+            </div>
+          </div>
+          <!-- Add Customer  -->
+          <div  *ngIf="AddView">
+            <br>
+            <mat-card class="header">
+              <mat-card-header>Employee Details</mat-card-header>
+            </mat-card>
+            <br>
+            <mat-card class="example-container">
+              <form #form="ngForm">
+                <mat-form-field>
+                  <mat-label for="">First Name</mat-label><br>
+                  <input matInput type="text" name="firstName"  required [(ngModel)]="employee.firstName">
+                </mat-form-field>
+  
+                <br>
+                <mat-form-field>
+                <mat-label for="">Surname</mat-label><br>
+                <input matInput type="text" name="surname"  required [(ngModel)]="employee.surname">
+              </mat-form-field>
+
+              <br>
+                <mat-form-field>
+                  <mat-label>Phone Number</mat-label><br>
+                  <div *ngIf="employee.phoneNumber.length != 10">
+                  </div>
+                  <input matInput type="text" name="phoneNumber" required [(ngModel)]="employee.phoneNumber">
+                </mat-form-field>
+  
+                <br>
+  
+                <mat-form-field>
+                  <mat-label>Email Address</mat-label><br>
+                  <input matInput type="email" name="email" required [(ngModel)]="employee.email">
+                </mat-form-field>
+  
+                <br>
+                <mat-form-field>
+                <mat-label>Employee Role</mat-label><br>
+                <mat-select [(value)]  = "employee.employeeRoleId"
+                    stye="color:rgb(192,192,192);">
+                  <div style="width:250px;">
+                    <mat-option name="employeeRoleId" required *ngFor="let employeerole of employeeroles" [value]="employeerole.employeeRoleId">
+                      {{employeerole.employeeRoleDescription}}
+                    </mat-option>  
+                    <!--<mat-option *ngFor="let employeetype of employeetypes" [value]="employeetype.value">
+                      {{employeetype.viewValue}}
+                    </mat-option>-->
+                  </div>
+                  </mat-select>
+                </mat-form-field>
+                <mat-checkbox class="example" (click)="toogleTag()"> Add Driver Details</mat-checkbox>
+                <div *ngIf="employeeType">
+                 <mat-form-field>
+                  <mat-label for="">License Number</mat-label><br>
+                  <input matInput type="text" name="LicenseNumber" required [(ngModel)]="driverdetail.LicenseNumber">
+                </mat-form-field>
+                <br>
+                  <mat-form-field>
+                    <mat-label>License Expiry Date</mat-label>
+                    <input matInput [matDatepicker]="picker" disabled name="LicenseExpirydate" required [(ngModel)]="driverdetail.LicenseExpirydate">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker disabled="false"></mat-datepicker>
+                  </mat-form-field>
+
+                  <br>
+                <mat-form-field>
+                    <mat-label>License Code</mat-label><br>
+                    <input matInput type="text" name="LicenseCode" required [(ngModel)]="driverdetail.LicenseCode">
+                  </mat-form-field>
+                  <br>
+
+                  <mat-form-field>
+                    <mat-label>License Code Description</mat-label><br>
+                    <input matInput type="text" name="LicenseCodeDescription" required [(ngModel)]="driverdetail.LicenseCodeDescription">
+                  </mat-form-field>
+                  <br>
+                    <mat-label>License Image</mat-label><br>
+                    <input type="file" name="LicenseCopy" required [(ngModel)]="driverdetail.LicenseCopy">
+                <!--<div class="app-driverdetails" style="margin-right: 50px;"></div> -->
+              </div>
+                <div>
+                  <!-- <button mat-flat-button color="accent" (click)="addCustomer()" >Add Customer</button>
+                <br>
+                <br> -->
+                  <button mat-flat-button color="accent" (click)="addEmployee()">Add Employee Details</button>
+                </div>
+               
+              </form>
+            </mat-card>
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Viewing Customer Contact 
+    <div *ngIf="ViewDriverDetails"></div>
+      <app-driverdetails [driverdetails]="driverdetails"></app-driverdetails>
+    </div> -->
+

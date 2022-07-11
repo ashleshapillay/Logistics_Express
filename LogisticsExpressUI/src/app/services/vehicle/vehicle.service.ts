@@ -30,7 +30,7 @@ export class VehicleService {
 
   //update vehicle
   updateVehicle(type:Vehicle):Observable<Vehicle>{
-    return this.http.put<Vehicle>(this.baseUrl + '/'+type.VehicleTypeID,type);
+    return this.http.put<Vehicle>(this.baseUrl + '/'+type.vehicleTypeID,type);
   }
 
   //delete vehicle

@@ -1,6 +1,6 @@
 
 export interface VehicleModels{
-    VehicleModelID:number;
+    vehicleModelID:number;
     name:string;
-    Description: string;
+    description: string;
 }

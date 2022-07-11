@@ -1,163 +1,73 @@
 <div class="Background">
 
-    <!-- Navigation Bar  -->
-    <app-navigation-bar></app-navigation-bar>
+    <div class="container">
+        <div class="col-6">
 
-    <div *ngIf="!viewDrivers" class="container">
-        <div class="row">
-            <div class="col-6">
-                <!-- List  -->
-                <div class="CustomerList">
-                    <mat-card class="CustomerHeader">
-                        <mat-card-header>Vehicle Driver</mat-card-header>
-                    </mat-card>
-                    <br>
-                    <div class="example-container">
-                        <mat-card>
-
-                            <mat-table [dataSource]="vehicleDrivers" matSort>
-
-                                <ng-container matColumnDef="vehicleID">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header>vehicleID</mat-header-cell>
-                                    <mat-cell *matCellDef="let driver" (click)="loadform(driver)"> {{driver.VehicleID}}
-                                    </mat-cell>
-                                </ng-container>
-
-                                <mat-header-row *matHeaderRowDef="listColumns"></mat-header-row>
-                                <mat-row *matRowDef="let driver; columns: listColumns;">
-                                </mat-row>
-                            </mat-table>
-                            <br>
-                            <button mat-flat-button color="accent" (click)="Add()">Add Driver</button>
-                        </mat-card>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="col-6">
-
-                <mat-card class="NavButtonHeader">
-                    <button mat-button class="NavButton">Vehicle Driver Details</button>
-                    <button mat-button class="NavButton" [disabled]="disable" (click)="getVehicle(driver.VehicleDriverID)">Vehicle</button>
+            <!-- VehicleDrivers List -->
+            <div class="DriverList">
+                <mat-card class="VehicleDriverHeader">
+                    <mat-card-header>Driver</mat-card-header>
                 </mat-card>
-                <!-- <button mat-button class=" NavButton " (click)="getCustomerContacts(customer.customerId) ">Customer Contacts</button> -->
+
                 <br>
 
-                <div class="CustomerDetails">
-                    <!-- Update  -->
-                    <div *ngIf="EditView ">
-                        <mat-card class="header ">
-                            <mat-card-header>Vehicle Driver Details</mat-card-header>
-                        </mat-card>
+                <div class="example-container">
+
+                    <mat-card>
+
+                        <mat-table [dataSource]="vehicledrivers" matSort>
+
+                            <ng-container matColumnDef="employeeID">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header>Driver Name</mat-header-cell>
+                                <mat-cell *matCellDef="let driver" (click)="loadform(driver)">{{driver.employeeID}}</mat-cell>
+                            </ng-container>
+
+                            <mat-header-row *matHeaderRowDef="listColumns"></mat-header-row>
+                            <mat-row *matRowDef="let driver; columns: listColumns;"></mat-row>
+
+                        </mat-table>
+
                         <br>
-                        <mat-card class="example-container ">
-                            <form #form="ngForm">
+
+                        <button mat-flat-button color="accent" (click)="Add()">Assign a Driver</button>
+                    </mat-card>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-6">
+            <mat-card class="NavButtonHeader">
+                <button mat-button class="NavButton" (click)="Back()">Vehicle Details</button>
+                <button mat-button class="NavButton" (click)="getVehicleDriver(vehicleID)">Vehicle Drivers</button>
+            </mat-card>
+
+            <br>
+
+            <div class="VehicleDriverDetails">
+
+                <!-- Updating a Driver -->
+                <div *ngif="EditView">
+                    <mat-card class="header">
+                        <mat-card-header>Driver Details</mat-card-header>
+                        <br>
+                        <div class="example-container">
+                            <form #form="ngForm" (ngSubmit)="addDriverDetails()">
                                 <mat-form-field>
-                                    <mat-label for="vehicle">Vehicle</mat-label><br>
-                                    <input matInput id="vehicle " type="text " name="vehicle " required [(ngModel)]="driver.VehicleID">
+
                                 </mat-form-field>
 
-                                <br>
-
-                                <mat-form-field>
-                                    <mat-label for="employee">Employee</mat-label><br>
-                                    <input matInput id="employee" type="text " name="employee " required [(ngModel)]="driver.EmployeeID">
-                                </mat-form-field>
-                                <br>
-
-                                <mat-form-field>
-                                    <mat-label>Trip</mat-label><br>
-                                    <input matInput type="email " name="emailAddress " required email="true " [(ngModel)]="driver.TripID ">
-                                </mat-form-field>
-
-                                <br>
-
-                                <div>
-                                    <!-- <button mat-flat-button color="accent " (click)="addCustomer() " >Add Customer</button>
-              <br>
-              <br> -->
-                                    <button mat-flat-button color="accent " [disabled]="disable" (click)="updateVehicleDriverDetails(driver) ">Save
-                    Changes</button>
-                                </div>
                             </form>
-                        </mat-card>
-                    </div>
-                    <!-- View  Details -->
-                    <div *ngIf="!EditView ">
-                        <div *ngIf="!AddView ">
-                            <mat-card class="header ">
-                                <mat-card-header>Vehicle Driver Details</mat-card-header>
-                            </mat-card>
-                            <br>
-                            <mat-card class="example-container ">
-
-                                <div>
-                                    <mat-list>
-                                        <mat-list-item>Vehicle: {{driver.VehicleID}}</mat-list-item>
-                                        <mat-divider></mat-divider>
-                                        <mat-list-item>Employee: {{driver.EmployeeID}}</mat-list-item>
-                                        <mat-divider></mat-divider>
-                                        <mat-list-item>Trip: {{driver.TripID}}</mat-list-item>
-                                    </mat-list>
-                                </div>
-                                <br>
-                                <div>
-                                    <button mat-flat-button color="accent " [disabled]="disable" (click)="Update() ">Update
-                    Driver</button>
-                                    <br>
-                                    <br>
-                                    <button mat-flat-button color="accent " [disabled]="disable" (click)="deleteVehicleDriver(driver.VehicleDriverID) ">Delete Driver</button>
-                                </div>
-
-                            </mat-card>
                         </div>
-                    </div>
-                    <!-- Add Driver  -->
-                    <div *ngIf="AddView ">
-                        <br>
-                        <mat-card class="header ">
-                            <mat-card-header>Driver Details</mat-card-header>
-                        </mat-card>
-                        <br>
-                        <mat-card class="example-container ">
-                            <form #form="ngForm">
-                                <mat-form-field>
-                                    <mat-label>Vehicle</mat-label><br>
-                                    <input matInput type="text " name="vehicle " required [(ngModel)]="driver.VehicleID ">
-                                </mat-form-field>
+                    </mat-card>
 
-                                <br>
 
-                                <mat-form-field>
-                                    <mat-label>Employee</mat-label><br>
-                                    <input matInput type="text " name="employee " required [(ngModel)]="driver.EmployeeID">
-                                </mat-form-field>
-
-                                <br>
-
-                                <mat-form-field>
-                                    <mat-label>Trip</mat-label><br>
-                                    <!-- <input matInput type="text" name="emailAddress " required email="true " [(ngModel)]="customer.emailAddress "> -->
-                                </mat-form-field>
-
-                                <br>
-
-                                <div>
-                                    <!-- <button mat-flat-button color="accent " (click)="addVehicleDriver() ">Add Driver</button> -->-->
-                                    <br>
-                                    <br>
-                                </div>
-                            </form>
-                        </mat-card>
-
-                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
+
+    </div>
 
 </div>

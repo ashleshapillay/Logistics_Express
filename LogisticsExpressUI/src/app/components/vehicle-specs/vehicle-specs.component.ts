@@ -7,6 +7,7 @@ import { VehicleMakes } from 'src/app/modules/vehiclespecs/vehiclemake.model';
 import { VehicleModels } from 'src/app/modules/vehiclespecs/vehiclemodel.model';
 import { VehicleTypes } from 'src/app/modules/vehiclespecs/vehicletype.model';
 import { VehicleService } from 'src/app/services/vehicle/vehicle.service';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NavigationBarComponent } from '../navigation-bar/navigation-bar.component';
 import { VehicleSpecsService } from 'src/app/services/vehiclespecs/vehicle-specs.service';
 
@@ -23,9 +24,9 @@ export class VehicleSpecsComponent implements OnInit {
 
   vehicleTypes: VehicleTypes[] = [];
   type: VehicleTypes = {
-    VehicleTypeID:0,
-    name:'',
-    Description: '',
+    vehicleTypeID: 0,
+    name: '',
+    description: '',
     //VehicleID:0
   }
 
@@ -33,34 +34,43 @@ export class VehicleSpecsComponent implements OnInit {
   make: VehicleMakes = {
     vehicleMakeID: 0,
     name: '',
-    Description: '',
+    description: '',
   }
 
   vehicleModels: VehicleModels[] = [];
   model: VehicleModels = {
-    VehicleModelID: 0,
+    vehicleModelID: 0,
     name: '',
-    Description: ''
+    description: ''
   }
 
   viewSpecs = false;
 
   AddViewT = false;
-  AddViewMod=false;
-  AddViewMak=false;
+  AddViewMod = false;
+  AddViewMak = false;
 
-  constructor(private router: Router, private route: ActivatedRoute, private vehiclespecsService: VehicleSpecsService, private snackBar: MatSnackBar, private vehicleService: VehicleService) { }
+  constructor(private router: Router, private dialog: MatDialog, private route: ActivatedRoute, private vehiclespecsService: VehicleSpecsService, private snackBar: MatSnackBar, private vehicleService: VehicleService) { }
 
   @Output() vehicles: Vehicle[] = [
     {
-      VehicleID: 0,
+      vehicleID: 0,
       TareWeight: '',
-      VehicleTypeID: this.type.VehicleTypeID,
-      VehicleMakeID: this.make.vehicleMakeID,
-      VehicleModelID: this.model.VehicleModelID,
-      
+      vehicleTypeID: this.type.vehicleTypeID,
+      vehicleMakeID: this.make.vehicleMakeID,
+      vehicleModelID: this.model.vehicleModelID,
+
     }
   ];
+
+  // openDialog(): void {
+  //   const dialogRef = this.dialog.open(VehicleSpecsComponent,{
+
+  //   }
+
+  // OnNoClick(): void{
+  //     this.close();
+  // }
 
   openBar() {
     this.snackBar.open(this.displayMsg, 'Close', {
@@ -68,16 +78,20 @@ export class VehicleSpecsComponent implements OnInit {
     });
   }
 
+  // VehicleSpecsClick(){
+  //   this.router.navigate[('specs')]
+  // }
+
   // get Type
   getAllTypes() {
     this.vehiclespecsService.getAllTypes()
       .subscribe(
         response => {
-          this.vehicleTypes = response; 
+          this.vehicleTypes = response;
           console.log(response);
         }
       )
-  }  
+  }
 
   //add type
   AddType() {
@@ -85,9 +99,9 @@ export class VehicleSpecsComponent implements OnInit {
       .subscribe(
         resp => {
           this.type = {
-            VehicleTypeID: 0,
+            vehicleTypeID: 0,
             name: '',
-            Description: '',
+            description: '',
             //VehicleID: 0
           }
 
@@ -107,9 +121,9 @@ export class VehicleSpecsComponent implements OnInit {
       .subscribe(
         response => {
           this.type = {
-            VehicleTypeID: 0,
+            vehicleTypeID: 0,
             name: '',
-            Description: '',
+            description: '',
           }
 
           this.getAllTypes();
@@ -119,7 +133,7 @@ export class VehicleSpecsComponent implements OnInit {
       )
   };
 
-  
+
   // getVehicleMake(id: number) {
   //   this.vehiclespecsService.getAllMakes().subscribe(resp => { this.vehicleMakes = resp,id})
   // }
@@ -132,7 +146,7 @@ export class VehicleSpecsComponent implements OnInit {
           console.log(response);
         }
       )
-  }  
+  }
 
   //add make
   addMake() {
@@ -142,7 +156,7 @@ export class VehicleSpecsComponent implements OnInit {
           this.make = {
             vehicleMakeID: 0,
             name: '',
-            Description: '',
+            description: '',
           }
 
           this.displayMsg = "A Vehicle Make Was Added Successfully";
@@ -163,7 +177,7 @@ export class VehicleSpecsComponent implements OnInit {
           this.make = {
             vehicleMakeID: 0,
             name: '',
-            Description: '',
+            description: '',
           }
 
           this.getAllMakes();
@@ -172,7 +186,7 @@ export class VehicleSpecsComponent implements OnInit {
         }
       )
   };
-  
+
   //get Model
   getAllModel() {
     this.vehiclespecsService.getAllModel()
@@ -182,8 +196,8 @@ export class VehicleSpecsComponent implements OnInit {
           console.log(response);
         }
       )
-  }  
-  VehicleClick(){
+  }
+  VehicleClick() {
     this.router.navigate(['vehicle']);
   }
   //add model
@@ -192,9 +206,9 @@ export class VehicleSpecsComponent implements OnInit {
       .subscribe(
         resp => {
           this.model = {
-            VehicleModelID: 0,
+            vehicleModelID: 0,
             name: '',
-            Description: '',
+            description: '',
           }
 
           this.displayMsg = "A Vehicle Model Was Added Successfully";
@@ -213,9 +227,9 @@ export class VehicleSpecsComponent implements OnInit {
       .subscribe(
         response => {
           this.model = {
-            VehicleModelID: 0,
+            vehicleModelID: 0,
             name: '',
-            Description: '',
+            description: '',
           }
 
           this.getAllModel();
@@ -226,7 +240,7 @@ export class VehicleSpecsComponent implements OnInit {
   };
 
 
-  
+
 
   DeleteType() {
     this.AddViewT = false;
@@ -242,40 +256,40 @@ export class VehicleSpecsComponent implements OnInit {
   }
   AddAType() {
     this.AddViewT = true;
-    this.AddViewMak=false;
-    this.AddViewMod=false;
+    this.AddViewMak = false;
+    this.AddViewMod = false;
     this.type = {
-      VehicleTypeID: 0,
+      vehicleTypeID: 0,
       name: '',
-      Description: '',
+      description: '',
       //VehicleID: 0
     }
   };
 
   AddAModel() {
     this.AddViewMod = true;
-    this.AddViewT=false;
-    this.AddViewMak=false;
+    this.AddViewT = false;
+    this.AddViewMak = false;
     this.model = {
-      VehicleModelID: 0,
+      vehicleModelID: 0,
       name: '',
-      Description: ''
-      
+      description: ''
+
     }
   };
   AddAMake() {
     this.AddViewMak = true;
     this.AddViewT = false;
-    this.AddViewMod=false;
+    this.AddViewMod = false;
     this.make = {
       vehicleMakeID: 0,
       name: '',
-      Description: ''
+      description: ''
     }
   };
 
 
- loadformT(types: VehicleTypes) {
+  loadformT(types: VehicleTypes) {
     this.type = types;
     this.disable = false;
     console.log(types);
@@ -284,7 +298,7 @@ export class VehicleSpecsComponent implements OnInit {
     this.make = makes;
     this.disable = false;
     console.log(makes);
-    
+
   };
   loadformMod(models: VehicleModels) {
     this.model = models;

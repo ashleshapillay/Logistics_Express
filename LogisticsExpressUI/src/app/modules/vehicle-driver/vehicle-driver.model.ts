@@ -1,7 +1,7 @@
 
 export interface VehicleDriver {
-    VehicleDriverID: number;
-    VehicleID: number;
-    TripID: number;
+    vehicleDriverID: number;
+    vehicleID: number;
+    tripID: number;
     EmployeeID: number;
 }

@@ -9,23 +9,26 @@ import { VehicleDriver } from 'src/app/modules/vehicle-driver/vehicle-driver.mod
 })
 export class VehicleDriverService {
 
-  baseUrl!:'https://localhost:7077/api/VehicleDriver'
+  baseUrl!: 'https://localhost:7077/api/VehicleDriver'
 
   constructor(private http: HttpClient) { }
 
-  //get driver
-  getDriver():Observable<VehicleDriver[]>{
-    return this.http.get<VehicleDriver[]>(this.baseUrl)
+  //all vehicles
+  getAllDrivers(): Observable<VehicleDriver[]> {
+    return this.http.get<VehicleDriver[]>(this.baseUrl);
   }
 
+  getDriver(id: number): Observable<VehicleDriver[]> {
+    return this.http.get<VehicleDriver[]>(this.baseUrl + '/' + id)
+  }
   //add driver
-  addDriver(driver: VehicleDriver): Observable<VehicleDriver[]>{
-    return this.http.post<VehicleDriver[]>(this.baseUrl,driver)
+  addDriver(driver: VehicleDriver): Observable<VehicleDriver[]> {
+    return this.http.post<VehicleDriver[]>(this.baseUrl, driver)
   }
 
   //update driver
   updateDriver(driver: VehicleDriver): Observable<VehicleDriver> {
-    return this.http.put<VehicleDriver>(this.baseUrl + '/' + driver.VehicleDriverID, driver);
+    return this.http.put<VehicleDriver>(this.baseUrl + '/' + driver.vehicleDriverID, driver);
   }
 
   // delete driver

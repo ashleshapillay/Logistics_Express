@@ -1,9 +1,9 @@
 export interface Vehicle{
-    VehicleID: number;
+    vehicleID: number;
     TareWeight: string;
-    VehicleTypeID: number;
-    VehicleMakeID: number;
-    VehicleModelID: number;
+    vehicleTypeID: number;
+    vehicleMakeID: number;
+    vehicleModelID: number;
     // Name: string;
     // Description: string;
 

@@ -1,252 +1,234 @@
 <div class="Background">
-
-    <!-- Navigation Bar  -->
     <app-navigation-bar></app-navigation-bar>
+    <div *ngIf="!viewVehicles" class="container"></div>
+    <div class="row">
+        <div class="col-6">
+            <div class="VehicleList">
+                <mat-card>
+                    <mat-card-header>Vehicle</mat-card-header>
+                </mat-card>
+                <br>
+                <div class="example-container">
+                    <mat-card>
+                        <!-- Viewing Vehicle -->
+                        <mat-table [dataSource]="vehicles" matSort>
+                            <ng-container matColumnDef="vehicle">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header>Vehicle License</mat-header-cell>
+                                <mat-cell *matCellDef="let vehicle" (click)="loadform(vehicle)">{{vehicle.vehicleID}}</mat-cell>
+                            </ng-container>
 
-    <div *ngIf="!viewVehicles" class="container">
-        <div class="row">
-            <div class="col-6">
-                <!-- List   -->
-                <div class="CustomerList">
-                    <mat-card class="CustomerHeader">
-                        <mat-card-header>Vehicle</mat-card-header>
-                    </mat-card>
-                    <br>
-                    <div class="example-container">
-                        <mat-card>
+                            <mat-header-row *matHeaderRowDef="listColumns"></mat-header-row>
+                            <mat-row *matRowDef="let vehicle; columns: listColumns;"></mat-row>
+                        </mat-table>
 
-                            <mat-table [dataSource]="vehicles" matSort>
-
-                                <ng-container matColumnDef="vehicle">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header> VehicleID</mat-header-cell>
-                                    <mat-cell *matCellDef="let vehicle" (click)="loadform(vehicle)"> {{vehicle.VehicleID}} </mat-cell>
-                                </ng-container>
-
-                                <mat-header-row *matHeaderRowDef="listColumns"></mat-header-row>
-                                <mat-row *matRowDef="let customer; columns: listColumns;">
-                                </mat-row>
-                            </mat-table>
-                            <br>
-                            <button mat-flat-button color="accent" (click)="Add()">Add Vehicle</button><br><br>
-                            <button mat-flat-button color="accent" (click)="AddDriver()">Add Driver</button>
-
-                        </mat-card>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="col-6">
-                <!-- Update  Details  -->
-                <div class="CustomerDetails" *ngIf="EditView">
-                    <mat-card class="NavButtonHeader">
-                        <button mat-button class="NavButton">Vehicle Details</button>
-                        <button mat-button class="NavButton" (click)="VehicleSpecsClick()">Vehicle Specs</button>
-                    </mat-card>
-                    <br>
-                    <mat-card class="header">
-                        <mat-card-header>Vehicle Details</mat-card-header>
-                    </mat-card>
-                    <br>
-                    <mat-card class="example-container">
-                        <form #form="ngForm">
-                            <mat-form-field>
-                                <mat-label for="">Tare Weight</mat-label><br>
-                                <input matInput type="text" name="tare" [(ngModel)]="vehicle.TareWeight">
-                            </mat-form-field>
-
-                            <br>
-
-                            <mat-form-field appearance="fill">
-                                <mat-label>Vehicle Type</mat-label>
-                                <mat-select>
-                                    <mat-option *ngFor="let type of vehicleTypes" [(ngModel)]="type.VehicleTypeID">
-                                        {{type.name}}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-
-                            <br>
-
-                            <mat-form-field appearance="fill">
-                                <mat-label>Vehicle Make</mat-label>
-                                <mat-select>
-                                    <mat-option *ngFor="let make of vehicleMakes" [(ngModel)]="make.vehicleMakeID">
-                                        {{make.name}}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-
-                            <br>
-                            <mat-form-field appearance="fill">
-                                <mat-label>Vehicle Model</mat-label>
-                                <mat-select>
-                                    <mat-option *ngFor="let model of vehicleModels" [(ngModel)]="model.VehicleModelID">
-                                        {{model.name}}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                            <div>
-                                <!-- <button mat-flat-button color="accent" (click)="addCustomer()" >Add Customer</button>
-            <br>
-            <br> -->
-                                <button mat-flat-button color="accent" [disabled]="disable" (click)="updateVehicleDetails(vehicle)">Save Changes</button>
-                            </div>
-                        </form>
-                    </mat-card>
-
-                </div>
-
-                <!-- View  Details -->
-                <div class="CustomerDetails" *ngIf="!EditView">
-                    <div *ngIf="!AddView">
-                        <mat-card class="NavButtonHeader">
-                            <button mat-button class="NavButton">Vehicle Details</button>
-                            <button mat-button class="NavButton" (click)="VehicleSpecsClick()">Vehicle Specs</button>
-
-                        </mat-card>
                         <br>
-                        <mat-card class="header">
-                            <mat-card-header>Vehicle Details</mat-card-header>
-                        </mat-card>
-                        <br>
-                        <mat-card class="example-container">
 
-                            <div>
-                                <mat-list>
-                                    <mat-list-item>Tare Weight: {{vehicle.TareWeight}}</mat-list-item>
-                                    <mat-divider></mat-divider>
-                                    <mat-list-item>Vehicle Type: {{type.name}}</mat-list-item>
-                                    <mat-divider></mat-divider>
-                                    <mat-list-item>Vehicle Make: {{make.name}}</mat-list-item>
-                                    <mat-divider></mat-divider>
-                                    <mat-list-item>Vehicle Model: {{model.name}}</mat-list-item>
-
-                                </mat-list>
-                            </div>
-                            <br>
-                            <div>
-                                <button mat-flat-button color="accent" [disabled]="disable" (click)="Update()">Update Vehicle</button>
-                                <br>
-                                <br>
-                                <button mat-flat-button color="accent" [disabled]="disable" (click)="deleteVehicle(vehicle.VehicleID)">Delete Customer</button>
-                            </div>
-
-                        </mat-card>
-                    </div>
-                </div>
-
-                <!-- Add  -->
-                <div class="CustomerDetails" *ngIf="AddView">
-                    <mat-card class="NavButtonHeader">
-                        <button mat-button class="NavButton">Vehicle Details</button>
-                        <button mat-button class="NavButton" (click)="VehicleSpecsClick()">Vehicle Specs</button>
+                        <button mat-flat-button color="accent" (click)="Add()">Add Vehicle</button>
                     </mat-card>
-                    <br>
-                    <mat-card class="header">
-                        <mat-card-header>Vehicle Details</mat-card-header>
-                    </mat-card>
-                    <br>
-                    <mat-card class="example-container">
-                        <form #form="ngForm">
-                            <mat-form-field>
-                                <mat-label for="">Tare Weight</mat-label><br>
-                                <input matInput type="text" name="tare" [(ngModel)]="vehicle.TareWeight">
-                            </mat-form-field>
-
-                            <br>
-
-                            <mat-form-field appearance="fill">
-                                <mat-label>Vehicle Type</mat-label>
-                                <mat-select matNativeControl [(ngModel)]="type.VehicleTypeID" name="type">
-                                    <mat-option value="" selected></mat-option>
-
-                                    <mat-option *ngFor="let type of vehicleTypes" [value]="type.VehicleTypeID">
-                                        {{type.name}}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-
-                            <br>
-
-                            <mat-form-field appearance="fill">
-                                <mat-label>Vehicle Make</mat-label>
-                                <mat-select matNativeControl [(ngModel)]="make.vehicleMakeID" name="make">
-                                    <mat-option value="" selected></mat-option>
-                                    <mat-option *ngFor="let make of vehicleMakes" [value]="make.vehicleMakeID">
-                                        {{make.name}}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-
-                            <br>
-                            <mat-form-field appearance="fill">
-                                <mat-label>Vehicle Model</mat-label>
-                                <mat-select matNativeControl [(ngModel)]="model.VehicleModelID" name="make">
-                                    <mat-option value="" selected></mat-option>
-
-                                    <mat-option *ngFor="let model of vehicleModels" [value]="model.VehicleModelID">
-                                        {{model.name}}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-
-                            <br>
-
-                            <div>
-                                <!-- <button mat-flat-button color="accent" (click)="addCustomer()" >Add Customer</button>
-              <br>
-              <br> -->
-                                <button mat-flat-button color="accent" (click)="addVehicle()">Add Vehicle</button>
-                            </div>
-                        </form>
-                    </mat-card>
-
-                    <!-- Add Driver -->
-                    <div class="CustomerDetails" *ngIf="AddViewE">
-                        <div>
-                            <div class="CustomerDetails">
-                                <mat-card class="NavButtonHeader">
-                                    <button mat-button class="NavButton">Vehicle Details</button>
-                                    <button mat-button class="NavButton" (click)="VehicleSpecsClick()">Vehicle Specs</button>
-                                </mat-card>
-                                <br>
-                                <mat-card class="header">
-                                    <mat-card-header>Vehicle Driver</mat-card-header>
-                                </mat-card>
-                                <br>
-                                <mat-card class="example-container">
-                                    <form #form="ngForm">
-                                        <mat-form-field>
-                                            <mat-label for="">Employee</mat-label><br>
-                                            <input matInput type="text" name="tare" [(ngModel)]="employee.Emp_FirstName">
-                                        </mat-form-field>
-
-                                        <br>
-
-                                        <div>
-                                            <!-- <button mat-flat-button color="accent" (click)="addCustomer()" >Add Customer</button>
-              <br>
-              <br> -->
-                                            <button mat-flat-button color="accent" (click)="AddDriver()">Assign Driver</button>
-                                        </div>
-                                    </form>
-                                </mat-card>
-
-                            </div>
-
-                        </div>
-                    </div>
                 </div>
-
-                <!-- Viewing Customer Contact  -->
-                <div *ngIf="viewVehicles">
-                    <!-- <app-vehicle-specs [customercontacts]="customercontacts"></app-vehicle-specs> -->
-                </div>
-
             </div>
         </div>
 
+        <div class="col-6">
+            <mat-card class="NavButtonHeader">
+                <button mat-button class="NavButton" (click)="VehicleClick()">Vehicle Details</button>
+                <button mat-button class="NavButton" [disabled]="disable" (click)="getVehicleDriverID(vehicle.vehicleID)">Vehicle Driver</button>
+            </mat-card>
+
+            <br>
+
+            <div class="VehicleDetails">
+                <!-- Adding -->
+                <div *ngIf="AddView" style="padding:50px;">
+                    <br>
+
+                    <!-- specifications -->
+                    <mat-card class="header">
+                        <mat-card-header>Specifications</mat-card-header>
+                    </mat-card>
+
+                    <mat-card class="example-container" style="width: 640px;">
+                        <form #form="ngForm">
+
+                            <!-- adding tareweight -->
+                            <mat-form-field>
+                                <mat-label for="TareWeight">Tare Weight:</mat-label>
+                                <input matInput type="text" name="TareWeight" required [(ngModel)]="vehicle.TareWeight">
+                            </mat-form-field>
+
+                            <br>
+
+                            <!-- selecting VehicleType
+                            <mat-form-field>
+                                <mat-label for="VehicleType">Vehicle Type:</mat-label>
+                                <mat-select [(value)]="type.name" placeholder="eg. Truck, Car">
+                                    <mat-option name="vehicleTypeID" (click)="getAllTypes()" *ngFor="let type of vehicleTypes" [value]="type.vehicleTypeID">{{type.name}}</mat-option>
+
+                                    <mat-option name="AddType" id="TypeSelector" data-toggle="modal" data-target="#AddTypeModal">
+
+                                        <mat-icon>add</mat-icon>Add Type
+
+                                    </mat-option>
+
+                                </mat-select>
+                                <div class="modal fade" id="AddTypeModal" tabindex="-1" role="dialog" aria-labelledby="AddTypeModal" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="AddTypeModalLabel">Add a Type</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aira-hidden="true">&times;</span>
+                                                    </button>
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" data-dismiss="modal">Close</button>
+                                                <mat-option name="vehicleTypeID" *ngFor="let type of vehicleTypes" [value]="type.name">{{type.vehicleTypeID}}</mat-option>
+                                                <button type="button" data-dismiss="modal" (click)="ChooseNewType(AddTypeModal, type.name)">Save</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                            </mat-form-field> -->
+
+                            <!-- selecting vehicle type -->
+                            <mat-form-field>
+                                <mat-label for="VehicleMake">Vehicle Type:</mat-label>
+                                <mat-select [(value)]="type.name" placeholder="eg. Toyota, Nissan">
+                                    <mat-option name="vehicleTypeID" *ngFor="let type of vehicleTypes" [value]="type.name">{{type.vehicleTypeID}}</mat-option>
+                                    <button type="button" (click)="AddNewType(AddTypeModal, type.name)">
+                                        <mat-option name="AddType">
+                                        <mat-icon>add</mat-icon>Add Type</mat-option>
+
+                                    </button>
+
+                                </mat-select>
+                            </mat-form-field>
+
+                            <br>
+
+
+                            <br>
+
+                            <!-- selecting vehicleMake -->
+                            <mat-form-field>
+                                <mat-label for="VehicleMake">Vehicle Make:</mat-label>
+                                <mat-select [(value)]="make.name" placeholder="eg. Toyota, Nissan">
+                                    <mat-option name="vehicleMakeID" *ngFor="let make of vehicleMakes" [value]="make.name">{{make.name}}</mat-option>
+                                    <button type="button" (click)="ChooseNewMake(AddMakeModal, make.name)">
+                                        <mat-option name="AddMake">
+                                        <mat-icon>add</mat-icon>Add Make</mat-option>
+
+                                    </button>
+
+                                </mat-select>
+                            </mat-form-field>
+
+                            <br>
+
+                            <!-- selecting VehicleModel -->
+                            <mat-form-field>
+                                <mat-label for="VehicleModel">Vehicle Model:</mat-label>
+                                <mat-select [(value)]="model.name" placeholder="eg. Tundra, Dyna">
+                                    <mat-option name="vehicleModelID" *ngFor="let model of vehicleModels" [value]="model.name">{{model.vehicleModelID}}</mat-option>
+                                    <!-- <button type="button" (click)="AddNewType(AddModelModal, model.name)"> -->
+                                    <mat-option name="AddModel">
+                                        <mat-icon>add</mat-icon>Add Model
+                                    </mat-option>
+
+                                    <!-- </button> -->
+
+                                </mat-select>
+                            </mat-form-field>
+                        </form>
+                    </mat-card>
+
+
+                    <!-- Registration -->
+                    <mat-card class="header">
+                        <mat-card-header>Registration</mat-card-header>
+                    </mat-card>
+
+
+
+                    <!-- Insurance Plan -->
+                    <mat-card class="header">
+                        <mat-card-header>Insurance Plan</mat-card-header>
+                    </mat-card>
+
+
+                    <!-- Service Plan -->
+                    <mat-card class="header">
+                        <mat-card-header>Service Plan</mat-card-header>
+                    </mat-card>
+                    <br>
+
+                    <button mat-button class="NavButton" [disabled]="disable" (click)="addVehicle()">Add Vehicle</button>
+                </div>
+
+                <!-- Editing Vehicle -->
+            </div>
+        </div>
     </div>
+</div>
+
+<!-- Add a new Type Modal -->
+<ng-template #AddTypeModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title"> Add a new Type</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+    </div>
+
+    <div class="modal-body">
+        <label for="name">Name:</label> <br>
+        <input matInput for="name" placeholder="eg. Truck">
+        <label for="description">Description: </label>
+        <input matInput for="description" placeholder="eg. 18 wheeler">
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Add Type')">Add new Type</button>
+    </div>
+</ng-template>
+
+<!-- Add a new Make Modal -->
+<ng-template #AddMakeModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title"> Add a new Make</h4>
+    </div>
+
+    <div class="modal-body">
+        <label for="name">Name:</label> <br>
+        <input matInput for="name" placeholder="eg. Toyota">
+        <label for="description">Description: </label>
+        <input matInput for="description" placeholder="eg. Manufacturer">
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Add Make')">Add new Make</button>
+    </div>
+</ng-template>
+
+<!-- Add a new model Modal -->
+<ng-template #AddModelModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title"> Add a new Model</h4>
+    </div>
+
+    <div class="modal-body">
+        <label for="name">Name:</label> <br>
+        <input matInput for="name" placeholder="eg. Toyota">
+        <label for="description">Description: </label>
+        <input matInput for="description" placeholder="eg. Manufacturer">
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Add Model')">Add new Model</button>
+    </div>
+</ng-template>

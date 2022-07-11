@@ -1,7 +1,7 @@
 export interface VehicleTypes{
-    VehicleTypeID: number;
+    vehicleTypeID: number;
     name: string;
-    Description: string;
+    description: string;
     
     
 }

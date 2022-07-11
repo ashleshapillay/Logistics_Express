@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Vehicle } from 'src/app/modules/vehicle/vehicle.model';
@@ -20,10 +20,26 @@ export class VehicleDriverComponent implements OnInit {
 
   vehicleDrivers: VehicleDriver[] = [];
   driver: VehicleDriver = {
-    VehicleDriverID: 0,
-    VehicleID: 0,
-    TripID: 0,
-    EmployeeID: 0,
+    vehicleDriverID: 0,
+    vehicleID: 0,
+    tripID: 0,
+    EmployeeID: 0
+  }
+
+  @Input() vehicledrivers: VehicleDriver[] = []
+  vehicleID = JSON.parse(localStorage.getItem('vehicleID')!)
+  vehicledriver: VehicleDriver = {
+    vehicleDriverID: 0,
+    vehicleID: this.vehicleID,
+    tripID: 0,
+    EmployeeID: 0
+  }
+
+  addVehicle: any = {
+    driver: this.vehicledriver.vehicleDriverID,
+    vehicle: this.vehicledriver.vehicleID,
+    trip: this.vehicledriver.tripID,
+    employee: this.vehicledriver.EmployeeID
   }
 
   viewDrivers = false;
@@ -31,47 +47,40 @@ export class VehicleDriverComponent implements OnInit {
 
   constructor(private router: Router, private route: ActivatedRoute, private vehicledriverService: VehicleDriverService, private snackBar: MatSnackBar, private vehicleService: VehicleService) { }
 
-  @Output() vehicles: Vehicle[] = [
-    {
-      VehicleID: 0,
-      TareWeight: '',
-      VehicleTypeID: 0,
-      VehicleMakeID: 0,
-      VehicleModelID: 0,
-     
-    }
-  ];
-
   openBar() {
     this.snackBar.open(this.displayMsg, 'Close', {
       duration: 3000
     });
   }
 
-  getAllVehicleDrivers() {
-    this.vehicledriverService.getDriver().subscribe(resp => { this.vehicleDrivers = resp; })
+  getAllVehicleDrivers(id: number) {
+    this.vehicledriverService.getDriver(id).subscribe(resp => { this.vehicleDrivers = resp })
   }
 
-  addVehicleDriver() {
-    this.vehicledriverService.addDriver(this.driver)
-      .subscribe(
-        resp => {
-          this.driver = {
-            VehicleDriverID: 0,
-            VehicleID: 0,
-            TripID: 0,
-            EmployeeID: 0,
-          }
+  // addVehicleDriver() {
+  //   this.vehicledriverService.addDriver(this.driver)
+  //     .subscribe(
+  //       resp => {
+  //         this.driver = {
+  //           VehicleDriverID: 0,
+  //           VehicleID: 0,
+  //           TripID: 0,
+  //           EmployeeID: 0,
+  //         }
 
-          this.displayMsg = "A Vehicle Driver Was Added Successfully";
-          this.openBar();
-          this.getAllVehicleDrivers();
-          this.EditView = false
-          this.AddView = false
-          window.location.reload()
-        }
-      )
-  };
+  //         this.displayMsg = "A Vehicle Driver Was Added Successfully";
+  //         this.openBar();
+  //         this.getAllVehicleDrivers();
+  //         this.EditView = false
+  //         this.AddView = false
+  //         window.location.reload()
+  //       }
+  //     )
+  // };
+
+  Back() {
+    window.location.reload();
+  }
 
   loadform(drivers: VehicleDriver) {
     this.driver = drivers;
@@ -92,13 +101,13 @@ export class VehicleDriverComponent implements OnInit {
   deleteVehicleDriver(id: number) {
     this.vehicledriverService.deleteDriver(id).subscribe(resp => {
       this.driver = {
-        VehicleDriverID: 0,
-        VehicleID: 0,
-        TripID: 0,
-        EmployeeID: 0,
+        vehicleDriverID: 0,
+        vehicleID: 0,
+        tripID: 0,
+        EmployeeID: 0
       }
 
-      this.getAllVehicleDrivers();
+      this.getAllVehicleDrivers(id);
       this.openBar();
       this.displayMsg = "Vehicle Driver Details were removed succesfully";
 
@@ -113,21 +122,54 @@ export class VehicleDriverComponent implements OnInit {
   Add() {
     this.AddView = true;
     this.driver = {
-      VehicleDriverID: 0,
-      VehicleID: 0,
-      TripID: 0,
-      EmployeeID: 0,
+      vehicleDriverID: 0,
+      vehicleID: 0,
+      tripID: 0,
+      EmployeeID: 0
     }
   };
 
-  getVehicle(id: number) {
-    this.vehicleService.getAllVehicles().subscribe(
-      resp => {
-        this.vehicles = resp;
-        this.viewDrivers = true;
-        localStorage.setItem('vehicleID', JSON.stringify(id))
+  addDriverDetails() {
+    this.addVehicle = {
+      driver: this.vehicledriver.vehicleDriverID,
+      vehicle: this.vehicledriver.vehicleID,
+      trip: this.vehicledriver.tripID,
+      employee: this.vehicledriver.EmployeeID
+    }
+
+    console.log(this.addVehicle)
+    if (this.addVehicle.driver == "" || this.addVehicle.vehicle == "" || this.addVehicle.trip == "" || this.addVehicle.employee == "") {
+      this.displayMsg = "Driver cannot be assigned. Please fill in all the required information.";
+      this.openBar();
+    }
+    else {
+      this.vehicledriverService.addDriver(this.addVehicle).subscribe(
+        resp => {
+          this.vehicledriver = {
+            vehicleDriverID: 0,
+            vehicleID: 0,
+            tripID: 0,
+            EmployeeID: 0
+          }
+
+          this.displayMsg = "Driver was assigned successfully";
+          this.openBar();
+          this.EditView = false;
+          this.AddView = false;
+          this.getVehicleDriver(this.vehicleID)
+
+        }
+      )
+    }
+  }
+
+  getVehicleDriver(id: number) {
+    this.vehicledriverService.getDriver(id).subscribe(
+      res => {
+        this.vehicleDrivers = res
       }
     )
+
   }
 
   ngOnInit(): void {

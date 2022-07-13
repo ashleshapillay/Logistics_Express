@@ -1,0 +1,80 @@
+<app-navigation-bar></app-navigation-bar>
+<!--
+<div class="container">
+    <div class="row">
+        <div class="search-hero">
+            <input type="text" name="search" [(ngModel)]="searchText"  placeholder="Search by Hero">
+            <mat-icon></mat-icon>
+            <button mat-icon-button color="accent" aria-label="Example icon button with a menu icon">
+                <mat-icon> search </mat-icon>
+            </button>
+        </div>
+        <br>
+        <br>
+        <table class="table table-striped"> 
+            <thead>
+                <tr>
+                    <th> Id </th>
+                    <th> Hero Name </th>
+                    <th> Country </th>  
+                </tr>
+            </thead>
+
+            <tbody>
+-->
+
+               <!-- <tr *ngFor="let hero of heroes" | filter:searchText>
+                    <td> {{hero.id}} </td>
+                    <td> {{hero.name}} </td> 
+                    <td> {{hero.country}} </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+-->
+
+<hr style="height: 12px;"><br><br>
+
+<div class="row">
+    <div class="col-6">
+        <button mat-flat-button color="accent" (click)="AddStatement()"> Generate Statement </button>
+        <br>
+        <br>
+        <button mat-flat-button color="accent"> Download </button>
+    </div>
+    <div class="col-6" *ngIf="AddView">
+        <mat-card class="header">
+            <mat-card-header> July Statement </mat-card-header>
+        </mat-card>
+        <br>
+        <ng-container> 
+            <b> CUSTOMER DETAILS GO HERE </b>
+        </ng-container>
+        <br><br><br>
+        <div> 
+            <table class="table table-striped"> 
+                <thead>
+                    <tr>
+                        <th> Date </th>
+                        <th> Details</th>
+                        <th> Amount (R)</th>  
+                    </tr>
+                </thead>
+    
+                <tbody>
+    
+                    <tr *ngFor="let hero of heroes"> <!--| filter:searchText-->
+                        <td> {{hero.Date}} </td>
+                        <td> {{hero.Details}} </td> 
+                        <td> {{hero.Amount}} </td>
+                    </tr>
+    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+

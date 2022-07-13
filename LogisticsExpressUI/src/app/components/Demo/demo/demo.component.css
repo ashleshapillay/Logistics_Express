@@ -1,0 +1,14 @@
+.mat-card{
+    background-color: #d4d4d4;
+ }
+
+.mat-card-header{
+    color: #990000;
+    font-family: 'Poppins';
+    font-size: large;
+    font-weight: bolder;
+ }
+
+font{
+    text-align: center;
+}

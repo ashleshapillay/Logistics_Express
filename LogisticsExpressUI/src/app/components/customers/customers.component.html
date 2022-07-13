@@ -1,6 +1,6 @@
-<div class="Background">
+<div class="Background"> 
 
-  <!-- Navigation Bar  -->
+  <!-- Navigation Bar -->
   <app-navigation-bar></app-navigation-bar>
 
   <div *ngIf="!ViewContact" class="container">
@@ -13,6 +13,14 @@
           </mat-card>
           <br>
           <div class="example-container">
+            <div> 
+              <input type="text" name="search"  placeholder="Search by ID">
+            <mat-icon></mat-icon>
+            <button mat-icon-button color="accent" aria-label="Example icon button with a menu icon">
+                <mat-icon> search </mat-icon>
+            </button>
+            </div>
+
             <mat-card>
 
               <mat-table [dataSource]="customers" matSort>
@@ -109,12 +117,10 @@
                 </div>
                 <br>
                 <div>
-                  <button mat-flat-button color="accent" [disabled]="isDisabled" (click)="UpdatePage()">Update
-                    Customer</button>
+                  <button mat-flat-button color="accent" [disabled]="isDisabled" (click)="UpdatePage()">Update Customer</button>
                   <br>
                   <br>
-                  <button mat-flat-button color="accent" [disabled]="isDisabled"
-                    (click)="deleteCustomer(customer.customerId)">Delete Customer</button>
+                  <button mat-flat-button color="accent" [disabled]="isDisabled" (click)="deleteCustomer(customer.customerId)">Delete Customer</button>
                 </div>
   
               </mat-card>
@@ -168,7 +174,7 @@
     </div>
   </div>
 
-  <!-- Viewing Customer Contact  -->
+  <!-- Viewing Customer Contact -->
   <div *ngIf="ViewContact">
     <app-customercontacts [customercontacts]="customercontacts"></app-customercontacts>
   </div>

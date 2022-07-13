@@ -1,0 +1,147 @@
+<div class="Background">
+    <app-navigation-bar></app-navigation-bar>
+    <div *ngIf="!viewInvDocs" class="container"></div>
+
+    <div class="row">
+        <div class="col-6">
+            <div class="DeliveryNoteList">
+                <mat-card>
+                    <mat-card-header>Invoicing</mat-card-header>
+                </mat-card>
+                <br>
+                <div class="example-container">
+                    <!-- Search Delivery Note -->
+
+                    <!-- Search bar -->
+
+                    <mat-card>
+
+
+                        <!-- List of Delivery Note -->
+                        <mat-table [dataSource]="dNotes" matSort>
+                            <ng-cntainer matColumnDef="dNote">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header>Delivery</mat-header-cell>
+                                <mat-cell *matCellDef="let vehicle" (click)="loadform(dNote)">{{dNote.deliveryID}}</mat-cell>
+                            </ng-cntainer>
+
+                            <mat-header-row *matHeaderRowDef="listColumns"></mat-header-row>
+                            <mat-row *matCellDef="let note; columns: listColumns;"></mat-row>
+                        </mat-table>
+
+                        <br>
+                    </mat-card>
+
+                </div>
+
+                <!-- View a Delivery Note -->
+                <div>
+                    <!-- <div  class="example-container">*ngIf="ViewNote" -->
+                    <div class="DNDetails">
+
+                        <br>
+
+                        <mat-card>
+                            <mat-card-header>Jesslyn Carriers</mat-card-header> <br>
+                            <mat-card-subtitle>Cell: 082 573 2015 <br> Tel: 031 464 6261</mat-card-subtitle> <br>
+                            <table class="grid-container">
+                                <div class="row">
+                                    <div class="col">
+                                        <mat-label>Date: {{invoice.dateIssued}}</mat-label>
+                                    </div>
+                                    <div class="col">
+                                        <mat-label>Order No: #{{invoice.invoiceNumber}}</mat-label>
+                                    </div>
+                                </div>
+                                <br>
+
+                                <div class="row">
+                                    <div class="col">
+                                        <mat-label>Consignee:</mat-label>
+
+                                    </div>
+                                    <div class="col">
+                                        <mat-label>Deliver To: </mat-label>
+                                    </div>
+                                </div>
+                                <br>
+
+                                <div class="row">
+                                    <mat-label>Collect From: </mat-label>
+                                </div>
+                                <br>
+
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <mat-label>Quantity: </mat-label>
+                                    </div>
+                                    <div class="col">
+                                        Description as per Supplier Document No.
+                                    </div>
+                                    <div class="col">
+                                        Weight Mass:
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col">
+                                        Recieved in good condition
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col">
+                                            Date:
+                                        </div>
+                                        <div class="col">
+                                            Driver:
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col">
+                                                Time:
+                                            </div>
+                                            <div class="col">
+                                                Vehicle Reg:
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    Print Names:
+                                                </div>
+                                                <div class="col">
+                                                    Trailer Reg:
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    Signature ___________
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+                            </table>
+
+
+
+
+
+
+                        </mat-card>
+
+                    </div>
+
+
+
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </div>
+</div>
+<!-- </div> -->

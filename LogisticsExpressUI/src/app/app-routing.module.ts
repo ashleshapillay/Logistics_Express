@@ -22,6 +22,7 @@ import { RepairRequestsComponent } from './components/repairrequest/repair-reque
 import { VehicleComponent } from './components/vehicle/vehicle.component';
 import { VehicleDriverComponent } from './components/vehicle-driver/vehicle-driver.component';
 import { VehicleSpecsComponent } from './components/vehicle-specs/vehicle-specs.component';
+import { InvoicingComponent } from './components/invoicing/invoicing.component';
 
 const routes: Routes = [
     { path: 'customers', component: CustomersComponent},
@@ -38,6 +39,7 @@ const routes: Routes = [
   { path: 'vehicle', component: VehicleComponent },
   {path:'vehicleDriver', component: VehicleDriverComponent},
   {path: 'vehicleSpecs', component: VehicleSpecsComponent},
+  {path: 'invoice', component: InvoicingComponent},
 
     { path: '', component: DashboardComponent},
     { path: 'dashboard', component: DashboardComponent, canActivate:[MsalGuard]},

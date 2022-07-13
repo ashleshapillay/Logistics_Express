@@ -37,6 +37,7 @@ import { AuthenicationService } from './services/authenication/authenication.ser
 import { RepairRequestsComponent } from './components/repairrequest/repair-requests.component';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { InvoicingComponent } from './components/invoicing/invoicing.component';
 
 @NgModule({
   declarations: [
@@ -57,9 +58,10 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
     VehicleComponent,
     VehicleDriverComponent,
-    VehicleSpecsComponent
+    VehicleSpecsComponent,
 
-    RepairRequestsComponent
+    RepairRequestsComponent,
+      InvoicingComponent,
 
    ],
   imports: [

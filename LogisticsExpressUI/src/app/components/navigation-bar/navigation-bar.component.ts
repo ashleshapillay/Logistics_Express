@@ -49,6 +49,10 @@ export class NavigationBarComponent implements OnDestroy{
     this.router.navigate(["vehicle"]);
   }
 
+  Invoices() {
+    this.router.navigate(["invoice"]);
+  }
+
   logout() {
     this.authService.logoutRedirect({postLogoutRedirectUri: environment.postLogoutUrl});
  }

@@ -12,5 +12,8 @@ namespace LogisticsExpressAPI.Data
         public DbSet<Customer> Customers { get; set;  }
 
         public DbSet<CustomerContact> CustomerContacts { get; set; }
+
+        public DbSet<ClientFeedback> ClientFeedbacks { get; set; }
+       
     }
 }

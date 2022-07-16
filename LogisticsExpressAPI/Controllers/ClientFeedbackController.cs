@@ -39,7 +39,7 @@ namespace Iteration_6.Controllers
         }
 
         //Add customer feedback
-        [HttpPost]
+        [HttpPost] //HTTP POST
         public async Task<IActionResult> AddFeedback(ClientFeedback clientFeedback)
         {
             dataContext.ClientFeedbacks.Add(clientFeedback);

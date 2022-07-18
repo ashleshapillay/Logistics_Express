@@ -1,0 +1,88 @@
+<app-navigation-bar></app-navigation-bar>
+
+<div class="background" >
+
+
+    <div class="row">
+        <div class="col-4">
+            <br>
+            <mat-card class="CustomerDetails"> 
+                <button mat-flat-button color="accent" (click)="AddStatement()"> Generate Statement </button>
+                <br>
+                <br>
+                <button mat-flat-button color="accent"> Download Statement</button> <!--(click)="openPDF()"-->
+            </mat-card>
+        </div>
+        <div class="col-8" *ngIf="AddView">
+            <br><br>
+            <div class="StatementDetails" id="htmlData">
+
+                <div class="container">
+                    <div class="row">
+                      <div class="col">
+                        <img src="assets/image/Statement_Details.png" width="400px">
+                      </div>
+                      <div class="col">
+                        <br><br>
+                        <h2 align="right"> Statement</h2>
+                        <table width="98%">
+                            <tr>
+                                <th> Reference </th>
+                                <th> Terms </th>
+                                <th> Date</th>
+                            </tr>
+                            <tr> 
+                                <td><pre></pre></td>
+                                <td><pre></pre></td>
+                                <td><pre></pre></td>
+                            </tr>
+                        </table>
+                      </div>
+                    </div>  
+                </div>
+                <br>
+
+                <table> 
+                    <tr> 
+                        <th bgcolor="lightgrey" > Customer Details </th>
+                    </tr>
+                    <tr>
+                        <font color="white"></font>
+                    </tr>
+                    <tr>
+                        <td>VAT No.</td>
+                        <td> </td>
+                    </tr>
+                </table>
+                <br>
+
+                <img src="assets/image/Amount.png" >
+                <br><br><br> 
+                
+                <table align ="center" width="95%"> 
+                    <tr bgcolor="lightgrey">
+                        <th> 120 Days </th>
+                        <th> 90 Days </th>
+                        <th> 60 Days </th>
+                        <th> 30 Days </th>
+                        <th> Current </th>
+                        <th> Total Due </th>
+                    </tr>
+                    <tr>
+                        <td><pre></pre></td>
+                        <td><pre></pre></td>
+                        <td><pre></pre></td>
+                        <td><pre></pre></td>
+                        <td><pre></pre></td>
+                        <td><pre></pre></td>
+                    </tr>
+                </table>
+                <br><br><br>
+
+                <p>JESSLYN CARRIERS YOUR PARTNER IN SERVICE EXCELLENCE</p>
+
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,53 @@
+.background{
+    background-color: #d4d4d4;
+    margin: 0;
+}
+
+.CustomerDetails{
+    width: max-content;
+    margin-right: 50px;
+    margin-left: 100px;
+    margin-bottom: 50px;
+ }
+
+.StatementDetails{
+    width: fit-content ;
+    margin-right: 50px;
+    margin-left: 100px;
+    margin-bottom: 50px;
+    background-color: white;
+}
+
+.mat-card{
+    background-color: white;
+    box-shadow:  5px 10px #888888;
+ }
+
+.mat-card-header{
+    color: #990000;
+    font-family: 'Poppins';
+    font-size: large;
+    font-weight: bolder;
+ }
+
+font{
+    text-align: center;
+}
+
+table{
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+.Amount{
+    width: fit-content;
+}
+
+p{
+    font-style: italic;
+    text-align: center;
+}

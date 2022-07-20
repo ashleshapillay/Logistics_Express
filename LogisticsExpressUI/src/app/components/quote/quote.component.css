@@ -1,0 +1,27 @@
+
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+th {
+  background-color: #e4e4e4;
+}
+
+
+h2{
+   margin-left: 180%;
+   font-size: x-large;
+}
+
+p{
+    font-size: x-small;
+}
+
+.dates{
+    margin-right: 60%;
+}
+
+

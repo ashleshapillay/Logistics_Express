@@ -38,5 +38,8 @@ namespace LogisticsExpressAPI.Data
        // public DbSet<VehicleDriver> VehicleDrivers { get; set; }
 
 
+         public DbSet<ClientFeedback> ClientFeedbacks { get; set; }
+        public DbSet<LoadConfirmation> LoadConfirmations { get; set; }
+
     }
 }

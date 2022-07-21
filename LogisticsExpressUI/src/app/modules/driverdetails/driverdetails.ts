@@ -1,11 +1,11 @@
 export interface DriverDetail{
     
-   DriverDetailsID: number; 
-   LicenseNumber: String;
-    licenseExpirydate: String; 
-    licenseCode: String; 
-    licenseCodeDescription:string;
-    licenseCopy : String; 
+  driverDetailsID: number; 
+    LicenseNumber: String;
+    LicenseExpirydate: String; 
+    LicenseCode: String; 
+    LicenseCodeDescription:string;
+    LicenseCopy : String; 
     employeeId : number;
   
   }

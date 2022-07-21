@@ -26,6 +26,7 @@ import { RepairRequestsComponent } from './components/repairrequest/repair-reque
 import { VehicleComponent } from './components/vehicle/vehicle.component';
 import { VehicleDriverComponent } from './components/vehicle-driver/vehicle-driver.component';
 import { VehicleSpecsComponent } from './components/vehicle-specs/vehicle-specs.component';
+import { LoadConfirmationComponent } from './components/load-confirmation/load-confirmation.component';
 
 
 const routes: Routes = [
@@ -50,7 +51,9 @@ const routes: Routes = [
 
     { path: '', component: DashboardComponent},
     { path: 'dashboard', component: DashboardComponent, canActivate:[MsalGuard]},
-    { path: 'repair-requests', component: RepairRequestsComponent}
+    { path: 'repair-requests', component: RepairRequestsComponent},
+
+    { path: 'loadconfirmation', component: LoadConfirmationComponent}
 
 ];
 

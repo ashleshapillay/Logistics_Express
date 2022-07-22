@@ -26,6 +26,16 @@ namespace LogisticsExpressAPI.Controllers
             return Ok(VAT);
         }
 
+        //Add new VAT entry (admin purposes)
+        [HttpPost]
+        public async Task<IActionResult> AddVATPercentage(VAT vat)
+        {
+            dataContext.VATs.Add(vat);
+            await dataContext.SaveChangesAsync();
+
+            return CreatedAtAction("GetVATPercentage", new { id = vat.VATId }, vat);
+        }
+
 
         //Edit VAT
         [HttpPut]

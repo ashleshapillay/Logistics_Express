@@ -32,7 +32,7 @@ import { VehicleSpecsComponent } from './components/vehicle-specs/vehicle-specs.
 import { MsalModule, MsalInterceptor, MsalGuard, MsalRedirectComponent } from '@azure/msal-angular';
 import { PublicClientApplication, InteractionType } from '@azure/msal-browser';
 import { AuthenicationService } from './services/authenication/authenication.service';
-
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { RepairRequestsComponent } from './components/repairrequest/repair-requests.component';
 
@@ -67,6 +67,7 @@ import { InvoicingComponent } from './components/invoicing/invoicing.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MatTooltipModule,
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,

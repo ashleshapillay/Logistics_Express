@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { DeliveryNote } from 'src/app/modules/Invoicing/deliverynote.module';
-import { Invoice } from 'src/app/modules/Invoicing/invoice.module';
+import { DeliveryNote } from 'src/app/modules/invoicing/deliverynote.module';
+import { Invoice } from 'src/app/modules/invoicing/invoice.module';
+import { Quotation } from 'src/app/modules/quotation/quote';
+import { Vehicle } from 'src/app/modules/vehicle/vehicle.model';
+import { Input, Output, EventEmitter } from '@angular/core';
+
 
 @Component({
   selector: 'app-invoicing',
@@ -21,8 +25,35 @@ dNote: DeliveryNote = {
   deliveryID: 0,
   quotationID: 0,
   dateSubmitted: new Date(),
-  //pod_image: "" 
+   
+   cosginee:'',
+    deliverTo:'',
+    collectFrom: '',
+    quantity:0,
+    weight:0,
+    description:'',
+    receivedQuality: true,
+    driverName:'',
+    vehReg:'',
+    printName:'',
+    trailerReg:'',
+    time: new Date()
+    //pod_image: "",
+    //signature:''
 }
+
+
+
+// quotes: Quotation []= [];
+// quote: Quotation = {
+//   total_price:0,
+//   date_issued: new Date(),
+//   vatID:0,
+//   customerID: 0,
+//   addressID: 0
+// }
+
+
 
 invoices: Invoice[]=[];
 invoice: Invoice = {
@@ -41,6 +72,7 @@ invoice: Invoice = {
   getDeliveryNote(id:number){
    
   }
+
   ngOnInit(): void {
   }
 

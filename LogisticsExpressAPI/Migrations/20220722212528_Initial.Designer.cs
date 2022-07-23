@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LogisticsExpressAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220527210755_Fuel")]
-    partial class Fuel
+    [Migration("20220722212528_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -130,34 +130,63 @@ namespace LogisticsExpressAPI.Migrations
                     b.ToTable("CustomerContacts");
                 });
 
+            modelBuilder.Entity("LogisticsExpressAPI.Models.DriverDetail", b =>
+                {
+                    b.Property<int>("DriverDetailId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LicenseCode")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("LicenseCodeDescription")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("LicenseCopy")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("LicenseExpiryDate")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("LicenseNumber")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("DriverDetailId");
+
+                    b.HasIndex("EmployeeId")
+                        .IsUnique();
+
+                    b.ToTable("DriverDetails");
+                });
+
             modelBuilder.Entity("LogisticsExpressAPI.Models.Employee", b =>
                 {
                     b.Property<int>("EmployeeId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Emp_Contact")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Emp_Email")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Emp_FirstName")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Emp_LastName")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Emp_PhoneNumber")
+                    b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<int>("EmployeeRoleId")
                         .HasColumnType("int");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Surname")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.HasKey("EmployeeId");
 
@@ -172,7 +201,7 @@ namespace LogisticsExpressAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("EmployeeDescription")
+                    b.Property<string>("EmployeeRoleDescription")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -213,6 +242,27 @@ namespace LogisticsExpressAPI.Migrations
                     b.ToTable("FuelLogs");
                 });
 
+            modelBuilder.Entity("LogisticsExpressAPI.Models.InsurancePlan", b =>
+                {
+                    b.Property<int>("InsurancePlanId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<double>("Cost")
+                        .HasColumnType("double");
+
+                    b.Property<DateTime>("DateOfIssue")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Provider")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("InsurancePlanId");
+
+                    b.ToTable("InsurancePlans");
+                });
+
             modelBuilder.Entity("LogisticsExpressAPI.Models.Province", b =>
                 {
                     b.Property<int>("ProvinceId")
@@ -231,6 +281,69 @@ namespace LogisticsExpressAPI.Migrations
                     b.HasIndex("CountryId");
 
                     b.ToTable("Provinces");
+                });
+
+            modelBuilder.Entity("LogisticsExpressAPI.Models.Quote", b =>
+                {
+                    b.Property<int>("QuoteId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("DropOffAddress")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("PickUpAddress")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("Quote_Date")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("Rate")
+                        .HasColumnType("int");
+
+                    b.HasKey("QuoteId");
+
+                    b.HasIndex("CustomerId");
+
+                    b.ToTable("Quotes");
+                });
+
+            modelBuilder.Entity("LogisticsExpressAPI.Models.Repair", b =>
+                {
+                    b.Property<int>("RepairId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<double>("Cost")
+                        .HasColumnType("double");
+
+                    b.Property<DateTime>("DateCompleted")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("MechanicContact")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("MechanicName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("RepairId");
+
+                    b.ToTable("Repairs");
                 });
 
             modelBuilder.Entity("LogisticsExpressAPI.Models.RepairRequests", b =>
@@ -254,6 +367,28 @@ namespace LogisticsExpressAPI.Migrations
                     b.HasIndex("VehicleId");
 
                     b.ToTable("RepairRequests");
+                });
+
+            modelBuilder.Entity("LogisticsExpressAPI.Models.ServicePlan", b =>
+                {
+                    b.Property<int>("ServicePlanId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("ServicePlanDescription")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("ServicePlanId");
+
+                    b.ToTable("ServicePlans");
                 });
 
             modelBuilder.Entity("LogisticsExpressAPI.Models.Subcontractor", b =>
@@ -327,9 +462,47 @@ namespace LogisticsExpressAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<string>("TareWeight")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("VehicleMakeID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("VehicleModelID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("VehicleTypeID")
+                        .HasColumnType("int");
+
                     b.HasKey("VehicleId");
 
+                    b.HasIndex("VehicleMakeID");
+
+                    b.HasIndex("VehicleModelID");
+
+                    b.HasIndex("VehicleTypeID");
+
                     b.ToTable("Vehicles");
+                });
+
+            modelBuilder.Entity("LogisticsExpressAPI.Models.VehicleLicense", b =>
+                {
+                    b.Property<int>("VehicleLicenseId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("EngineNumber")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("VehicleIdentificationNumber")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("VehicleLicenseId");
+
+                    b.ToTable("VehicleLicenses");
                 });
 
             modelBuilder.Entity("LogisticsExpressAPI.Models.VehicleMake", b =>
@@ -422,6 +595,17 @@ namespace LogisticsExpressAPI.Migrations
                     b.Navigation("Customer");
                 });
 
+            modelBuilder.Entity("LogisticsExpressAPI.Models.DriverDetail", b =>
+                {
+                    b.HasOne("LogisticsExpressAPI.Models.Employee", "Employee")
+                        .WithOne("DriverDetail")
+                        .HasForeignKey("LogisticsExpressAPI.Models.DriverDetail", "EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
+                });
+
             modelBuilder.Entity("LogisticsExpressAPI.Models.Employee", b =>
                 {
                     b.HasOne("LogisticsExpressAPI.Models.EmployeeRole", "EmployeeRole")
@@ -455,6 +639,17 @@ namespace LogisticsExpressAPI.Migrations
                     b.Navigation("Country");
                 });
 
+            modelBuilder.Entity("LogisticsExpressAPI.Models.Quote", b =>
+                {
+                    b.HasOne("LogisticsExpressAPI.Models.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+                });
+
             modelBuilder.Entity("LogisticsExpressAPI.Models.RepairRequests", b =>
                 {
                     b.HasOne("LogisticsExpressAPI.Models.Vehicle", "Vehicle")
@@ -486,6 +681,38 @@ namespace LogisticsExpressAPI.Migrations
                         .IsRequired();
 
                     b.Navigation("City");
+                });
+
+            modelBuilder.Entity("LogisticsExpressAPI.Models.Vehicle", b =>
+                {
+                    b.HasOne("LogisticsExpressAPI.Models.VehicleMake", "VehicleMake")
+                        .WithMany()
+                        .HasForeignKey("VehicleMakeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LogisticsExpressAPI.Models.VehicleModel", "VehicleModel")
+                        .WithMany()
+                        .HasForeignKey("VehicleModelID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LogisticsExpressAPI.Models.VehicleType", "VehicleType")
+                        .WithMany()
+                        .HasForeignKey("VehicleTypeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("VehicleMake");
+
+                    b.Navigation("VehicleModel");
+
+                    b.Navigation("VehicleType");
+                });
+
+            modelBuilder.Entity("LogisticsExpressAPI.Models.Employee", b =>
+                {
+                    b.Navigation("DriverDetail");
                 });
 #pragma warning restore 612, 618
         }

@@ -281,6 +281,40 @@ namespace LogisticsExpressAPI.Migrations
                     b.ToTable("Provinces");
                 });
 
+            modelBuilder.Entity("LogisticsExpressAPI.Models.Quote", b =>
+                {
+                    b.Property<int>("QuoteId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("DropOffAddress")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("PickUpAddress")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("Quote_Date")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("Rate")
+                        .HasColumnType("int");
+
+                    b.HasKey("QuoteId");
+
+                    b.HasIndex("CustomerId");
+
+                    b.ToTable("Quotes");
+                });
+
             modelBuilder.Entity("LogisticsExpressAPI.Models.Repair", b =>
                 {
                     b.Property<int>("RepairId")
@@ -426,7 +460,26 @@ namespace LogisticsExpressAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<string>("TareWeight")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("VehicleMakeID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("VehicleModelID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("VehicleTypeID")
+                        .HasColumnType("int");
+
                     b.HasKey("VehicleId");
+
+                    b.HasIndex("VehicleMakeID");
+
+                    b.HasIndex("VehicleModelID");
+
+                    b.HasIndex("VehicleTypeID");
 
                     b.ToTable("Vehicles");
                 });
@@ -584,6 +637,17 @@ namespace LogisticsExpressAPI.Migrations
                     b.Navigation("Country");
                 });
 
+            modelBuilder.Entity("LogisticsExpressAPI.Models.Quote", b =>
+                {
+                    b.HasOne("LogisticsExpressAPI.Models.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+                });
+
             modelBuilder.Entity("LogisticsExpressAPI.Models.RepairRequests", b =>
                 {
                     b.HasOne("LogisticsExpressAPI.Models.Vehicle", "Vehicle")
@@ -615,6 +679,33 @@ namespace LogisticsExpressAPI.Migrations
                         .IsRequired();
 
                     b.Navigation("City");
+                });
+
+            modelBuilder.Entity("LogisticsExpressAPI.Models.Vehicle", b =>
+                {
+                    b.HasOne("LogisticsExpressAPI.Models.VehicleMake", "VehicleMake")
+                        .WithMany()
+                        .HasForeignKey("VehicleMakeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LogisticsExpressAPI.Models.VehicleModel", "VehicleModel")
+                        .WithMany()
+                        .HasForeignKey("VehicleModelID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LogisticsExpressAPI.Models.VehicleType", "VehicleType")
+                        .WithMany()
+                        .HasForeignKey("VehicleTypeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("VehicleMake");
+
+                    b.Navigation("VehicleModel");
+
+                    b.Navigation("VehicleType");
                 });
 
             modelBuilder.Entity("LogisticsExpressAPI.Models.Employee", b =>

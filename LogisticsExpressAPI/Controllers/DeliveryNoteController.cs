@@ -35,7 +35,8 @@ namespace DeliveryNote.Controllers
             var note = await _context.DeliveryNotes.FindAsync(id);
             if(note == null){
                 return NotFound();
-            }
+            } 
+            
 
             return note ;
         }

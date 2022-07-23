@@ -43,7 +43,16 @@ import { EmployeeroleComponent } from './components/employeerole/employeerole.co
 import { VehicleComponent } from './components/vehicle/vehicle.component';
 
 import { MatSnackBarModule} from '@angular/material/snack-bar';
+
 import { LoadConfirmationComponent } from './components/load-confirmation/load-confirmation.component';
+
+import { QuoteComponent } from './components/quote/quote.component';
+import { RequestQuoteComponent } from './components/request-quote/request-quote.component';
+import { OutstandingQuotesComponent } from './components/outstanding-quotes/outstanding-quotes.component';
+import { InvoiceComponent } from './components/invoice/invoice.component';
+import { CurrentDeliveriesComponent } from './components/current-deliveries/current-deliveries.component';
+import { EditQuoteComponent } from './components/edit-quote/edit-quote.component';
+
 
 @NgModule({
   declarations: [
@@ -67,6 +76,13 @@ import { LoadConfirmationComponent } from './components/load-confirmation/load-c
     RepairRequestsComponent,
     VehicleComponent,
     LoadConfirmationComponent
+    QuoteComponent,
+    RequestQuoteComponent,
+    OutstandingQuotesComponent,
+    InvoiceComponent,
+    CurrentDeliveriesComponent,
+    EditQuoteComponent,
+
 
    ],
   imports: [

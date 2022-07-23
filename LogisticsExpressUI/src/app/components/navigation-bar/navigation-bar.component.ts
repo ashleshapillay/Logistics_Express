@@ -59,4 +59,8 @@ export class NavigationBarComponent implements OnDestroy{
   }
 
 
+  Quote(){
+    this.router.navigate(["quote"]);
+  }
+
 }

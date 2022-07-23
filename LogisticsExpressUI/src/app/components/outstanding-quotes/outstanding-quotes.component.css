@@ -1,0 +1,35 @@
+.CustomerHeader{
+    background-color: #f0f0f0;
+    width:650px;
+ }
+
+ .mat-card-header{
+    color: #990000;
+    font-family: 'Poppins';
+    font-size: large;
+    font-weight: bolder;
+ }
+
+ .CustomerDetails{
+    width: max-content;
+    margin-right: 50px;
+    margin-left: 200px;
+    margin-bottom: 50px;
+ }
+ 
+ .CustomerList{
+    margin-right: 45px;
+    margin-left: 45px;
+    width: 650px;
+ }
+ 
+ .mat-card-header{
+    color: #990000;
+    font-family: 'Poppins';
+    font-size: large;
+    font-weight: bolder;
+ }
+ 
+ .container{
+    margin: 0;
+ }

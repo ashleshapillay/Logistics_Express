@@ -35,6 +35,9 @@ namespace LogisticsExpressAPI.Data
         public DbSet<VehicleMake> VehicleMakes { get; set; }
         public DbSet<VehicleModel> VehicleModels { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
+
+        public DbSet<DeliveryNote> DeliveryNotes {get; set; }
+
        // public DbSet<VehicleDriver> VehicleDrivers { get; set; }
 
         public DbSet<ClientFeedback> ClientFeedbacks { get; set; }

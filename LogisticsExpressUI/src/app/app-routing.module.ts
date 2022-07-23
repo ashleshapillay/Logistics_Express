@@ -27,6 +27,12 @@ import { VehicleComponent } from './components/vehicle/vehicle.component';
 import { VehicleDriverComponent } from './components/vehicle-driver/vehicle-driver.component';
 import { VehicleSpecsComponent } from './components/vehicle-specs/vehicle-specs.component';
 
+import { QuoteComponent } from './components/quote/quote.component';
+import { RequestQuoteComponent } from './components/request-quote/request-quote.component';
+import { OutstandingQuotesComponent } from './components/outstanding-quotes/outstanding-quotes.component';
+import { InvoiceComponent } from './components/invoice/invoice.component';
+import { EditQuoteComponent } from './components/edit-quote/edit-quote.component';
+
 
 const routes: Routes = [
     { path: 'customers', component: CustomersComponent},
@@ -44,13 +50,20 @@ const routes: Routes = [
     { path: 'driverdetails', component: DriverdetailsComponent},
 
   
-  { path: 'vehicle', component: VehicleComponent },
-  {path:'vehicleDriver', component: VehicleDriverComponent},
-  {path: 'vehicleSpecs', component: VehicleSpecsComponent},
+    { path: 'vehicle', component: VehicleComponent },
+    {path:'vehicleDriver', component: VehicleDriverComponent},
+    {path: 'vehicleSpecs', component: VehicleSpecsComponent},
 
     { path: '', component: DashboardComponent},
     { path: 'dashboard', component: DashboardComponent, canActivate:[MsalGuard]},
-    { path: 'repair-requests', component: RepairRequestsComponent}
+    { path: 'repair-requests', component: RepairRequestsComponent},
+
+    { path: 'quote', component: QuoteComponent},
+    {path: 'request-quote', component: RequestQuoteComponent},
+    {path: 'outstanding-quote', component: OutstandingQuotesComponent},
+
+    {path:'invoice', component: InvoiceComponent},
+    {path: 'edit-quote', component: EditQuoteComponent}
 
 ];
 

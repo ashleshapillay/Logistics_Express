@@ -32,4 +32,11 @@ export class CustomersService {
     return  this.http.put<Customer>(this.baseUrl + '/'+ customer.customerId, customer);
   }
 
+  //Get Customer
+  getCustomer(id: Number): Observable<Customer>{
+    return  this.http.get<Customer>(this.baseUrl + '/'+ id);
+  }
+
+
+
 }

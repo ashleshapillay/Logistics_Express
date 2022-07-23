@@ -9,6 +9,8 @@
                 Email</button><br>
             <br><button mat-button style=" background-color: #770000fb; color: rgb(255, 255, 255); width: 100%;" (click)=" openPDF()">Save as
                 PDF</button>
+            <br>
+                <br><button mat-button style=" background-color: #8b8989; color: rgb(255, 255, 255); width: 100%;" (click)=" back()">Exit</button>
         </mat-card>
     </div>
 
@@ -42,10 +44,10 @@
                         </tr>
                         <tr>
                             <td>
-                                {{quotes[0].quote_Date}}
+                                {{quote.quote_Date}}
                             </td>
                             <td>
-                                {{quotes[0].quoteId}}
+                                {{quote.quoteId}}
                             </td>
                         </tr>
                     </table>
@@ -63,7 +65,7 @@
                     <th>Customer Details</th>
                 </tr>
                 <tr>
-                    <td>{{quotes[0].customerId}}</td>
+                    <td>{{customer.businessName}}</td>
                 </tr>
                 <tr>
                     <th>Attention</th>
@@ -76,22 +78,22 @@
                     <th>Description</th>
                 </tr>
                 <tr>
-                    <td>{{quotes[0].description}}</td>
+                    <td>{{quote.description}}</td>
                 </tr>
                 <tr>
                     <th>Pick up Address</th>
                 </tr>
                 <tr>
-                    <td>{{quotes[0].pickUpAddress}}</td>
+                    <td>{{quote.pickUpAddress}}</td>
                 </tr>
                 <tr>
                     <th>Delivery Address</th>
                 </tr>
                 <tr>
-                    <td>{{quotes[0].dropOffAddress}}</td>
+                    <td>{{quote.dropOffAddress}}</td>
                 </tr>
                 <tr>
-                    <th>Rate:{{quotes[0].rate}} </th>
+                    <th>Rate:{{quote.rate}} </th>
                 </tr>
             </table>
     

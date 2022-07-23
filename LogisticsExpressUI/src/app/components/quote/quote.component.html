@@ -1,0 +1,128 @@
+<app-navigation-bar></app-navigation-bar>
+
+
+<div class="row" style="margin-top: 50px; margin-bottom: 50px;">
+
+    <div class="col-3">
+        <mat-card style="width: 340px ;  margin-right: 50px; margin-left: 50px;" >
+            <button mat-button style="background-color: #8b8989; color: rgb(255, 255, 255); width: 100%;">
+                Email</button><br>
+            <br><button mat-button style=" background-color: #770000fb; color: rgb(255, 255, 255); width: 100%;" (click)=" openPDF()">Save as
+                PDF</button>
+            <br>
+                <br><button mat-button style=" background-color: #8b8989; color: rgb(255, 255, 255); width: 100%;" (click)=" back()">Exit</button>
+        </mat-card>
+    </div>
+
+    <div class="col-9" id="htmlData">
+        <mat-card style="width: 1000px ; margin-right: 50px; margin-left: 50px;">
+    
+           <div class="row">
+    
+             <div class="col-6">
+                 <h1>Company Name</h1>
+                 <p>
+                     Cell: 082 573 2015 <br>
+                    Email: jesslyn@telkomsa.net
+                </p>
+            </div>
+    
+    
+            <div class="col-6">
+                
+                <div class="dates">
+                    <h2>Quotation</h2>                   
+                    
+                    <table style="width: 250px;; margin-left: 110%;">
+                        <tr>
+                            <th>
+                                Date
+                            </th>
+                            <th>
+                                Quote No.
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                {{quote.quote_Date}}
+                            </td>
+                            <td>
+                                {{quote.quoteId}}
+                            </td>
+                        </tr>
+                    </table>
+                    
+                </div>
+            </div>
+    
+        </div> 
+    
+            <br>
+    
+            
+            <table style="width: 100%;">
+                <tr>
+                    <th>Customer Details</th>
+                </tr>
+                <tr>
+                    <td>{{customer.businessName}}</td>
+                </tr>
+                <tr>
+                    <th>Attention</th>
+                </tr>
+            </table>
+    
+            <br>
+            <table style="width: 100%;" >
+                <tr>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>{{quote.description}}</td>
+                </tr>
+                <tr>
+                    <th>Pick up Address</th>
+                </tr>
+                <tr>
+                    <td>{{quote.pickUpAddress}}</td>
+                </tr>
+                <tr>
+                    <th>Delivery Address</th>
+                </tr>
+                <tr>
+                    <td>{{quote.dropOffAddress}}</td>
+                </tr>
+                <tr>
+                    <th>Rate:{{quote.rate}} </th>
+                </tr>
+            </table>
+    
+    
+            <p>
+                We thank you for your valued enquiry regarding the above and have pleasure in submitting our quotation.
+            </p>
+    
+            <h3>
+                Regards <br>
+                Client Name
+            </h3>
+    
+            <h4>
+                <b>Please Note:</b>
+                <p>
+                    1. Rates quoted exclude VAT. <br>
+                    2. All work is undertaken strictly according to our general terms and conditions of contract and we
+                    therefore accept no responsibility for loss/damage to goods from whatsoever cause. <br>
+                    For full terms and conditions, please contact the office.<br>
+                    3. This quote is valid for a period of seven (7) day
+                </p>
+            </h4>
+    
+        </mat-card>
+        
+    </div>
+
+</div>
+
+
+

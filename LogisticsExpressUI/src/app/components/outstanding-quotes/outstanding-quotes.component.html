@@ -1,0 +1,73 @@
+<div class="col-6">
+  <!-- List of Customer   -->
+  <div class="CustomerList">
+    <mat-card class="CustomerHeader">
+      <mat-card-header>Outstanding Quotes</mat-card-header>
+    </mat-card>
+    <br>
+    <button mat-button style="background-color: #750404; color: rgb(255, 255, 255); width: 50%;"
+      (click)="createQuote()">
+      Create Quote</button>
+     <br>
+    <br>
+
+    <div class="example-container">
+      <mat-card style="width: 100%;">
+        <mat-table [dataSource]="quotes" matSort>
+
+          <ng-container matColumnDef="Date">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Date</mat-header-cell>
+            <mat-cell *matCellDef="let quote"> {{quote.quote_Date}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="Customerid">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Customer</mat-header-cell>
+            <mat-cell *matCellDef="let quote"> {{quote.customerId}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="Rate">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Rate</mat-header-cell>
+            <mat-cell *matCellDef="let quote"> {{quote.rate}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="Accept">
+            <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+            <mat-cell *matCellDef="let quote">
+              <button style="background-color: rgba(16, 102, 16, 0.538);" mat-button> Accept</button>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="Reject">
+            <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+            <mat-cell *matCellDef="let quote">
+              <button style="background-color: rgba(148, 4, 4, 0.538);" (click)="deleteQuote(quote.quoteId)" mat-button>
+                Reject</button>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="View">
+            <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+            <mat-cell *matCellDef="let quote">
+              <button class="buttonColour" (click)="viewQuote(quote.quoteId)" mat-button>
+                <mat-icon>remove_red_eye</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="Edit">
+            <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+            <mat-cell *matCellDef="let quote">
+              <button class="buttonColour" (click)="editQuote(quote.quoteId)" mat-button>
+                <mat-icon>edit</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let quote; columns: displayedColumns;"></mat-row>
+
+        </mat-table>
+      </mat-card>
+    </div>
+  </div>
+</div>

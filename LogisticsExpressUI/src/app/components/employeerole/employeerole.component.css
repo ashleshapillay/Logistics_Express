@@ -1,22 +1,22 @@
 
-.EmployeeRoleDetails{
+.EmployeeDetails{
    width: max-content;
    margin-right: 50px;
    margin-left: 200px;
    margin-bottom: 50px;
 }
 
-.EmployeeRoleList{
-   margin-right: 45px;
-   margin-left: 45px;
-   width: 750px;
+.EmployeeList{
+   width:600px;
+   margin-right: 500px;
 }
-
+.mat-flat-button{
+   background-color: #990000;
+}
 .mat-card-header{
    color: #990000;
    font-family: 'Poppins';
    font-size: large;
-   font-weight: bolder;
 }
 
 .container{
@@ -28,9 +28,10 @@
   width: 640px;
 } 
 
-.EmployeeRoleHeader{
+.EmployeeHeader{
    background-color: #f0f0f0;
-   width:750px;
+   width:600px;
+   margin-right: 500px;
 }
 
 

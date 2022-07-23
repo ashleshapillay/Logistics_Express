@@ -19,73 +19,72 @@ export class EmployeeSubService {
 
   
 
-    //get all countries
-    getAllEmployees(): Observable<Employee[]>{ 
-      return  this.http.get<Employee[]>(this.employeeUrl)
-     }
-     //get a single driverdetail
-     getEmployee(id: Number):Observable<Employee>{
-      return this.http.get<Employee>(this.employeeUrl + '/' + id)
-    }
-    //add new employee
-    addEmployee(employee:Employee):Observable<Employee>{
-      return this.http.post<Employee>(this.employeeUrl,employee);
-    }
-    //update a employee
-    updateEmployee(employee: Employee): Observable<Employee>{
-      return  this.http.put<Employee>(this.employeeUrl + '/'+ employee.employeeId, employee);
-    }
-    //delete an employee
-    deleteEmployee(id: Number): Observable<Employee>{
-      return  this.http.delete<Employee>(this.employeeUrl + '/'+ id);
-    }
+   //get all countries
+   getAllEmployees(): Observable<Employee[]>{ 
+    return  this.http.get<Employee[]>(this.employeeUrl)
+   }
+   //get a single driverdetail
+   getEmployee(id: Number):Observable<Employee>{
+    return this.http.get<Employee>(this.employeeUrl + '/' + id)
+  }
+  //add new employee
+  addEmployee(employee:Employee):Observable<Employee>{
+    return this.http.post<Employee>(this.employeeUrl,employee);
+  }
+  //update a employee
+  updateEmployee(employee: Employee): Observable<Employee>{
+    return  this.http.put<Employee>(this.employeeUrl + '/'+ employee.employeeId, employee);
+  }
+  //delete an employee
+  deleteEmployee(id: Number): Observable<Employee>{
+    return  this.http.delete<Employee>(this.employeeUrl + '/'+ id);
+  }
 
 
-  //PROVINCE
-    //get all provinces
-    getAllRoles(): Observable<EmployeeRole[]>{
-      return  this.http.get<EmployeeRole[]>(this.employeeroleUrl)
-     }
-     //get a single employeerole
-     getRole(id: Number):Observable<EmployeeRole>{
-      return this.http.get<EmployeeRole>(this.employeeroleUrl + '/' + id)
-    }
-    //add new employeerole
-    addRole(employeerole:EmployeeRole):Observable<EmployeeRole>{
-      return this.http.post<EmployeeRole>(this.employeeroleUrl,employeerole);
-    }
-    //update a employeerole
-    updateRole(employeerole: EmployeeRole): Observable<EmployeeRole>{
-      return  this.http.put<EmployeeRole>(this.employeeroleUrl + '/'+ employeerole.employeeRoleId, employeerole);
-    }
-    //delete a employeerole
-    deleteRole(id: Number): Observable<EmployeeRole>{
-      return  this.http.delete<EmployeeRole>(this.employeeroleUrl + '/'+ id);
-    }
+//PROVINCE
+  //get all provinces
+  getAllRoles(): Observable<EmployeeRole[]>{
+    return  this.http.get<EmployeeRole[]>(this.employeeroleUrl)
+   }
+   //get a single employeerole
+   getRole(id: Number):Observable<EmployeeRole>{
+    return this.http.get<EmployeeRole>(this.employeeroleUrl + '/' + id)
+  }
+  //add new employeerole
+  addRole(employeerole:EmployeeRole):Observable<EmployeeRole>{
+    return this.http.post<EmployeeRole>(this.employeeroleUrl,employeerole);
+  }
+  //update a employeerole
+  updateRole(employeerole: EmployeeRole): Observable<EmployeeRole>{
+    return  this.http.put<EmployeeRole>(this.employeeroleUrl + '/'+ employeerole.employeeRoleId, employeerole);
+  }
+  //delete a employeerole
+  deleteRole(id: Number): Observable<EmployeeRole>{
+    return  this.http.delete<EmployeeRole>(this.employeeroleUrl + '/'+ id);
+  }
 
 
-  //CITY
-    //get all cities
-    getAllDriverDetails(): Observable<DriverDetail[]>{
-      return  this.http.get<DriverDetail[]>(this.driverdetailUrl)
-     }
-     //get a single driverdetail
-     getDriverDetail(id: Number):Observable<DriverDetail>{
-      return this.http.get<DriverDetail>(this.driverdetailUrl + '/' + id)
-    }
-    //add new driverdetail
-    addDriverDetails(driverdetail:DriverDetail):Observable<DriverDetail>{
-      return this.http.post<DriverDetail>(this.driverdetailUrl,driverdetail);
-    }
-    //update a driverdetail
-    updateDriverDetails(driverdetail: DriverDetail): Observable<DriverDetail>{
-      return  this.http.put<DriverDetail>(this.driverdetailUrl + '/'+ driverdetail.DriverDetailsID, driverdetail);
-    }
-    //delete a driverdetail
-    deleteDriverDetails(id: Number): Observable<DriverDetail>{
-      return  this.http.delete<DriverDetail>(this.driverdetailUrl + '/'+ id);
-    }
-
+//CITY
+  //get all cities
+  getAllDriverDetails(): Observable<DriverDetail[]>{
+    return  this.http.get<DriverDetail[]>(this.driverdetailUrl)
+   }
+   //get a single driverdetail
+   getDriverDetail(id: Number):Observable<DriverDetail>{
+    return this.http.get<DriverDetail>(this.driverdetailUrl + '/' + id)
+  }
+  //add new driverdetail
+  addDriverDetails(driverdetail:DriverDetail):Observable<DriverDetail>{
+    return this.http.post<DriverDetail>(this.driverdetailUrl,driverdetail);
+  }
+  //update a driverdetail
+  updateDriverDetails(driverdetail: DriverDetail): Observable<DriverDetail>{
+    return  this.http.put<DriverDetail>(this.driverdetailUrl + '/'+ driverdetail.driverDetailsID, driverdetail);
+  }
+  //delete a driverdetail
+  deleteDriverDetails(id: Number): Observable<DriverDetail>{
+    return  this.http.delete<DriverDetail>(this.driverdetailUrl + '/'+ id);
+  }
 
 
 }

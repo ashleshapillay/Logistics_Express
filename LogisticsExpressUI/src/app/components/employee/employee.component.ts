@@ -8,24 +8,37 @@ import { Employee } from 'src/app/modules/employee/employee.module';
 import { EmployeeRole } from 'src/app/modules/employeerole/employeerole.module';
 import { EmployeeSubService } from 'src/app/services/employee/employee-sub.service';
 
+interface EmployeeType {
+  value: string;
+  viewValue: string;
+}
+
 @Component({
   selector: 'app-employee',
   templateUrl: './employee.component.html',
   styleUrls: ['./employee.component.css']
 })
 export class EmployeeComponent implements OnInit {
-
+  
   displayedColumns = ['firstName'];
   EditView = false; 
   displayMessage = ''; 
   isDisabled = true; 
-  AddDisabled = false;
+  /*employeetypes: EmployeeType[] = [
+    {value: 'driver-0', viewValue: 'Driver'},
+    {value: 'administrator-1', viewValue: 'Administrator'},
+  ];*/
+  
+  searchTerm='';
+  term = '';
 
-  employeeroles: EmployeeRole[]= [];
+  employeeroles: EmployeeRole[] = [];
   employeerole: EmployeeRole = {
     employeeRoleId: 0,
     employeeRoleDescription: '',
   }
+
+  employeeType:boolean=false;
 
   employees: Employee[] = [];
   employee: Employee = {
@@ -37,19 +50,29 @@ export class EmployeeComponent implements OnInit {
     employeeRoleId: 0,
   }
 
+  driverdetails: DriverDetail[] = []
+  driverdetail: DriverDetail = {
+    driverDetailsID: 0,
+    LicenseNumber: '',
+    LicenseCopy : '',
+    LicenseExpirydate: '',
+    LicenseCode: '',
+    LicenseCodeDescription:'',
+    employeeId:0
+  
+  }
 
-
-  @Output() driverdetails: DriverDetail[] =[
+ /*@Output() driverdetail: DriverDetail[] =[
     {
-     DriverDetailsID: 0,
+     driverDetailsID: 0,
      LicenseNumber: '', 
-     licenseExpirydate: '',
-     licenseCode:'', 
-     licenseCodeDescription: '',
-     licenseCopy:'' ,
+     LicenseExpirydate: '',
+     LicenseCode:'', 
+     LicenseCodeDescription: '',
+     LicenseCopy:'' ,
      employeeId: this.employee.employeeId
     }
-  ];
+  ]*/
 
  ViewEmployeeRole= false;
  ViewDriverDetails= false;
@@ -67,7 +90,9 @@ export class EmployeeComponent implements OnInit {
    this.getAllEmployees();
    this.getAllRoles();
  }
-
+toogleTag(){
+  this.employeeType=!this.employeeType
+}
 
  getAllEmployees() {
    this.employeeSubService.getAllEmployees()
@@ -79,9 +104,8 @@ export class EmployeeComponent implements OnInit {
   }
 
  addEmployee() {
-  this.AddView=true;
-  if (this.employee.firstName == "" || this.employee.surname || this.employee.email == "" || this.employee.phoneNumber == "" || this.employee.employeeRoleId==0){
-       this.displayMessage = "Employee Details could not be added";
+  if (this.employee.firstName == "" || this.employee.surname == "" || this.employee.email == "" || this.employee.phoneNumber == "" || this.employee.employeeRoleId==0){
+       this.displayMessage = "Employee Details Could Not Be Added";
         this.openSnackBar();
   }
   else{
@@ -102,7 +126,6 @@ export class EmployeeComponent implements OnInit {
         this.getAllEmployees();
         this.EditView = false
         this.AddView = false
-        window.location.reload()
        }
      )
   }
@@ -125,7 +148,6 @@ export class EmployeeComponent implements OnInit {
          this.getAllEmployees();
          this.displayMessage = "Employee Details Were Removed Successfully";
          this.openSnackBar();
-         window.location.reload();
        }
      )
  };
@@ -133,11 +155,10 @@ export class EmployeeComponent implements OnInit {
  populateForm(employee: Employee){
    this.employee = employee; 
    this.isDisabled = false;
-   this.AddDisabled = true; 
 }
 
  updateEmployee(employee: Employee){
-  if (this.employee.firstName == "" || this.employee.surname || this.employee.email == "" || this.employee.phoneNumber == ""|| this.employee.employeeRoleId==0){
+  if (this.employee.firstName == "" || this.employee.surname == ""|| this.employee.email == "" || this.employee.phoneNumber == ""|| this.employee.employeeRoleId==0){
     this.displayMessage = "Employee Details could not be updated";
      this.openSnackBar();
 }
@@ -148,7 +169,6 @@ else{
         this.EditView = true;
         this.displayMessage = "Employee Details Were Updated Successfully";
         this.openSnackBar();
-        window.location.reload();
      })
  }
 }
@@ -181,7 +201,92 @@ getAllRoles(){
     phoneNumber: '',
     employeeRoleId:0,
    }
-   this.EditView=false;
+}
+
+getAllDriverDetails() {
+  this.employeeSubService.getAllDriverDetails()
+    .subscribe(
+      response => {
+        this.driverdetails = response;
+      }
+    )
+ }
+
+ addDriverDetails() {
+  if (this.driverdetail.LicenseNumber == "" || this.driverdetail.LicenseExpirydate == "" || this.driverdetail.LicenseCode == "" || this.driverdetail.LicenseCodeDescription == ""|| this.driverdetail.LicenseCopy == "" || this.driverdetail.employeeId == 0){
+       this.displayMessage = "Driver Details were unsuccessfully created";
+        this.openSnackBar();
+
+}
+else{
+  this.employeeSubService.addDriverDetails(this.driverdetail)
+  .subscribe(
+    response => {
+      this.driverdetail = {
+       driverDetailsID: 0,
+       LicenseNumber: '',
+       LicenseCopy : '',
+       LicenseExpirydate: '',
+       LicenseCode: '',
+       LicenseCodeDescription:'',
+       employeeId :0
+        }
+      
+      this.displayMessage = "The Driver Details Were Added Successfully";
+      this.openSnackBar();
+      
+      this.getAllDriverDetails();
+      this.EditView = false
+      this.AddView = false
+      
+     }
+   )
+}
+
+};
+
+deleteDriverDetails(id: Number) {
+  this.employeeSubService.deleteDriverDetails(id)
+    .subscribe(
+      response => {
+       this.driverdetail = {
+         driverDetailsID: 0,
+         LicenseNumber: '',
+         LicenseCopy :'',
+         LicenseExpirydate: '',
+         LicenseCode: '',
+         LicenseCodeDescription:'',
+         employeeId:0
+          
+        }
+
+
+        this.getAllDriverDetails();
+        this.displayMessage = "Driver Details were successfully removed";
+        this.openSnackBar();
+     }
+   )
+};
+
+
+
+
+updateDriverDetails(driverdetail: DriverDetail){
+  if (this.driverdetail.LicenseNumber == "" || this.driverdetail.LicenseExpirydate == ""|| this.driverdetail.LicenseCode == " "|| this.driverdetail.LicenseCodeDescription == "" || this.driverdetail.LicenseCopy == "" || this.driverdetail.employeeId == 0){
+    this.displayMessage = "The Driver Details could not be updated!”";
+     this.openSnackBar();
+}
+
+      else{
+          this.employeeSubService.updateDriverDetails(driverdetail)
+          .subscribe(
+            response => {
+               this.EditView = true;
+               this.displayMessage = "The Driver Details have been updated successfully!";
+               this.openSnackBar();
+               
+   })
+}
 }
 
   //Navigation
@@ -191,8 +296,12 @@ getAllRoles(){
   EmployeeRoleClick(){
     this.router.navigate(["employeerole"]);
   }
-  DriverDetailsClick(){
-    this.router.navigate(["driverdetails"]);
-  }
+
+
+  /*Driver addDriverDetails() {
+  if (this.driverdetail.LicenseNumber == "" || this.driverdetail.LicenseExpirydate == "" || this.driverdetail.LicenseCode == "" || this.driverdetail.LicenseCodeDescription == ""|| this.driverdetail.LicenseCopy == "" || this.driverdetail.employeeId == 0){
+       this.displayMessage = "Driver Details were unsuccessfully created";
+        this.openSnackBar();
+}*/
   
 }

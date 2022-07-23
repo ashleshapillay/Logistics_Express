@@ -1,4 +1,4 @@
-﻿using LogisticsExpressAPI.Models;
+using LogisticsExpressAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace LogisticsExpressAPI.Data
@@ -37,8 +37,11 @@ namespace LogisticsExpressAPI.Data
         public DbSet<Vehicle> Vehicles { get; set; }
        // public DbSet<VehicleDriver> VehicleDrivers { get; set; }
 
+        public DbSet<ClientFeedback> ClientFeedbacks { get; set; }
+        public DbSet<LoadConfirmation> LoadConfirmations { get; set; }
 
         public DbSet<Quote> Quotes { get; set; }
+
 
 
     }

@@ -11,7 +11,7 @@ import { EmployeeSubService } from 'src/app/services/employee/employee-sub.servi
 })
 export class EmployeeroleComponent implements OnInit {
 
-  displayedColumns = ['EmployeeRoleDescription'];
+  displayedColumns = ['employeeRoleDescription'];
   EditView = false; 
   displayMessage = ''; 
   isDisabled = true; 
@@ -58,7 +58,7 @@ export class EmployeeroleComponent implements OnInit {
  addRole() {
   this.AddView = true;
   if (this.employeerole.employeeRoleDescription == "" ){
-       this.displayMessage = "Employee Role could not be added";
+       this.displayMessage = "Employee Role Could Not Be Added";
         this.openSnackBar();
   }
   else{
@@ -75,7 +75,6 @@ export class EmployeeroleComponent implements OnInit {
         this.getAllRoles();
         this.EditView = false
         this.AddView = false
-        window.location.reload()
        }
      )
   }
@@ -94,7 +93,6 @@ export class EmployeeroleComponent implements OnInit {
          this.getAllRoles();
          this.displayMessage = "Employee Role Was Removed Successfully";
          this.openSnackBar();
-         window.location.reload();
        }
      )
  };
@@ -117,7 +115,6 @@ else{
         this.EditView = true;
         this.displayMessage = "Employee Role Was Updated Successfully";
         this.openSnackBar();
-        window.location.reload();
      })
  }
 }
@@ -143,9 +140,7 @@ EmployeeClick(){
 EmployeeRoleClick(){
   this.router.navigate(["employeerole"]);
 }
-DriverDetailsClick(){
-  this.router.navigate(["driverdetails"]);
-}
+
 
 }
   

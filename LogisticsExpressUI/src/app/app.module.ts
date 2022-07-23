@@ -13,13 +13,16 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { FormsModule, NgModel, ReactiveFormsModule } from '@angular/forms';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 import { CountriesComponent } from './components/countries/countries.component';
 import { ProvincesComponent } from './components/provinces/provinces.component';
 import { CitiesComponent } from './components/cities/cities.component';
 import { SuburbsComponent } from './components/suburbs/suburbs.component';
 import { AddressesComponent } from './components/addresses/addresses.component';
-
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 import { SubcontractorComponent } from './components/subcontractor/subcontractor.component';
 import { SubcontractorcontactsComponent } from './components/subcontractorcontacts/subcontractorcontacts.component';
@@ -35,17 +38,21 @@ import { AuthenicationService } from './services/authenication/authenication.ser
 
 import { RepairRequestsComponent } from './components/repairrequest/repair-requests.component';
 
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModule, NgbPaginationModule} from '@ng-bootstrap/ng-bootstrap';
 import { EmployeeroleComponent } from './components/employeerole/employeerole.component';
 import { VehicleComponent } from './components/vehicle/vehicle.component';
 
 import { MatSnackBarModule} from '@angular/material/snack-bar';
+
+import { LoadConfirmationComponent } from './components/load-confirmation/load-confirmation.component';
+
 import { QuoteComponent } from './components/quote/quote.component';
 import { RequestQuoteComponent } from './components/request-quote/request-quote.component';
 import { OutstandingQuotesComponent } from './components/outstanding-quotes/outstanding-quotes.component';
 import { InvoiceComponent } from './components/invoice/invoice.component';
 import { CurrentDeliveriesComponent } from './components/current-deliveries/current-deliveries.component';
 import { EditQuoteComponent } from './components/edit-quote/edit-quote.component';
+
 
 @NgModule({
   declarations: [
@@ -68,12 +75,14 @@ import { EditQuoteComponent } from './components/edit-quote/edit-quote.component
     VehicleSpecsComponent,
     RepairRequestsComponent,
     VehicleComponent,
+    LoadConfirmationComponent
     QuoteComponent,
     RequestQuoteComponent,
     OutstandingQuotesComponent,
     InvoiceComponent,
     CurrentDeliveriesComponent,
     EditQuoteComponent,
+
 
    ],
   imports: [
@@ -115,7 +124,12 @@ import { EditQuoteComponent } from './components/edit-quote/edit-quote.component
            ]
          )
       }
-      )
+      ),
+      MatNativeDateModule,
+      NgbPaginationModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatDatepickerModule,
       
   ],
   providers: [

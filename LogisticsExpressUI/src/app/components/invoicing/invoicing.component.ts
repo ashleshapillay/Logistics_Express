@@ -4,7 +4,7 @@ import { Invoice } from 'src/app/modules/invoicing/invoice.module';
 import { Quotation } from 'src/app/modules/quotation/quote';
 import { Vehicle } from 'src/app/modules/vehicle/vehicle.model';
 import { Input, Output, EventEmitter } from '@angular/core';
-
+import { DeliverynoteService } from 'src/app/services/invoicing/deliverynote.service';
 
 @Component({
   selector: 'app-invoicing',
@@ -62,7 +62,7 @@ invoice: Invoice = {
   loadConfirmationID:0
 }
 
-  constructor() { }
+  constructor(private noteService: DeliverynoteService ) { }
 
   loadform(dNotes: DeliveryNote){
     this.dNote=dNotes;
@@ -70,10 +70,25 @@ invoice: Invoice = {
   }
 
   getDeliveryNote(id:number){
-   
+    this.noteService.getDeliveryNote(id).subscribe(
+      response => {
+        this.dNotes=response;
+      }
+    )
+  }
+
+  getAllDeliveryNote(){
+    this.noteService.getAllDeliveryNotes()
+    .subscribe(
+      response => {
+        this.dNotes = response;
+  }
+)
+
   }
 
   ngOnInit(): void {
+    this.getAllDeliveryNote();
   }
 
 }

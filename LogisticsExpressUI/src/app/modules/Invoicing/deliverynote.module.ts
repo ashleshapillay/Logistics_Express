@@ -1,4 +1,3 @@
-import { DeclarationListEmitMode } from "@angular/compiler";
 
 export interface DeliveryNote{
     deliveryNoteID: number;

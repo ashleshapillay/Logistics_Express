@@ -9,14 +9,18 @@
                     <mat-card-header>Invoicing</mat-card-header>
                 </mat-card>
                 <br>
-                <div class="example-container">
+                <div>
+
                     <!-- Search Delivery Note -->
 
                     <!-- Search bar -->
+                    <!-- <input matInput type="text"  [(ngModel)]="searchword"(input)="searchThis()"> -->
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <input matInput placeholder="eg. John Doe">
+                    </mat-form-field> <button mat-raised-button matTooltip="Enter a customer's name" aria-label="Button that displays a tooltip when focused or hovered over"><mat-icon>search</mat-icon></button><br><br>
 
-                    <mat-card>
 
-
+                    <mat-card class="example-container">
                         <!-- List of Delivery Note -->
                         <mat-table [dataSource]="dNotes" matSort>
                             <ng-cntainer matColumnDef="dNote">
@@ -32,116 +36,170 @@
                     </mat-card>
 
                 </div>
-
-                <!-- View a Delivery Note -->
-                <div>
-                    <!-- <div  class="example-container">*ngIf="ViewNote" -->
-                    <div class="DNDetails">
-
-                        <br>
-
-                        <mat-card>
-                            <mat-card-header>Jesslyn Carriers</mat-card-header> <br>
-                            <mat-card-subtitle>Cell: 082 573 2015 <br> Tel: 031 464 6261</mat-card-subtitle> <br>
-                            <table class="grid-container">
-                                <div class="row">
-                                    <div class="col">
-                                        <mat-label>Date: {{invoice.dateIssued}}</mat-label>
-                                    </div>
-                                    <div class="col">
-                                        <mat-label>Order No: #{{invoice.invoiceNumber}}</mat-label>
-                                    </div>
-                                </div>
-                                <br>
-
-                                <div class="row">
-                                    <div class="col">
-                                        <mat-label>Consignee:</mat-label>
-
-                                    </div>
-                                    <div class="col">
-                                        <mat-label>Deliver To: </mat-label>
-                                    </div>
-                                </div>
-                                <br>
-
-                                <div class="row">
-                                    <mat-label>Collect From: </mat-label>
-                                </div>
-                                <br>
-
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <mat-label>Quantity: </mat-label>
-                                    </div>
-                                    <div class="col">
-                                        Description as per Supplier Document No.
-                                    </div>
-                                    <div class="col">
-                                        Weight Mass:
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col">
-                                        Recieved in good condition
-                                    </div>
-                                    <br>
-                                    <br>
-                                    <div class="row">
-                                        <div class="col">
-                                            Date:
-                                        </div>
-                                        <div class="col">
-                                            Driver:
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col">
-                                                Time:
-                                            </div>
-                                            <div class="col">
-                                                Vehicle Reg:
-                                            </div>
-                                            <div class="row">
-                                                <div class="col">
-                                                    Print Names:
-                                                </div>
-                                                <div class="col">
-                                                    Trailer Reg:
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col">
-                                                    Signature ___________
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                    </div>
-                                </div>
-
-                            </table>
-
-
-
-
-
-
-                        </mat-card>
-
-                    </div>
-
-
-
-                </div>
             </div>
-
 
         </div>
 
 
+        <!-- View a Delivery Note -->
+        <div class="col-6">
+            <div *ngif="viewInvDocs" class="DNDetails">
+                <br>
+                <mat-card>
+                    <mat-card-header style="color:black;">Jesslyn Carriers</mat-card-header> <br>
+                    <mat-card-subtitle>Cell: 082 573 2015 <br> Tel: 031 464 6261 <br> Date: {{invoice.dateIssued}} <br> Order No: #{{invoice.invoiceNumber}}</mat-card-subtitle>
+
+                    <br>
+
+                    <div class="col">
+                        <table>
+                            <tr>
+                                <th>Consignee</th>
+                            </tr>
+                            <tr>
+                                <td>{{dNote.cosginee}}</td>
+                            </tr>
+                        </table>
+
+                    </div>
+                    <br>
+
+                    <div class="col">
+                        <table class="table">
+                            <tr>
+                                <th>
+                                    Deliver To
+                                </th>
+
+
+                                <th>
+                                    Collect From
+                                </th>
+
+                            </tr>
+                            <tr>
+                                <td>{{dNote.deliverTo}}</td>
+                                <td>{{dNote.collectFrom}}</td>
+                            </tr>
+                        </table>
+
+                    </div>
+
+
+                    <br>
+
+                    <div class="col">
+                        <table>
+                            <tr>
+                                <th>Quantity</th>
+                            </tr>
+                            <tr>
+                                <td>{{dNote.quantity}}</td>
+                            </tr>
+                        </table>
+
+                    </div>
+
+                    <br>
+                    <div class="col">
+                        <table>
+                            <tr>
+                                <th>Description as per Supplier Document No.</th>
+
+                            </tr>
+                            <tr>
+                                <td>{{dNote.description}}</td>
+                            </tr>
+
+                        </table>
+
+                    </div>
+
+                    <br>
+
+                    <div class="col">
+                        <table>
+                            <tr>
+
+                                <th>Weight Mass</th>
+
+                            </tr>
+
+                            <tr>
+                                <td>{{dNote.weight}}</td>
+                            </tr>
+                        </table>
+
+                    </div>
+
+                    <br>
+
+                    <div class="col">
+                        <table>
+                            <tr>
+
+                                <th>Recieved in good condition</th>
+
+                            </tr>
+                            <tr>
+                                <td>{{dNote.receivedQuality}}</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <br>
+
+                    <div class="col">
+                        <table class="table" style="border-collapse: collapse;">
+                            <thead>
+                                <tr>
+                                    <th>Date:</th>
+                                    <th>Driver:</th>
+                                </tr>
+
+                                <tr>
+                                    <td>{{dNote.dateSubmitted}}</td>
+                                    <td>{{dNote.driverName}}</td>
+                                </tr>
+
+                                <tr>
+                                    <th>Time:</th>
+                                    <th>Vehicle Reg: </th>
+                                </tr>
+
+                                <tr>
+                                    <td>{{dNote.time}}</td>
+                                    <td>{{dNote.vehReg}}</td>
+                                </tr>
+
+                                <tr>
+                                    <th>Print Names:</th>
+                                    <th>Trailer Reg:</th>
+                                </tr>
+
+                                <tr>
+                                    <td>{{dNote.printName}}</td>
+                                    <td>{{dNote.trailerReg}}</td>
+                                </tr>
+
+                            </thead>
+
+                        </table>
+
+
+                    </div>
+
+                    <br>
+                    <h4>Signature: __________________</h4>
+
+                </mat-card>
+
+            </div>
+
+
+
+        </div>
     </div>
+
+
 </div>
-<!-- </div> -->

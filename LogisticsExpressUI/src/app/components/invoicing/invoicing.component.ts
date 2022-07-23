@@ -75,6 +75,8 @@ invoice: Invoice = {
         this.dNotes=response;
       }
     )
+
+    this.viewInvDocs=true;
   }
 
   getAllDeliveryNote(){
